@@ -22,13 +22,13 @@
                 </h:selectOneMenu></div>
 
                 <div><h:outputLabel for="inputFirstname">Vorname</h:outputLabel></div>
-                <div><h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname"/></div>
+                <div><h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname" required="true"/></div>
 
                 <div><h:outputLabel for="inputLastname">Nachname</h:outputLabel></div>
-                <div><h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname"/></div>
+                <div><h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname" required="true"/></div>
 
                 <div><h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel></div>
-                <div><h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress"/></div>
+                <div><h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress" required="true"/></div>
             </div>
 
             <div class="buttons-hbox">

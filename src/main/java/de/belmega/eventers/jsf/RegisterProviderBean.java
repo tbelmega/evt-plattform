@@ -1,10 +1,13 @@
 package de.belmega.eventers.jsf;
 
+import de.belmega.eventers.dto.ServiceProviderID;
 import de.belmega.eventers.dto.ServiceProviderUserTO;
+import de.belmega.eventers.service.ProviderService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
@@ -13,8 +16,9 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class RegisterProviderBean {
 
-    public static final String NOTELIST_PAGE = "notelist?faces-redirect=true";
-    public static final String INDEX_PAGE = "index?faces-redirect=true";
+    @Inject
+    ProviderService providerService;
+
 
     private ServiceProviderUserTO provider;
 
@@ -35,7 +39,9 @@ public class RegisterProviderBean {
 
 
     public String register() {
-        return "";
+        ServiceProviderID serviceProviderID = providerService.registerNewProvider(provider);
+
+        return "registered.xhtml?faces-redirect=true&id=" + serviceProviderID.getId();
     }
 
     public void setProvider(ServiceProviderUserTO provider) {

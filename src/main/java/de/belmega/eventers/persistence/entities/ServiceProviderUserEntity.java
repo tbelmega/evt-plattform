@@ -1,14 +1,33 @@
-package de.belmega.eventers.dto;
+package de.belmega.eventers.persistence.entities;
 
-public class ServiceProviderUserTO {
+import de.belmega.eventers.dto.ServiceProviderID;
+
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class ServiceProviderUserEntity {
+
 
     private String firstname;
     private String lastname;
     private String emailadress;
     private String greeting;
     private String profession;
+
+    @Id
+    @EmbeddedId
     private ServiceProviderID id;
 
+    public ServiceProviderID getId() {
+        return id;
+    }
+
+    public void setId(ServiceProviderID id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -42,20 +61,11 @@ public class ServiceProviderUserTO {
         this.greeting = greeting;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
-
     public String getProfession() {
         return profession;
     }
 
-    public void setId(ServiceProviderID id) {
-        this.id = id;
-    }
-
-    public ServiceProviderID getId() {
-        return id;
+    public void setProfession(String profession) {
+        this.profession = profession;
     }
 }
-

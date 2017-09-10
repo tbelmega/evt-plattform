@@ -1,0 +1,22 @@
+<ui:composition template="template/template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <f:metadata>
+            <!-- When page is loaded, get ID from URL and store it in the bean. -->
+            <f:viewParam name="id" value="#{providerProfileBean.serviceProviderId}"/>
+            <f:event type="preRenderComponent" listener="#{providerProfileBean.loadProfile()}"/>
+        </f:metadata>
+
+        <div>
+            <div>Dies ist das Erfassungsformular für den Dienstleister:</div>
+            <div><h:outputText value="#{providerProfileBean.provider.lastname}"/></div>
+            <div><h:outputText value="#{providerProfileBean.provider.firstname}"/></div>
+            <div><h:outputText value="#{providerProfileBean.provider.emailadress}"/></div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
+
