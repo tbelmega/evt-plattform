@@ -1,4 +1,4 @@
-package de.belmega.pardernote.dto;
+package de.belmega.eventers.dto;
 
 public class ServiceProviderUserTO {
 

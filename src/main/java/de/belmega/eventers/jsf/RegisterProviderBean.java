@@ -1,6 +1,6 @@
-package de.belmega.pardernote.jsf;
+package de.belmega.eventers.jsf;
 
-import de.belmega.pardernote.dto.ServiceProviderUserTO;
+import de.belmega.eventers.dto.ServiceProviderUserTO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;

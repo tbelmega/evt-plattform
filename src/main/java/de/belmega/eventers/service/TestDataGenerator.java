@@ -1,14 +1,12 @@
-package de.belmega.pardernote.service;
+package de.belmega.eventers.service;
 
 import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
 
 @ApplicationScoped
 public class TestDataGenerator {
