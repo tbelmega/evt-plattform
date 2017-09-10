@@ -127,3 +127,10 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+.idea/artifacts/
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/kotlinc.xml
+.idea/misc.xml
+.idea/modules.xml
+pardernote.iml
