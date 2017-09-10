@@ -1,0 +1,94 @@
+.page {
+    position: absolute;
+    background-color: steelblue;
+    width: 100%;
+    min-height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.container-fluid {
+    position: relative;
+    background-color: white;
+    max-width: 1280px;
+    min-height: 100vh;
+    padding: 0px;
+}
+
+.container-fluid div {
+    padding: 0.25em;
+}
+
+#header {
+    padding: 0em;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.75em;
+    background-color: aliceblue;
+    text-align: center;
+    padding: 0em;
+}
+
+#title-bar {
+    background-color: #030303;
+    color: #ececec;
+    min-height: 3em;
+}
+
+#title-bar form {
+    text-align: right;
+    margin: auto;
+}
+
+.data-table {
+    min-width: 100%;
+    padding: 5px;
+    margin: 5px;
+}
+
+.title-column {
+    min-width: 50%;
+    padding: 2px;
+}
+
+.date-column {
+    padding: 2px;
+}
+
+.author-column {
+    padding: 2px;
+}
+
+
+.buttons-hbox input {
+    margin-right: 1em;
+    margin-top: 1em;
+    min-height: 3em;
+    min-width: 10em;
+}
+
+#optionals {
+
+}
+#optionals td {
+    padding: 2px;
+}
+
+.hidden {
+    display: none;
+}
+
+.toggle {
+    font-size: 0.75em;
+}
+
+.loginInputText {
+    font-size: 1em;
+    color: black;
+    line-height: 1em;
+}

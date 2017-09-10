@@ -1,0 +1,41 @@
+<ui:composition template="template/template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <h:form>
+            <div>
+                <div><h:outputLabel for="selectProfession">Ihr Fachgebiet</h:outputLabel></div>
+                <div><h:selectOneMenu value="#{registerProviderBean.provider.profession}" id="selectProfession">
+                    <f:selectItem itemValue="wellness" itemLabel="Wellness" />
+                    <f:selectItem itemValue="bewegung" itemLabel="Bewegung" />
+                    <f:selectItem itemValue="unterhaltung" itemLabel="Unterhaltung" />
+                    <f:selectItem itemValue="kultur" itemLabel="Kultur" />
+                    <f:selectItem itemValue="genuss" itemLabel="Genuss" />
+                </h:selectOneMenu></div>
+
+                <div><h:outputLabel for="selectGreeting">Anrede</h:outputLabel></div>
+                <div><h:selectOneMenu value="#{registerProviderBean.provider.greeting}" id="selectGreeting">
+                    <f:selectItem itemValue="mrs" itemLabel="Frau" />
+                    <f:selectItem itemValue="mr" itemLabel="Herr" />
+                    <f:selectItem itemValue="company" itemLabel="Firma" />
+                </h:selectOneMenu></div>
+
+                <div><h:outputLabel for="inputFirstname">Vorname</h:outputLabel></div>
+                <div><h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname"/></div>
+
+                <div><h:outputLabel for="inputLastname">Nachname</h:outputLabel></div>
+                <div><h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname"/></div>
+
+                <div><h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel></div>
+                <div><h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress"/></div>
+            </div>
+
+            <div class="buttons-hbox">
+                <h:commandButton value="Absenden" action="#{registerProviderBean.register()}"/>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
