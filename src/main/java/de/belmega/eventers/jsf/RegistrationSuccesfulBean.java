@@ -8,8 +8,8 @@ import javax.inject.Named;
 @RequestScoped
 public class RegistrationSuccesfulBean {
 
-    //public static final String HOSTNAME = "localhost:8080";
-    public static final String HOSTNAME = "https://the-eventers.herokuapp.com";
+    public static final String HOSTNAME = "localhost:8080";
+    //public static final String HOSTNAME = "https://the-eventers.herokuapp.com";
 
 
     private String serviceProviderId;

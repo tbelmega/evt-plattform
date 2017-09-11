@@ -8,6 +8,7 @@ public class ServiceProviderUserTO {
     private String greeting;
     private String profession;
     private ServiceProviderID id;
+    private String passwordPlainText;
 
 
     public String getFirstname() {
@@ -56,6 +57,14 @@ public class ServiceProviderUserTO {
 
     public ServiceProviderID getId() {
         return id;
+    }
+
+    public String getPasswordPlainText() {
+        return passwordPlainText;
+    }
+
+    public void setPasswordPlainText(String passwordPlainText) {
+        this.passwordPlainText = passwordPlainText;
     }
 }
 

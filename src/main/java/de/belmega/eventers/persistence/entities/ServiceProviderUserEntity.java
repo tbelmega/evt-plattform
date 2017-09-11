@@ -68,4 +68,16 @@ public class ServiceProviderUserEntity {
     public void setProfession(String profession) {
         this.profession = profession;
     }
+
+    @Override
+    public String toString() {
+        return "ServiceProviderUserEntity{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", emailadress='" + emailadress + '\'' +
+                ", greeting='" + greeting + '\'' +
+                ", profession='" + profession + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

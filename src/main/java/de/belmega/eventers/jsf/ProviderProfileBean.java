@@ -4,25 +4,32 @@ import de.belmega.eventers.dto.ServiceProviderID;
 import de.belmega.eventers.dto.ServiceProviderUserTO;
 import de.belmega.eventers.service.ProviderService;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 
 @Named
-@RequestScoped
-public class ProviderProfileBean {
+@SessionScoped
+public class ProviderProfileBean implements Serializable {
 
     @Inject
     ProviderService providerService;
 
     private ServiceProviderUserTO provider;
+
+    @ManagedProperty(value = "#{request.getParameter('id')}")
     private String serviceProviderId;
 
+
+    public void loadProfile() {
+        ServiceProviderID id = new ServiceProviderID(serviceProviderId);
+        System.out.println(id);
+        this.provider = providerService.findProvider(id);
+
+    }
 
     public void setProvider(ServiceProviderUserTO provider) {
         this.provider = provider;
@@ -40,7 +47,4 @@ public class ProviderProfileBean {
         return serviceProviderId;
     }
 
-    public void loadProfile() {
-        this.provider = providerService.findProvider(new ServiceProviderID(serviceProviderId));
-    }
 }

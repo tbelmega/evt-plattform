@@ -10,16 +10,16 @@
         </f:metadata>
 
         <h2>Eingabemaske Dienstleister</h2>
-        <div>
+        <h:form>
             <h:outputLabel for="outputEmailadress">Ihre Nutzerkennung</h:outputLabel>
             <h:outputText value="#{providerProfileBean.provider.emailadress}" id="outputEmailadress"/>
 
             <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
-            <h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname" required="true"/>
+            <h:inputText initial="foo" value="#{registerProviderBean.provider.firstname}" id="inputFirstname"/>
 
             <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
-            <h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname" required="true"/>
-        </div>
+            <h:inputText initial="#{registerProviderBean.provider.lastname}" value="hello" id="inputLastname"/>
+        </h:form>
 
     </ui:define>
 
