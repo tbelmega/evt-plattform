@@ -9,11 +9,16 @@
             <f:event type="preRenderComponent" listener="#{providerProfileBean.loadProfile()}"/>
         </f:metadata>
 
+        <h2>Eingabemaske Dienstleister</h2>
         <div>
-            <div>Dies ist das Erfassungsformular für den Dienstleister:</div>
-            <div><h:outputText value="#{providerProfileBean.provider.lastname}"/></div>
-            <div><h:outputText value="#{providerProfileBean.provider.firstname}"/></div>
-            <div><h:outputText value="#{providerProfileBean.provider.emailadress}"/></div>
+            <h:outputLabel for="outputEmailadress">Ihre Nutzerkennung</h:outputLabel>
+            <h:outputText value="#{providerProfileBean.provider.emailadress}" id="outputEmailadress"/>
+
+            <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
+            <h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname" required="true"/>
+
+            <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
+            <h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname" required="true"/>
         </div>
 
     </ui:define>
