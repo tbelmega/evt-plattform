@@ -12,9 +12,10 @@ import java.io.IOException;
  * Use this filter for all requests that contain the .xhtml file extension.
  */
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"*.xhtml"})
-public class AuthorizationFilter implements Filter {
+public class AuthFilter implements Filter {
 
     public static final String JAVAX_FACES_RESOURCE_URL = "javax.faces.resource";
+    public static final String ATTRIBUTE_USER_ID = "userId";
 
     public void init(FilterConfig filterConfig) throws ServletException {
         // do nothing
@@ -31,30 +32,32 @@ public class AuthorizationFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
 
         if (isPrivatePage(url) && !userIsLoggedIn(session)) {
+            System.out.println("Kein User eingeloggt, leite weiter zu Login");
             redirectToLogin((HttpServletResponse) response);
         } else {
+            System.out.println("User ist berechtigt, diese Seite zu sehen.");
             chain.doFilter(request, response);
         }
     }
 
 
     private void redirectToLogin(HttpServletResponse response) throws IOException {
-        response.sendRedirect("index.xhtml");
+        response.sendRedirect("register-provider.xhtml");
     }
 
     /**
      * Check if the HttpSession has the USER_IS_LOGGED_IN attribute.
      */
     private boolean userIsLoggedIn(HttpSession session) {
-        boolean sessionHasAttributeUserLoggedIn = session != null && session.getAttribute("userId") != null;
-        return sessionHasAttributeUserLoggedIn && session.getAttribute("userId").equals("true");
+        boolean sessionHasAttributeUserLoggedIn = session != null && session.getAttribute(ATTRIBUTE_USER_ID) != null;
+        return sessionHasAttributeUserLoggedIn;
     }
 
     /**
-     * Check if the requested page is the index page or a resource.
+     * Check if the requested page is registration or a resource.
      */
     private boolean isPrivatePage(String url) {
-        return !(url.contains("index.xhtml") || url.contains(JAVAX_FACES_RESOURCE_URL));
+        return !(url.contains("register") || url.contains(JAVAX_FACES_RESOURCE_URL));
     }
 
 

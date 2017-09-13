@@ -1,7 +1,11 @@
 package de.belmega.eventers.jsf;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
+
+import static de.belmega.eventers.filter.AuthFilter.ATTRIBUTE_USER_ID;
 
 
 @Named
@@ -24,7 +28,9 @@ public class RegistrationSuccesfulBean {
     }
 
     public void generateTestLink() {
-        this.testlink = HOSTNAME + "/profile.xhtml?id=" + serviceProviderId;
+        ((HttpSession) FacesContext.getCurrentInstance().
+                getExternalContext().getSession(true)).setAttribute(ATTRIBUTE_USER_ID, serviceProviderId);
+        this.testlink = HOSTNAME + "/profil-fitness.xhtml?id=" + serviceProviderId;
     }
 
     public String getTestlink() {

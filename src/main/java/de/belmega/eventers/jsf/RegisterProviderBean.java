@@ -32,10 +32,6 @@ public class RegisterProviderBean {
         return "";
     }
 
-    private HttpSession getHttpSession() {
-        return (HttpSession) FacesContext.getCurrentInstance()
-                .getExternalContext().getSession(false);
-    }
 
 
     public String register() {
