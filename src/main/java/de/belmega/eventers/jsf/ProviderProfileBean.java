@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
@@ -24,17 +25,19 @@ public class ProviderProfileBean implements Serializable {
 
     private ServiceProviderUserTO provider;
 
-    @ManagedProperty(value = "#{request.getParameter('id')}")
     private String serviceProviderId;
 
+    public void loadProfile() throws AuthException {
 
-    public void loadProfile() {
+        if (FacesContext.getCurrentInstance().isPostback()) return;
+
+        String idFromSession = (String) getHttpSession().getAttribute(ATTRIBUTE_USER_ID);
+        if(!serviceProviderId.equals(idFromSession)){
+            System.out.println(idFromSession);
+            throw new AuthException("Zugriff auf dieses Nutzerprofil ist nicht gestattet.");
+        }
+
         ServiceProviderID id = new ServiceProviderID(serviceProviderId);
-
-
-        String attribute = (String) getHttpSession().getAttribute(ATTRIBUTE_USER_ID);
-        System.out.println(id);
-        System.out.println(attribute); // TODO
         this.provider = providerService.findProvider(id);
 
     }
@@ -48,6 +51,7 @@ public class ProviderProfileBean implements Serializable {
     }
 
     public void setServiceProviderId(String serviceProviderId) {
+        System.out.println("ID set from URL: " + serviceProviderId);
         this.serviceProviderId = serviceProviderId;
     }
 
@@ -60,4 +64,7 @@ public class ProviderProfileBean implements Serializable {
                 .getExternalContext().getSession(false);
     }
 
+    public Object save() {
+        return null;
+    }
 }

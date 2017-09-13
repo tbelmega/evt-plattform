@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
     <title>Profil</title>
@@ -14,16 +15,104 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
 
     <h:outputStylesheet name="css/eventers-webapp.css"></h:outputStylesheet>
+
 </h:head>
 
 <h:body>
     <div id="container">
+
+        <h:form>
+            <h:commandLink class="toggle" onclick="$('.personal-section').toggleClass('hidden'); return false;">
+                <h3>Persönliche Daten</h3></h:commandLink>
+            <div class="personal-section">
+                <h:outputLabel for="outputEmailadress">Ihre Nutzerkennung</h:outputLabel>
+                <h:outputText value="#{providerProfileBean.provider.emailadress}" id="outputEmailadress"/>
+
+                <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.firstname}" id="inputFirstname"/>
+
+                <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.lastname}" id="inputLastname"/>
+
+                <h:outputLabel for="inputStreet">Straße und Hausnummer</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.street}" id="inputStreet"/>
+
+                <h:outputLabel for="inputZipCode">Postleitzahl</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.zipcode}" id="inputZipCode"/>
+
+                <h:outputLabel for="inputCity">Stadt</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.city}" id="inputCity"/>
+
+                <h:outputLabel for="inputDateOFBirth">Geburtsdatum</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.dateOfBirth}" id="inputDateOFBirth"
+                             p:placeholder="31.12.2999">
+                    <f:convertDateTime pattern="dd.MM.yyyy"/>
+                </h:inputText>
+                <h:message for="inputDateOFBirth" id="messageDateOfBirth"/>
+
+                <h:outputLabel for="inputPhoneBusiness">Telefonnummer Geschäftlich</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.phoneBusiness}" id="inputPhoneBusiness"/>
+
+                <h:outputLabel for="inputPhoneMobile">Telefonnummer Mobil</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.mobile}" id="inputPhoneMobile"/>
+
+                <div class="buttons-hbox">
+                    <h:commandButton value="Speichern" action="#{providerProfileBean.save()}"/>
+                </div>
+            </div>
+
+            <h:commandLink class="toggle" onclick="$('.additional-section').toggleClass('hidden'); return false;">
+                <h3>Ergänzende Angaben</h3></h:commandLink>
+            <div class="additional-section hidden">
+                <h4>Ausbildung</h4>
+                <h:outputLabel for="inputDegree">Welches ist Ihr höchster Ausbildungsgrad?</h:outputLabel>
+                <h:inputText value="#{providerProfileBean.provider.degree}" id="inputDegree"/>
+
+                <h4>Praktische Erfahrung</h4>
+                <h:outputLabel for="dropdownExperience">Wieviel Erfahrung besitzen Sie in Ihrem Fachgebiet? (im Vergleich zum Markt oder Mitbewerbern)</h:outputLabel>
+                <h:selectOneMenu value="#{providerProfileBean.provider.experience}" id="dropdownExperience">
+                    <f:selectItem itemValue="50" itemLabel="Sehr viel Erfahrung"/>
+                    <f:selectItem itemValue="40" itemLabel="Viel Erfahrung"/>
+                    <f:selectItem itemValue="30" itemLabel="Durschnittliche Erfahrung"/>
+                    <f:selectItem itemValue="20" itemLabel="Unterdurchschnittliche Erfahrung"/>
+                    <f:selectItem itemValue="10" itemLabel="Wenig Erfahrung"/>
+                </h:selectOneMenu>
+
+                <h4>Erreichbarkeit</h4>
+                <h:outputLabel for="dropdownContactable">Sind Sie gewöhnlich innerhalb von 30-60 Minuten telefonisch/per SMS/per Whatsapp zu erreichen?</h:outputLabel>
+                <h:selectOneMenu value="#{providerProfileBean.provider.contactable}" id="dropdownContactable">
+                    <f:selectItem itemValue="true" itemLabel="Ja"/>
+                    <f:selectItem itemValue="false" itemLabel="Nein"/>
+                </h:selectOneMenu>
+
+                <h4>Mobilität</h4>
+                <h:outputLabel for="dropdownMobility">Verfügen Sie über einen PKW oder eine andere Möglichkeit die Kunden vor Ort (Hotel, Firma, etc.) zu besuchen?</h:outputLabel>
+                <h:selectOneMenu value="#{providerProfileBean.provider.mobility}" id="dropdownMobility">
+                    <f:selectItem itemValue="true" itemLabel="Ja"/>
+                    <f:selectItem itemValue="false" itemLabel="Nein"/>
+                </h:selectOneMenu>
+
+                <h4>Stundensatz inkl. Anreisepauschale bis 30km</h4>
+                <h:inputText value="#{providerProfileBean.provider.hourlyRate}" id="inputHourlyRate"/>
+
+
+                <div class="buttons-hbox">
+                    <h:commandButton value="Speichern" action="#{providerProfileBean.save()}"/>
+                </div>
+            </div>
+
 
         <div id="main">
             <ui:insert name="main-content">
 
             </ui:insert>
         </div>
+
+        </h:form>
+
+        <h2>
+            TODO: Verfügbarkeit (Kalender)
+        </h2>
 
     </div>
 </h:body>

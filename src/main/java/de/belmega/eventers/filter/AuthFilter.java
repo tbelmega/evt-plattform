@@ -35,14 +35,13 @@ public class AuthFilter implements Filter {
             System.out.println("Kein User eingeloggt, leite weiter zu Login");
             redirectToLogin((HttpServletResponse) response);
         } else {
-            System.out.println("User ist berechtigt, diese Seite zu sehen.");
             chain.doFilter(request, response);
         }
     }
 
 
     private void redirectToLogin(HttpServletResponse response) throws IOException {
-        response.sendRedirect("register-provider.xhtml");
+        response.sendRedirect("login.xhtml");
     }
 
     /**
@@ -57,7 +56,7 @@ public class AuthFilter implements Filter {
      * Check if the requested page is registration or a resource.
      */
     private boolean isPrivatePage(String url) {
-        return !(url.contains("register") || url.contains(JAVAX_FACES_RESOURCE_URL));
+        return !(url.contains("register") || url.contains("login.xhtml") || url.contains(JAVAX_FACES_RESOURCE_URL));
     }
 
 

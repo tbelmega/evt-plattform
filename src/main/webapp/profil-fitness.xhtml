@@ -4,23 +4,48 @@
                 template="template-provider.xhtml">
 
     <ui:define name="main-content">
+
         <f:metadata>
             <!-- When page is loaded, get ID from URL and store it in the bean. -->
             <f:viewParam name="id" value="#{providerProfileBean.serviceProviderId}"/>
-            <f:event type="preRenderComponent" listener="#{providerProfileBean.loadProfile()}"/>
+            <f:viewAction action="#{providerProfileBean.loadProfile()}"/>
         </f:metadata>
 
-        <h2>Eingabemaske Dienstleister</h2>
-        <h:form>
-            <h:outputLabel for="outputEmailadress">Ihre Nutzerkennung</h:outputLabel>
-            <h:outputText value="#{providerProfileBean.provider.emailadress}" id="outputEmailadress"/>
+        <h:commandLink class="toggle" onclick="$('.service-section').toggleClass('hidden'); return false;">
+            <h3>Dienstleistung</h3></h:commandLink>
+        <div class="service-section hidden">
+            <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
+            <h:outputLabel for="selectServices" class="hint">Mehrfachauswahl durch Strg+Klick</h:outputLabel>
+            <h:selectManyListbox value="#{providerProfileBean.provider.services}" id="selectServices">
+                <f:selectItem itemValue="CoachGym" itemLabel="Training als Personal Coach in einem Sportstudio" />
+                <f:selectItem itemValue="CoachRunning" itemLabel="Personal Coach Laufen / Joggen im Park" />
+                <f:selectItem itemValue="CoachWalking" itemLabel="Personal Coach Nordic Walking im Park" />
+                <f:selectItem itemValue="CoachClimbing" itemLabel="Personal Coach in einer Kletterhalle / Klettergarten" />
+                <f:selectItem itemValue="CoachYoga" itemLabel="Yoga / Tai Chi" />
+                <f:selectItem itemValue="CoachPilates" itemLabel="Pilates" />
+                <f:selectItem itemValue="CoachIndoorFootball" itemLabel="Begleitung als Trainer / Schiedsrichter / Spieler bei Indoor Fußball" />
+            </h:selectManyListbox>
 
-            <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
-            <h:inputText initial="foo" value="#{registerProviderBean.provider.firstname}" id="inputFirstname"/>
+            <h4>Wo können Sie diese Leistungen erbringen?</h4>
+            <h:selectManyListbox value="#{providerProfileBean.provider.locations}" id="selectLocation">
+                <f:selectItem itemValue="Indoor" itemLabel="Indoor" />
+                <f:selectItem itemValue="Outdoor" itemLabel="Outdoor" />
+                <f:selectItem itemValue="Gym" itemLabel="Gym" />
+                <f:selectItem itemValue="Hotel" itemLabel="Hotel" />
+            </h:selectManyListbox>
 
-            <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
-            <h:inputText initial="#{registerProviderBean.provider.lastname}" value="hello" id="inputLastname"/>
-        </h:form>
+            <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
+            <h:selectManyListbox value="#{providerProfileBean.provider.equipments}" id="selectEquipment">
+                <f:selectItem itemValue="WalkingStick" itemLabel="Nordic Walking Stöcke" />
+                <f:selectItem itemValue="RollMat" itemLabel="Isomatten" />
+                <f:selectItem itemValue="BadmintonSet" itemLabel="Federballsets" />
+                <f:selectItem itemValue="WalkingWeights" itemLabel="Walking Hanteln" />
+            </h:selectManyListbox>
+
+            <div class="buttons-hbox">
+                <h:commandButton value="Speichern" action="#{providerProfileBean.save()}"/>
+            </div>
+        </div>
 
     </ui:define>
 
