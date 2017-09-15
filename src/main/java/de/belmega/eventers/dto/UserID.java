@@ -5,15 +5,15 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Embeddable
-public class ServiceProviderID implements Serializable {
+public class UserID implements Serializable {
 
     private String id;
 
-    public ServiceProviderID(String id) {
+    public UserID(String id) {
         this.id = id;
     }
 
-    public ServiceProviderID() {
+    public UserID() {
     }
 
     public String getId() {
@@ -24,17 +24,17 @@ public class ServiceProviderID implements Serializable {
         this.id = id;
     }
 
-    public static ServiceProviderID generateId() {
+    public static UserID generateId() {
         UUID uuid = UUID.randomUUID();
-        return new ServiceProviderID(uuid.toString());
+        return new UserID(uuid.toString());
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ServiceProviderID)) return false;
+        if (!(o instanceof UserID)) return false;
 
-        ServiceProviderID that = (ServiceProviderID) o;
+        UserID that = (UserID) o;
 
         return id.equals(that.id);
     }
@@ -46,7 +46,7 @@ public class ServiceProviderID implements Serializable {
 
     @Override
     public String toString() {
-        return "ServiceProviderID{" +
+        return "UserID{" +
                 "id='" + id + '\'' +
                 '}';
     }

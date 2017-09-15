@@ -1,6 +1,6 @@
 package de.belmega.eventers.persistence.dao;
 
-import de.belmega.eventers.dto.ServiceProviderID;
+import de.belmega.eventers.dto.UserID;
 import de.belmega.eventers.persistence.entities.ServiceProviderUserEntity;
 
 import javax.persistence.EntityManager;
@@ -17,7 +17,7 @@ public class ProviderDAO {
         em.persist(entity);
     }
 
-    public ServiceProviderUserEntity findById(ServiceProviderID serviceProviderID) {
+    public ServiceProviderUserEntity findById(UserID serviceProviderID) {
         return em.find(ServiceProviderUserEntity.class, serviceProviderID);
     }
 }

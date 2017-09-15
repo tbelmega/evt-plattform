@@ -1,11 +1,10 @@
 package de.belmega.eventers.service;
 
-import de.belmega.eventers.dto.ServiceProviderID;
+import de.belmega.eventers.dto.UserID;
 import de.belmega.eventers.dto.ServiceProviderUserTO;
 import de.belmega.eventers.persistence.dao.ProviderDAO;
 import de.belmega.eventers.persistence.entities.ServiceProviderUserEntity;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -15,9 +14,9 @@ public class ProviderService {
     @Inject
     ProviderDAO providerDAO;
 
-    public ServiceProviderID registerNewProvider(ServiceProviderUserTO provider) {
+    public UserID registerNewProvider(ServiceProviderUserTO provider) {
         ServiceProviderUserEntity entity = new ServiceProviderUserEntity();
-        entity.setId(ServiceProviderID.generateId());
+        entity.setId(UserID.generateId());
         entity.setFirstname(provider.getFirstname());
         entity.setLastname(provider.getLastname());
         entity.setEmailadress(provider.getEmailadress());
@@ -29,7 +28,7 @@ public class ProviderService {
         return entity.getId();
     }
 
-    public ServiceProviderUserTO findProvider(ServiceProviderID serviceProviderID) {
+    public ServiceProviderUserTO findProvider(UserID serviceProviderID) {
 
         System.out.println(serviceProviderID);
 

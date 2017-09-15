@@ -12,10 +12,38 @@
     <title>Profil</title>
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <h:outputStylesheet name="css/eventers-webapp.css"/>
+
+    <script type="text/javascript">
+        PrimeFaces.locales['de'] = {
+            closeText: 'Schließen',
+            prevText: 'Zurück',
+            nextText: 'Weiter',
+            monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+            monthNamesShort: ['Jan', 'Feb', 'MÃ¤r', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+            dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+            dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+            dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+            weekHeader: 'Woche',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Nur Zeit',
+            timeText: 'Zeit',
+            hourText: 'Stunde',
+            minuteText: 'Minute',
+            secondText: 'Sekunde',
+            currentText: 'Aktuelles Datum',
+            ampm: false,
+            month: 'Monat',
+            week: 'Woche',
+            day: 'Tag',
+            allDayText: 'Ganzer Tag'
+        };
+    </script>
 
 </h:head>
 
@@ -114,77 +142,48 @@
 
         </h:form>
 
+
         <h:form>
             <h:commandLink class="toggle" onclick="$('.scheduler-section').toggleClass('hidden'); return false;">
                 <h3>Verfügbarkeit</h3></h:commandLink>
-            <div class="scheduler hidden">
+            <div class="scheduler-section">
 
                 <p:growl id="messages" showDetail="true"/>
 
                 <h:panelGrid columnClasses="value">
-                    <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule"
-                                locale="de">
+                    <p:schedule id="schedule" value="#{providerProfileBean.eventModel}" widgetVar="myschedule"
+                                locale="de" ignoreTimezone="false">
 
-                        <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails"
+                        <p:ajax event="dateSelect" listener="#{providerProfileBean.onDateSelect}" update="eventDetails"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails"
+                        <p:ajax event="eventSelect" listener="#{providerProfileBean.onEventSelect}"
+                                update="eventDetails"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages"/>
-                        <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages"/>
-
+                        <p:ajax event="eventResize" listener="#{providerProfileBean.onEventResize}" update="messages" />
                     </p:schedule>
                 </h:panelGrid>
 
-                <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
+                <p:dialog widgetVar="eventDialog" header="Verfügbarkeit angeben" showEffect="clip" hideEffect="clip"
+                          locale="de">
                     <h:panelGrid id="eventDetails" columns="2">
-                        <p:outputLabel for="title" value="Titles:"/>
-                        <p:inputText id="title" value="#{scheduleView.event.title}" required="true"/>
+                        <p:outputLabel for="from" value="Von:"/>
+                        <p:calendar id="from" value="#{providerProfileBean.event.startDate}"
+                                    pattern="dd.MM.yyyy HH:mm" locale="de"/>
 
-                        <p:outputLabel for="from" value="From:"/>
-                        <p:calendar id="from" value="#{scheduleView.event.startDate}" timeZone="GMT+2"
-                                    pattern="dd/MM/yyyy HH:mm"/>
-
-                        <p:outputLabel for="to" value="To:"/>
-                        <p:calendar id="to" value="#{scheduleView.event.endDate}" timeZone="GMT+2"
-                                    pattern="dd/MM/yyyy HH:mm"/>
-
-                        <p:outputLabel for="allDay" value="All Day:"/>
-                        <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}"/>
-
-                        <p:commandButton type="reset" value="Reset"/>
-                        <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}"
-                                         oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+                        <p:outputLabel for="to" value="Bis:"/>
+                        <p:calendar id="to" value="#{providerProfileBean.event.endDate}"
+                                    pattern="dd.MM.yyyy HH:mm" locale="de"/>
                     </h:panelGrid>
+
+                    <p:commandButton id="addButton" value="Speichern" actionListener="#{providerProfileBean.addEvent}"
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+
+                    <p:commandButton id="abortButton" value="Abbrechen"
+                                     oncomplete="PF('eventDialog').hide();"/>
+
                 </p:dialog>
             </div>
         </h:form>
-
-        <script type="text/javascript">
-            PrimeFaces.locales['de'] = {
-                closeText: 'Schließen',
-                prevText: 'Zurück',
-                nextText: 'Vor',
-                currentText: 'Heute',
-                monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
-                    'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-                monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-                dayNames: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'],
-                dayNamesShort: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-                dayNamesMin: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-                weekHeader: 'W',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
-                month: 'Monat',
-                week: 'Woche',
-                day: 'Tag',
-                allDayText: 'Ganzen Tag'
-            };
-        </script>
-
-
     </div>
 
 

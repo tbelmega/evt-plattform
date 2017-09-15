@@ -1,8 +1,7 @@
 package de.belmega.eventers.persistence.entities;
 
-import de.belmega.eventers.dto.ServiceProviderID;
+import de.belmega.eventers.dto.UserID;
 
-import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,13 +18,13 @@ public class ServiceProviderUserEntity {
 
     @Id
     @EmbeddedId
-    private ServiceProviderID id;
+    private UserID id;
 
-    public ServiceProviderID getId() {
+    public UserID getId() {
         return id;
     }
 
-    public void setId(ServiceProviderID id) {
+    public void setId(UserID id) {
         this.id = id;
     }
 
