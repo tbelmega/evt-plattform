@@ -11,9 +11,9 @@
             <f:viewAction action="#{providerProfileBean.loadProfile()}"/>
         </f:metadata>
 
-        <h:commandLink class="toggle" onclick="$('.service-section').toggleClass('hidden'); return false;">
-            <h3>Dienstleistung</h3></h:commandLink>
-        <div class="service-section hidden">
+        <h:commandLink class="toggle" onclick="$('.service-section').toggleClass('invisible'); return false;">
+            <h3 class="slidedown-heading">Dienstleistung</h3></h:commandLink>
+        <div class="service-section invisible">
             <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
             <h:outputLabel for="selectServices" class="hint">Mehrfachauswahl durch Strg+Klick</h:outputLabel>
             <h:selectManyListbox value="#{providerProfileBean.provider.services}" id="selectServices">
@@ -43,7 +43,7 @@
             </h:selectManyListbox>
 
             <div class="buttons-hbox">
-                <h:commandButton value="Speichern" action="#{providerProfileBean.save()}"/>
+                <h:commandLink class="button button_green" value="Speichern" action="#{providerProfileBean.save()}"/>
             </div>
         </div>
 

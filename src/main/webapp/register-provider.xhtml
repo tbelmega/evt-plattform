@@ -7,9 +7,7 @@
 
 <h:head>
     <title>Registrierung</title>
-    <!--link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"/>
+
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
 
     <h:outputStylesheet name="css/eventers-webapp.css"></h:outputStylesheet>
@@ -81,7 +79,7 @@
         <h:message for="inputPasswordConfirmation" id="m_password_confirm"/>
 
         <div class="buttons-hbox">
-            <h:commandLink value="Absenden" action="#{registerProviderBean.register()}" class="button button_green"/>
+            <h:commandLink value="Absenden" class="button button_green" action="#{registerProviderBean.register()}" />
         </div>
     </h:form>
 </h:body>

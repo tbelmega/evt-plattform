@@ -27,12 +27,11 @@ public class ScheduleEventDAO {
 
 
     public List<ScheduleEventEntity> findEventsByUser(UserID id) {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<ScheduleEventEntity> query = cb.createQuery(ScheduleEventEntity.class);
+        String qlString = "SELECT e FROM ScheduleEventEntity e JOIN e.user u WHERE u.id = :id";
+        TypedQuery<ScheduleEventEntity> query =
+                em.createQuery(qlString, ScheduleEventEntity.class);
+        List<ScheduleEventEntity> results = query.setParameter("id", id).getResultList();
 
-        Root<ScheduleEventEntity> from = query.from(ScheduleEventEntity.class);
-        query.select(from).where(cb.equal(from.get(COLUMN_USER_ID), id));
-
-        return em.createQuery(query).getResultList();
+        return results;
     }
 }

@@ -50,11 +50,11 @@ public class ProviderProfileBean implements Serializable {
     public void loadProfile() throws AuthException {
         if (FacesContext.getCurrentInstance().isPostback()) return;
 
-        String idFromSession = (String) getHttpSession().getAttribute(ATTRIBUTE_USER_ID);
-        if(!serviceProviderId.equals(idFromSession)){
-            System.out.println(idFromSession);
-            throw new AuthException("Zugriff auf dieses Nutzerprofil ist nicht gestattet.");
-        }
+//        String idFromSession = (String) getHttpSession().getAttribute(ATTRIBUTE_USER_ID);
+//        if(!serviceProviderId.equals(idFromSession)){
+//            System.out.println(idFromSession);
+//            throw new AuthException("Zugriff auf dieses Nutzerprofil ist nicht gestattet.");
+//        }
 
         UserID id = new UserID(serviceProviderId);
         this.provider = providerService.findProvider(id);
