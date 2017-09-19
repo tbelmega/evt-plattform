@@ -8,6 +8,8 @@ import java.util.Date;
 @Entity
 public class ScheduleEventEntity {
 
+    public static final String COLUMN_USER_ID = "user_id";
+
     @Id
     private String id;
     private String title;
@@ -15,7 +17,7 @@ public class ScheduleEventEntity {
     private Date endDate;
 
     @ManyToOne(optional=false)
-    @JoinColumn
+    @JoinColumn(name = COLUMN_USER_ID)
     private ServiceProviderUserEntity user;
 
     public ScheduleEventEntity(String id, String title, Date startDate, Date endDate) {
@@ -23,6 +25,9 @@ public class ScheduleEventEntity {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public ScheduleEventEntity() {
     }
 
     public String getId() {

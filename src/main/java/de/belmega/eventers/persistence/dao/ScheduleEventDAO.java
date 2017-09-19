@@ -13,6 +13,8 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static de.belmega.eventers.persistence.entities.ScheduleEventEntity.COLUMN_USER_ID;
+
 public class ScheduleEventDAO {
 
     @PersistenceContext
@@ -29,7 +31,7 @@ public class ScheduleEventDAO {
         CriteriaQuery<ScheduleEventEntity> query = cb.createQuery(ScheduleEventEntity.class);
 
         Root<ScheduleEventEntity> from = query.from(ScheduleEventEntity.class);
-        query.select(from).where(cb.equal(from.get("userId"), id));
+        query.select(from).where(cb.equal(from.get(COLUMN_USER_ID), id));
 
         return em.createQuery(query).getResultList();
     }
