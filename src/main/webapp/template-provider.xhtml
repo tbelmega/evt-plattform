@@ -54,7 +54,8 @@
                 <h3 class="slidedown-heading">Persönliche Daten</h3></h:commandLink>
             <div class="personal-section">
                 <h:outputLabel for="outputEmailadress">Ihre Nutzerkennung</h:outputLabel>
-                <h:outputText value="#{providerProfileBean.provider.emailadress}" id="outputEmailadress"/>
+                <h:inputText value="#{providerProfileBean.provider.emailadress}" id="outputEmailadress"
+                readonly="true"/>
 
                 <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
                 <h:inputText value="#{providerProfileBean.provider.firstname}" id="inputFirstname"/>

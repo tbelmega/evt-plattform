@@ -12,8 +12,8 @@ import static de.belmega.eventers.filter.AuthFilter.ATTRIBUTE_USER_ID;
 @RequestScoped
 public class RegistrationSuccesfulBean {
 
-    //public static final String HOSTNAME = "http://the-eventers.de";
-    public static final String HOSTNAME = "localhost:8080";
+    public static final String HOSTNAME = "http://the-eventers.de";
+    //public static final String HOSTNAME = "localhost:8080";
 
     private String serviceProviderId;
     private String testlink;
