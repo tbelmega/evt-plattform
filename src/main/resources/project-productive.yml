@@ -8,13 +8,13 @@ swarm:
     data-sources:
       ExampleDS:
         driver-name: com.mysql
-        connection-url: jdbc:mysql://vs221.vps4free.de:3306/eventers_testdatabase
+        connection-url: jdbc:mysql://vs221.vps4free.de:3306/eventers_productive
         user-name: eventers
         password: PutzDerSchwanJolly99
 
 urls:
-  hostname: http://localhost:8080
+  hostname: http://the-eventers.de
   sites:
-    profil-fitness: /profil-fitness.xhtml
+    profil-fitness: /profil-fitness
 
-test-environment: true
+test-environment: false
