@@ -1,6 +1,6 @@
 package de.belmega.eventers.service;
 
-import de.belmega.eventers.dto.ServiceProviderID;
+import de.belmega.eventers.dto.UserID;
 import de.belmega.eventers.persistence.dao.ProviderDAO;
 import de.belmega.eventers.persistence.entities.ServiceProviderUserEntity;
 import org.jboss.logging.Logger;
@@ -27,7 +27,7 @@ public class TestDataGenerator {
 
     public void setupTestData(@Observes @Initialized(ApplicationScoped.class) Object init) {
         ServiceProviderUserEntity entity = new ServiceProviderUserEntity();
-        entity.setId(new ServiceProviderID("1"));
+        entity.setId(new UserID("1"));
         entity.setLastname("Belmega");
         entity.setFirstname("Thiemo");
         entity.setEmailadress("thiemo.belmega@gmail.com");

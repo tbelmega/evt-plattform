@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Use this filter for all requests that contain the .xhtml file extension.
  */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"*.xhtml"})
+//@WebFilter(filterName = "AuthFilter", urlPatterns = {"*.xhtml"})
 public class AuthFilter implements Filter {
 
     public static final String JAVAX_FACES_RESOURCE_URL = "javax.faces.resource";

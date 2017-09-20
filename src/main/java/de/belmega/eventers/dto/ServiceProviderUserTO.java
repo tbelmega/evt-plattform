@@ -9,7 +9,7 @@ public class ServiceProviderUserTO {
     private String emailadress;
     private String greeting;
     private String profession;
-    private ServiceProviderID id;
+    private UserID id;
     private String passwordPlainText;
     private Object street;
     private Object zipcode;
@@ -67,11 +67,11 @@ public class ServiceProviderUserTO {
         return profession;
     }
 
-    public void setId(ServiceProviderID id) {
+    public void setId(UserID id) {
         this.id = id;
     }
 
-    public ServiceProviderID getId() {
+    public UserID getId() {
         return id;
     }
 
