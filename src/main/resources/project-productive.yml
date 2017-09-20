@@ -14,7 +14,7 @@ swarm:
 
 urls:
   hostname: http://the-eventers.de
-  sites:
+  pages:
     profil-fitness: /profil-fitness
 
 test-environment: false

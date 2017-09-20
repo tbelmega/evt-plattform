@@ -7,8 +7,8 @@
 
         <f:metadata>
             <!-- When page is loaded, get ID from URL and store it in the bean. -->
-            <f:viewParam name="id" value="#{providerProfileBean.serviceProviderId}"/>
-            <f:viewAction action="#{providerProfileBean.loadProfile()}"/>
+            <f:viewParam name="id" value="#{userProfileBean.serviceProviderId}"/>
+            <f:viewAction action="#{userProfileBean.loadProfile()}"/>
         </f:metadata>
 
         <h:commandLink class="toggle" onclick="$('.service-section').toggleClass('invisible'); return false;">
@@ -16,7 +16,7 @@
         <div class="service-section invisible">
             <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
             <h:outputLabel for="selectServices" class="hint">Mehrfachauswahl durch Strg+Klick</h:outputLabel>
-            <h:selectManyListbox value="#{providerProfileBean.provider.services}" id="selectServices">
+            <h:selectManyListbox value="#{userProfileBean.provider.services}" id="selectServices">
                 <f:selectItem itemValue="CoachGym" itemLabel="Training als Personal Coach in einem Sportstudio" />
                 <f:selectItem itemValue="CoachRunning" itemLabel="Personal Coach Laufen / Joggen im Park" />
                 <f:selectItem itemValue="CoachWalking" itemLabel="Personal Coach Nordic Walking im Park" />
@@ -27,7 +27,7 @@
             </h:selectManyListbox>
 
             <h4>Wo können Sie diese Leistungen erbringen?</h4>
-            <h:selectManyListbox value="#{providerProfileBean.provider.locations}" id="selectLocation">
+            <h:selectManyListbox value="#{userProfileBean.provider.locations}" id="selectLocation">
                 <f:selectItem itemValue="Indoor" itemLabel="Indoor" />
                 <f:selectItem itemValue="Outdoor" itemLabel="Outdoor" />
                 <f:selectItem itemValue="Gym" itemLabel="Gym" />
@@ -35,7 +35,7 @@
             </h:selectManyListbox>
 
             <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
-            <h:selectManyListbox value="#{providerProfileBean.provider.equipments}" id="selectEquipment">
+            <h:selectManyListbox value="#{userProfileBean.provider.equipments}" id="selectEquipment">
                 <f:selectItem itemValue="WalkingStick" itemLabel="Nordic Walking Stöcke" />
                 <f:selectItem itemValue="RollMat" itemLabel="Isomatten" />
                 <f:selectItem itemValue="BadmintonSet" itemLabel="Federballsets" />
@@ -43,7 +43,7 @@
             </h:selectManyListbox>
 
             <div class="buttons-hbox">
-                <h:commandLink class="button button_green" value="Speichern" action="#{providerProfileBean.save()}"/>
+                <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
             </div>
         </div>
 

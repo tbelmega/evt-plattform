@@ -1,11 +1,8 @@
-package de.belmega.eventers.jsf;
+package de.belmega.eventers.user;
 
-import de.belmega.eventers.dto.EventProperties;
-import de.belmega.eventers.dto.UserID;
-import de.belmega.eventers.dto.ServiceProviderUserTO;
-import de.belmega.eventers.persistence.entities.ScheduleEventEntity;
-import de.belmega.eventers.service.ProviderService;
-import de.belmega.eventers.service.ScheduleEventService;
+import de.belmega.eventers.scheduling.EventProperties;
+import de.belmega.eventers.scheduling.ScheduleEventEntity;
+import de.belmega.eventers.scheduling.ScheduleEventService;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
@@ -23,13 +20,14 @@ import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-import static de.belmega.eventers.filter.AuthFilter.ATTRIBUTE_USER_ID;
 
+import static de.belmega.eventers.auth.AuthFilter.ATTRIBUTE_USER_ID;
 
 @Named
 @SessionScoped
-public class ProviderProfileBean implements Serializable {
+public class UserProfileBean implements Serializable {
 
     @Inject
     ProviderService providerService;
@@ -42,49 +40,30 @@ public class ProviderProfileBean implements Serializable {
     private DefaultScheduleEvent event = new DefaultScheduleEvent();
     private EventProperties eventProperties = new EventProperties();
 
-    private ServiceProviderUserTO provider;
-
-    private String serviceProviderId;
-
+    private Optional<ProviderUserTO> provider;
 
     public void loadProfile() throws AuthException {
         if (FacesContext.getCurrentInstance().isPostback()) return;
 
-//        String idFromSession = (String) getHttpSession().getAttribute(ATTRIBUTE_USER_ID);
-//        if(!serviceProviderId.equals(idFromSession)){
-//            System.out.println(idFromSession);
-//            throw new AuthException("Zugriff auf dieses Nutzerprofil ist nicht gestattet.");
-//        }
+        UserID idFromSession = (UserID) getHttpSession().getAttribute(ATTRIBUTE_USER_ID);
+        this.provider = providerService.findProvider(idFromSession);
 
-        UserID id = new UserID(serviceProviderId);
-        this.provider = providerService.findProvider(id);
+        if (!this.provider.isPresent()) getHttpSession().invalidate();
 
-
-        List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(id);
-        for (ScheduleEventEntity event: events) {
+        List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(idFromSession);
+        for (ScheduleEventEntity event : events) {
             ScheduleEvent scheduleEvent = createScheduleEvent(event);
             eventModel.addEvent(scheduleEvent);
         }
 
     }
 
-
-
-    public void setProvider(ServiceProviderUserTO provider) {
-        this.provider = provider;
+    public void setProvider(ProviderUserTO provider) {
+        this.provider = Optional.of(provider);
     }
 
-    public ServiceProviderUserTO getProvider() {
-        return provider;
-    }
-
-    public void setServiceProviderId(String serviceProviderId) {
-        System.out.println("ID set from URL: " + serviceProviderId);
-        this.serviceProviderId = serviceProviderId;
-    }
-
-    public String getServiceProviderId() {
-        return serviceProviderId;
+    public ProviderUserTO getProvider() {
+        return provider.get();
     }
 
     private HttpSession getHttpSession() {
@@ -110,7 +89,7 @@ public class ProviderProfileBean implements Serializable {
     }
 
     public void addEvent(ActionEvent actionEvent) {
-        if(event.getId() == null) {
+        if (event.getId() == null) {
             event.setTitle("Verfügbar");
             eventModel.addEvent(event);
         } else {

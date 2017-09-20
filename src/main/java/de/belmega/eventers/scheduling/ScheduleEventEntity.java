@@ -1,6 +1,6 @@
-package de.belmega.eventers.persistence.entities;
+package de.belmega.eventers.scheduling;
 
-import de.belmega.eventers.dto.UserID;
+import de.belmega.eventers.user.ProviderUserEntity;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +18,7 @@ public class ScheduleEventEntity {
 
     @ManyToOne(optional=false)
     @JoinColumn(name = COLUMN_USER_ID)
-    private ServiceProviderUserEntity user;
+    private ProviderUserEntity user;
 
     public ScheduleEventEntity(String id, String title, Date startDate, Date endDate) {
         this.id = id;
@@ -62,11 +62,11 @@ public class ScheduleEventEntity {
         this.endDate = endDate;
     }
 
-    public ServiceProviderUserEntity getUser() {
+    public ProviderUserEntity getUser() {
         return user;
     }
 
-    public void setUser(ServiceProviderUserEntity user) {
+    public void setUser(ProviderUserEntity user) {
         this.user = user;
     }
 }

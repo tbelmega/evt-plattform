@@ -1,8 +1,6 @@
-package de.belmega.eventers.service;
+package de.belmega.eventers.scheduling;
 
-import de.belmega.eventers.dto.UserID;
-import de.belmega.eventers.persistence.dao.ScheduleEventDAO;
-import de.belmega.eventers.persistence.entities.ScheduleEventEntity;
+import de.belmega.eventers.user.UserID;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

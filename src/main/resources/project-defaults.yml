@@ -14,7 +14,12 @@ swarm:
 
 urls:
   hostname: http://localhost:8080
-  sites:
-    profil-fitness: /profil-fitness.xhtml
+  pages:
+    login: /login.xhtml
+    profile: /internal/profile.xhtml
+    fitness: /internal/fitness.xhtml
+    registration: /register.xhtml
+    registered: /registered.xhtml
+
 
 test-environment: true

@@ -1,19 +1,13 @@
-package de.belmega.eventers.persistence.dao;
+package de.belmega.eventers.scheduling;
 
-import de.belmega.eventers.dto.UserID;
-import de.belmega.eventers.persistence.entities.ScheduleEventEntity;
-import de.belmega.eventers.persistence.entities.ServiceProviderUserEntity;
+import de.belmega.eventers.user.UserID;
+import de.belmega.eventers.scheduling.ScheduleEventEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
-
-import static de.belmega.eventers.persistence.entities.ScheduleEventEntity.COLUMN_USER_ID;
 
 public class ScheduleEventDAO {
 

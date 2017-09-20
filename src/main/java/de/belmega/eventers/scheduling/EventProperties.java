@@ -1,4 +1,4 @@
-package de.belmega.eventers.dto;
+package de.belmega.eventers.scheduling;
 
 import java.util.Date;
 

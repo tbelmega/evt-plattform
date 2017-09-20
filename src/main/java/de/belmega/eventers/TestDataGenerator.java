@@ -1,8 +1,6 @@
-package de.belmega.eventers.service;
+package de.belmega.eventers;
 
-import de.belmega.eventers.dto.UserID;
-import de.belmega.eventers.persistence.dao.ProviderDAO;
-import de.belmega.eventers.persistence.entities.ServiceProviderUserEntity;
+import de.belmega.eventers.user.*;
 import org.jboss.logging.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -19,8 +17,9 @@ public class TestDataGenerator {
     @PersistenceContext
     EntityManager em;
 
+
     @Inject
-    ProviderDAO dao;
+    ProviderService providerService;
 
     @Inject
     @ConfigurationValue("test-environment")
@@ -41,17 +40,21 @@ public class TestDataGenerator {
     }
 
     private void generateTestData() {
-        ServiceProviderUserEntity entity = new ServiceProviderUserEntity();
-        entity.setId(new UserID("1"));
-        entity.setLastname("Belmega");
-        entity.setFirstname("Thiemo");
-        entity.setEmailadress("thiemo.belmega@gmail.com");
-
-        dao.persist(entity);
-
-        System.out.println(entity);
+        registerUser("1", "Belmega", "Thiemo", "foo", "foo");
+        registerUser("2", "Wilfling", "Jochen", "info@coorgeist.de", "eventers789!");
 
         LOG.warn("Test data injection complete.");
+    }
+
+    private void registerUser(String id, String surname, String firstname, String emailadress, String password) {
+        ProviderUserTO user = new ProviderUserTO();
+        user.setId(new UserID(id));
+        user.setLastname(surname);
+        user.setFirstname(firstname);
+        user.setEmailadress(emailadress);
+        user.setPasswordPlainText(password);
+
+        providerService.registerNewProvider(user);
     }
 
 

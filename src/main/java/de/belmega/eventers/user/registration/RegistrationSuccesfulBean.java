@@ -1,5 +1,6 @@
-package de.belmega.eventers.jsf;
+package de.belmega.eventers.user.registration;
 
+import de.belmega.eventers.user.UserID;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.enterprise.context.RequestScoped;
@@ -8,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-import static de.belmega.eventers.filter.AuthFilter.ATTRIBUTE_USER_ID;
+import static de.belmega.eventers.auth.AuthFilter.ATTRIBUTE_USER_ID;
 
 
 @Named
@@ -19,27 +20,25 @@ public class RegistrationSuccesfulBean {
     @ConfigurationValue("urls.hostname")
     String hostname;
 
-    //public static final String hostname = "localhost:8080";
     @Inject
-    @ConfigurationValue("urls.sites.profil-fitness")
-    String profilFitnessSite;
+    @ConfigurationValue("urls.sites.profile")
+    String profileSite;
 
-    private String serviceProviderId;
+    private UserID serviceProviderId;
     private String testlink;
 
-    public void setServiceProviderId(String serviceProviderId) {
+    public void setServiceProviderId(UserID serviceProviderId) {
         this.serviceProviderId = serviceProviderId;
     }
 
-    public String getServiceProviderId() {
+    public UserID getServiceProviderId() {
         return serviceProviderId;
     }
 
-    public void generateTestLink() {
+    public void generateLink() {
         ((HttpSession) FacesContext.getCurrentInstance().
                 getExternalContext().getSession(true)).setAttribute(ATTRIBUTE_USER_ID, serviceProviderId);
-        this.testlink = hostname + profilFitnessSite + "?id=" + serviceProviderId;
-        System.out.println(this.testlink);
+        this.testlink = hostname + profileSite + "?id=" + serviceProviderId;
     }
 
     public String getTestlink() {

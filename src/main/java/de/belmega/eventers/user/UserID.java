@@ -1,4 +1,4 @@
-package de.belmega.eventers.dto;
+package de.belmega.eventers.user;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

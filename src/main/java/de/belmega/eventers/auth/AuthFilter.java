@@ -1,5 +1,8 @@
-package de.belmega.eventers.filter;
+package de.belmega.eventers.auth;
 
+import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
+
+import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +14,14 @@ import java.io.IOException;
 /**
  * Use this filter for all requests that contain the .xhtml file extension.
  */
-//@WebFilter(filterName = "AuthFilter", urlPatterns = {"*.xhtml"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"*/internal/*.xhtml"})
 public class AuthFilter implements Filter {
 
-    public static final String JAVAX_FACES_RESOURCE_URL = "javax.faces.resource";
+    @Inject
+    @ConfigurationValue("urls.pages.login")
+    String loginPage;
+
+
     public static final String ATTRIBUTE_USER_ID = "userId";
 
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -31,7 +38,7 @@ public class AuthFilter implements Filter {
 
         HttpSession session = httpRequest.getSession(false);
 
-        if (isPrivatePage(url) && !userIsLoggedIn(session)) {
+        if (!userIsLoggedIn(session)) {
             System.out.println("Kein User eingeloggt, leite weiter zu Login");
             redirectToLogin((HttpServletResponse) response);
         } else {
@@ -41,22 +48,15 @@ public class AuthFilter implements Filter {
 
 
     private void redirectToLogin(HttpServletResponse response) throws IOException {
-        response.sendRedirect("login.xhtml");
+        response.sendRedirect(loginPage);
     }
 
     /**
-     * Check if the HttpSession has the USER_IS_LOGGED_IN attribute.
+     * Check if the HttpSession has the LOGGED_IN_USER attribute.
      */
     private boolean userIsLoggedIn(HttpSession session) {
         boolean sessionHasAttributeUserLoggedIn = session != null && session.getAttribute(ATTRIBUTE_USER_ID) != null;
         return sessionHasAttributeUserLoggedIn;
-    }
-
-    /**
-     * Check if the requested page is registration or a resource.
-     */
-    private boolean isPrivatePage(String url) {
-        return !(url.contains("register") || url.contains("login.xhtml") || url.contains(JAVAX_FACES_RESOURCE_URL));
     }
 
 

@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="template-public.xhtml">
+
+    <ui:define name="main-content">
+        <h:form>
+            <h:outputLabel for="selectProfession">Ihr Fachgebiet</h:outputLabel>
+            <h:selectOneMenu value="#{registerProviderBean.provider.profession}" id="selectProfession"
+                             class="width-medium">
+                <f:selectItem itemValue="wellness" itemLabel="Wellness"/>
+                <f:selectItem itemValue="bewegung" itemLabel="Bewegung"/>
+                <f:selectItem itemValue="unterhaltung" itemLabel="Unterhaltung"/>
+                <f:selectItem itemValue="kultur" itemLabel="Kultur"/>
+                <f:selectItem itemValue="genuss" itemLabel="Genuss"/>
+            </h:selectOneMenu>
+
+            <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
+            <h:selectOneMenu value="#{registerProviderBean.provider.greeting}" id="selectGreeting" class="width-medium">
+                <f:selectItem itemValue="mrs" itemLabel="Frau"/>
+                <f:selectItem itemValue="mr" itemLabel="Herr"/>
+                <f:selectItem itemValue="company" itemLabel="Firma"/>
+            </h:selectOneMenu>
+
+            <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
+            <h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname" required="true"
+                         class="width-medium"/>
+
+            <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
+            <h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname" required="true"
+                         class="width-medium"/>
+
+            <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
+            <h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress" required="true"
+                         class="width-medium">
+                <f:validator validatorId="confirmEmailadressValidator"/>
+                <f:attribute name="confirmEmailadress" value="#{confirmEmailadress.submittedValue}"/>
+                <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation" render="m_emailadress"/>
+            </h:inputText>
+            <h:message for="inputEmailadress" id="m_emailadress"/>
+
+            <h:outputLabel for="inputEmailadressConfirmation">Emailadresse wiederholen</h:outputLabel>
+            <h:inputText binding="#{confirmEmailadress}" id="inputEmailadressConfirmation" required="true"
+                         class="width-medium">
+                <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation"
+                        render="m_emailadress m_emailadress_confirm"/>
+            </h:inputText>
+            <h:message for="inputEmailadressConfirmation" id="m_emailadress_confirm"/>
+
+
+            <h:outputLabel for="inputPassword">Passwort</h:outputLabel>
+
+            <h:inputSecret value="#{registerProviderBean.provider.passwordPlainText}" id="inputPassword"
+                           required="true" class="width-medium">
+                <f:validator validatorId="confirmPasswordValidator"/>
+                <f:attribute name="confirmPassword" value="#{confirmPassword.submittedValue}"/>
+                <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation" render="m_password"/>
+            </h:inputSecret>
+            <h:message for="inputPassword" id="m_password"/>
+
+            <h:outputLabel for="inputPasswordConfirmation">Passwort wiederholen</h:outputLabel>
+            <h:inputSecret binding="#{confirmPassword}" id="inputPasswordConfirmation" required="true"
+                           class="width-medium">
+                <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation"
+                        render="m_password m_password_confirm"/>
+            </h:inputSecret>
+            <h:message for="inputPasswordConfirmation" id="m_password_confirm"/>
+
+            <div class="buttons-hbox">
+                <h:commandLink value="Absenden" class="button button_green"
+                               action="#{registerProviderBean.register()}"/>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
+

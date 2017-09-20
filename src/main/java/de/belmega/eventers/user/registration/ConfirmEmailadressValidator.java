@@ -1,4 +1,4 @@
-package de.belmega.eventers.jsf.validator;
+package de.belmega.eventers.user.registration;
 
 import org.apache.commons.lang.StringUtils;
 

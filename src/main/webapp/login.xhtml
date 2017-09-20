@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="template-public.xhtml">
+
+    <ui:define name="main-content">
+        <h:form id="formLogin">
+            <div>
+                <h:outputLabel for="emailAdressInput" value="Emailadresse"></h:outputLabel>
+                <h:inputText id="emailAdressInput" value="#{loginBean.emailAdress}"></h:inputText>
+            </div>
+            <div>
+                <h:outputLabel for="passwordInput" value="Passwort"></h:outputLabel>
+                <h:inputSecret id="passwordInput" value="#{loginBean.password}"></h:inputSecret>
+            </div>
+            <h:commandLink id="btnLogin" value="Login" class="button button_green"
+                             action="#{loginBean.validateUsernamePassword}"></h:commandLink>
+            <h:commandLink id="btnRegister" value="Registrieren" class="button button_green"
+                             action="#{loginBean.registration}"></h:commandLink>
+        </h:form>
+    </ui:define>
+
+
+</ui:composition>
+
+
+
+

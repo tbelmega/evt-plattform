@@ -54,39 +54,39 @@
                 <h3 class="slidedown-heading">Persönliche Daten</h3></h:commandLink>
             <div class="personal-section">
                 <h:outputLabel for="outputEmailadress">Ihre Nutzerkennung</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.emailadress}" id="outputEmailadress"
-                readonly="true"/>
+                <h:inputText value="#{userProfileBean.provider.emailadress}" id="outputEmailadress"
+                             readonly="true"/>
 
                 <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.firstname}" id="inputFirstname"/>
+                <h:inputText value="#{userProfileBean.provider.firstname}" id="inputFirstname"/>
 
                 <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.lastname}" id="inputLastname"/>
+                <h:inputText value="#{userProfileBean.provider.lastname}" id="inputLastname"/>
 
                 <h:outputLabel for="inputStreet">Straße und Hausnummer</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.street}" id="inputStreet"/>
+                <h:inputText value="#{userProfileBean.provider.street}" id="inputStreet"/>
 
                 <h:outputLabel for="inputZipCode">Postleitzahl</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.zipcode}" id="inputZipCode"/>
+                <h:inputText value="#{userProfileBean.provider.zipcode}" id="inputZipCode"/>
 
                 <h:outputLabel for="inputCity">Stadt</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.city}" id="inputCity"/>
+                <h:inputText value="#{userProfileBean.provider.city}" id="inputCity"/>
 
                 <h:outputLabel for="inputDateOFBirth">Geburtsdatum</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.dateOfBirth}" id="inputDateOFBirth"
+                <h:inputText value="#{userProfileBean.provider.dateOfBirth}" id="inputDateOFBirth"
                              a:placeholder="31.12.2999">
                     <f:convertDateTime pattern="dd.MM.yyyy"/>
                 </h:inputText>
                 <h:message for="inputDateOFBirth" id="messageDateOfBirth"/>
 
                 <h:outputLabel for="inputPhoneBusiness">Telefonnummer Geschäftlich</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.phoneBusiness}" id="inputPhoneBusiness"/>
+                <h:inputText value="#{userProfileBean.provider.phoneBusiness}" id="inputPhoneBusiness"/>
 
                 <h:outputLabel for="inputPhoneMobile">Telefonnummer Mobil</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.mobile}" id="inputPhoneMobile"/>
+                <h:inputText value="#{userProfileBean.provider.mobile}" id="inputPhoneMobile"/>
 
                 <div class="buttons-hbox">
-                    <h:commandLink class="button button_green" value="Speichern" action="#{providerProfileBean.save()}"/>
+                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
                 </div>
             </div>
 
@@ -95,12 +95,12 @@
             <div class="additional-section invisible">
                 <h4>Ausbildung</h4>
                 <h:outputLabel for="inputDegree">Welches ist Ihr höchster Ausbildungsgrad?</h:outputLabel>
-                <h:inputText value="#{providerProfileBean.provider.degree}" id="inputDegree"/>
+                <h:inputText value="#{userProfileBean.provider.degree}" id="inputDegree"/>
 
                 <h4>Praktische Erfahrung</h4>
                 <h:outputLabel
                         for="dropdownExperience">Wieviel Erfahrung besitzen Sie in Ihrem Fachgebiet? (im Vergleich zum Markt oder Mitbewerbern)</h:outputLabel>
-                <h:selectOneMenu value="#{providerProfileBean.provider.experience}" id="dropdownExperience">
+                <h:selectOneMenu value="#{userProfileBean.provider.experience}" id="dropdownExperience">
                     <f:selectItem itemValue="50" itemLabel="Sehr viel Erfahrung"/>
                     <f:selectItem itemValue="40" itemLabel="Viel Erfahrung"/>
                     <f:selectItem itemValue="30" itemLabel="Durschnittliche Erfahrung"/>
@@ -111,7 +111,7 @@
                 <h4>Erreichbarkeit</h4>
                 <h:outputLabel
                         for="dropdownContactable">Sind Sie gewöhnlich innerhalb von 30-60 Minuten telefonisch/per SMS/per Whatsapp zu erreichen?</h:outputLabel>
-                <h:selectOneMenu value="#{providerProfileBean.provider.contactable}" id="dropdownContactable">
+                <h:selectOneMenu value="#{userProfileBean.provider.contactable}" id="dropdownContactable">
                     <f:selectItem itemValue="true" itemLabel="Ja"/>
                     <f:selectItem itemValue="false" itemLabel="Nein"/>
                 </h:selectOneMenu>
@@ -119,17 +119,17 @@
                 <h4>Mobilität</h4>
                 <h:outputLabel
                         for="dropdownMobility">Verfügen Sie über einen PKW oder eine andere Möglichkeit die Kunden vor Ort (Hotel, Firma, etc.) zu besuchen?</h:outputLabel>
-                <h:selectOneMenu value="#{providerProfileBean.provider.mobility}" id="dropdownMobility">
+                <h:selectOneMenu value="#{userProfileBean.provider.mobility}" id="dropdownMobility">
                     <f:selectItem itemValue="true" itemLabel="Ja"/>
                     <f:selectItem itemValue="false" itemLabel="Nein"/>
                 </h:selectOneMenu>
 
                 <h4>Stundensatz inkl. Anreisepauschale bis 30km</h4>
-                <h:inputText value="#{providerProfileBean.provider.hourlyRate}" id="inputHourlyRate"/>
+                <h:inputText value="#{userProfileBean.provider.hourlyRate}" id="inputHourlyRate"/>
 
 
                 <div class="buttons-hbox">
-                    <h:commandLink class="button button_green" value="Speichern" action="#{providerProfileBean.save()}"/>
+                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
                 </div>
             </div>
 
@@ -151,15 +151,15 @@
                 <p:growl id="messages" showDetail="true"/>
 
                 <h:panelGrid columnClasses="value">
-                    <p:schedule id="schedule" value="#{providerProfileBean.eventModel}" widgetVar="myschedule"
+                    <p:schedule id="schedule" value="#{userProfileBean.eventModel}" widgetVar="myschedule"
                                 locale="de" ignoreTimezone="false">
 
-                        <p:ajax event="dateSelect" listener="#{providerProfileBean.onDateSelect}" update="eventDetails"
+                        <p:ajax event="dateSelect" listener="#{userProfileBean.onDateSelect}" update="eventDetails"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax event="eventSelect" listener="#{providerProfileBean.onEventSelect}"
+                        <p:ajax event="eventSelect" listener="#{userProfileBean.onEventSelect}"
                                 update="eventDetails"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax event="eventResize" listener="#{providerProfileBean.onEventResize}" update="messages"/>
+                        <p:ajax event="eventResize" listener="#{userProfileBean.onEventResize}" update="messages"/>
                     </p:schedule>
                 </h:panelGrid>
 
@@ -167,15 +167,15 @@
                           locale="de">
                     <h:panelGrid id="eventDetails" columns="2">
                         <p:outputLabel for="from" value="Von:"/>
-                        <p:calendar id="from" value="#{providerProfileBean.event.startDate}"
+                        <p:calendar id="from" value="#{userProfileBean.event.startDate}"
                                     pattern="dd.MM.yyyy HH:mm" locale="de"/>
 
                         <p:outputLabel for="to" value="Bis:"/>
-                        <p:calendar id="to" value="#{providerProfileBean.event.endDate}"
+                        <p:calendar id="to" value="#{userProfileBean.event.endDate}"
                                     pattern="dd.MM.yyyy HH:mm" locale="de"/>
                     </h:panelGrid>
 
-                    <p:commandButton id="addButton" value="Speichern" actionListener="#{providerProfileBean.addEvent}"
+                    <p:commandButton id="addButton" value="Speichern" actionListener="#{userProfileBean.addEvent}"
                                      oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
 
                     <p:commandButton id="abortButton" value="Abbrechen"

@@ -1,13 +1,13 @@
-package de.belmega.eventers.persistence.entities;
+package de.belmega.eventers.user;
 
-import de.belmega.eventers.dto.UserID;
+import de.belmega.eventers.user.UserID;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class ServiceProviderUserEntity {
+public class ProviderUserEntity {
 
 
     private String firstname;
@@ -19,6 +19,9 @@ public class ServiceProviderUserEntity {
     @Id
     @EmbeddedId
     private UserID id;
+    private byte[] salt;
+    private byte[] encryptedPassword;
+
 
     public UserID getId() {
         return id;
@@ -68,9 +71,13 @@ public class ServiceProviderUserEntity {
         this.profession = profession;
     }
 
+    public void setEncryptedPassword(byte[] encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
     @Override
     public String toString() {
-        return "ServiceProviderUserEntity{" +
+        return "ProviderUserEntity{" +
                 "firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", emailadress='" + emailadress + '\'' +
@@ -78,5 +85,17 @@ public class ServiceProviderUserEntity {
                 ", profession='" + profession + '\'' +
                 ", id=" + id +
                 '}';
+    }
+
+    public byte[] getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 }

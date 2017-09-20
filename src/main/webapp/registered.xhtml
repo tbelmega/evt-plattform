@@ -1,36 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="template-public.xhtml">
 
-<h:head>
-    <title>Profil</title>
-    <link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"/>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
-
-    <h:outputStylesheet name="css/eventers-webapp.css"></h:outputStylesheet>
+<ui:define name="main-content">
     <f:metadata>
         <!-- When page is loaded, get ID from URL and store it in the bean. -->
         <f:viewParam name="id" value="#{registrationSuccesfulBean.serviceProviderId}"/>
-        <f:event type="preRenderComponent" listener="#{registrationSuccesfulBean.generateTestLink()}"/>
+        <f:event type="preRenderComponent" listener="#{registrationSuccesfulBean.generateLink()}"/>
     </f:metadata>
-</h:head>
 
-<h:body>
     <div>
         <div>Vielen Dank für Ihre Registrierung auf The Eventers.de.</div>
         <div>Wir haben Ihnen soeben eine E-Mail geschickt, mit der Sie Ihre Registrierung bestätigen können. Dafür klicken Sie einfach auf den Bestätigungslink, den Sie erhalten haben.</div>
         <div>Falls Sie keine Mail erhalten haben, prüfen Sie bitte Ihren SPAM-Ordner und/oder Ihre SPAM-Einstellungen.</div>
         <h:outputLink value="javascript:void(0);" onclick="window.open ('#{registrationSuccesfulBean.testlink}', ''); return false">Zu Testzwecken Link hier</h:outputLink>
-
     </div>
-</h:body>
-</html>
+</ui:define>
 
+
+</ui:composition>
 
 
