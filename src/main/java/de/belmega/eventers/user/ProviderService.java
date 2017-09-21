@@ -65,4 +65,8 @@ public class ProviderService {
         optEntity.setLastname(provider.getLastname());
 
     }
+
+    public Optional<ProviderUserEntity> findById(UserID userId) {
+        return userDAO.findById(userId);
+    }
 }

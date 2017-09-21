@@ -1,20 +1,15 @@
 package de.belmega.eventers.auth;
 
-import de.belmega.eventers.user.ProviderUserEntity;
+import de.belmega.eventers.user.*;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.Optional;
-
-import static de.belmega.eventers.auth.AuthFilter.ATTRIBUTE_USER_ID;
-
-import static de.belmega.eventers.auth.AuthFilter.ATTRIBUTE_USER_ID;
 
 @Named
 @SessionScoped
@@ -36,6 +31,10 @@ public class LoginBean implements Serializable {
 
     @Inject
     AuthService authService;
+
+    @Inject
+    ProviderService providerService;
+
 
     private ProviderUserEntity sessionUser;
 
@@ -72,8 +71,7 @@ public class LoginBean implements Serializable {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute(AuthFilter.ATTRIBUTE_USER_ID, this.sessionUser.getId());
 
-            String url = profilePage + FACES_REDIRECT_TRUE_PARAMETER;
-            return url;
+            return profilePage + FACES_REDIRECT_TRUE_PARAMETER;
         } else {
             getHttpSession().invalidate();
             return loginPage + FACES_REDIRECT_TRUE_PARAMETER;
@@ -93,16 +91,23 @@ public class LoginBean implements Serializable {
      * Invalidate the user session and redirect to index page.
      */
     public String logout() {
+        this.sessionUser = null;
         getHttpSession().invalidate();
         return loginPage + FACES_REDIRECT_TRUE_PARAMETER;
     }
 
     public String registration() {
-        System.out.println(registerPage);
-        return registerPage;
+        return registerPage + "?faces-redirect=true";
     }
 
     public ProviderUserEntity getSessionUser() {
+        if (sessionUser == null) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            UserID userId = (UserID) session.getAttribute(AuthFilter.ATTRIBUTE_USER_ID);
+            System.out.println("Looking for user with ID " + userId.getId());
+            Optional<ProviderUserEntity> providerUserEntity = providerService.findById(userId);
+            this.sessionUser = providerUserEntity.get();
+        }
         return sessionUser;
     }
 }

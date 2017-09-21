@@ -49,6 +49,7 @@ public class UserProfileBean implements Serializable {
     public void loadProfile() {
         UserID id = loginBean.getSessionUser().getId();
 
+        System.out.println("Loading user for ID " + id);
         this.provider = providerService.findProvider(id).get();
 
         List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(id);

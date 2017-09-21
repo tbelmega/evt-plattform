@@ -29,9 +29,6 @@ public class AuthFilter implements Filter {
         // do nothing
     }
 
-    /**
-     * This method is executed for each HttpRequest that matches the @WebFilter(urlPatterns = {"*.xhtml"}).
-     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpSession session = ((HttpServletRequest) request).getSession(false);
@@ -42,6 +39,7 @@ public class AuthFilter implements Filter {
             System.out.println("Kein User eingeloggt, leite weiter zu Login");
             redirectToLogin((HttpServletResponse) response);
         } else {
+            System.out.println("User ist eingeloggt, leite weiter.");
             chain.doFilter(request, response);
         }
     }

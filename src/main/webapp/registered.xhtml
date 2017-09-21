@@ -5,11 +5,6 @@
                 template="template-public.xhtml">
 
 <ui:define name="main-content">
-    <f:metadata>
-        <!-- When page is loaded, get ID from URL and store it in the bean. -->
-        <f:viewParam name="id" value="#{registrationSuccesfulBean.serviceProviderId}"/>
-        <f:event type="preRenderComponent" listener="#{registrationSuccesfulBean.generateLink()}"/>
-    </f:metadata>
 
     <div>
         <div>Vielen Dank für Ihre Registrierung auf The Eventers.de.</div>
