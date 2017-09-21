@@ -57,4 +57,12 @@ public class ProviderService {
 
         return Optional.of(to);
     }
+
+    public void update(ProviderUserTO provider) {
+        ProviderUserEntity optEntity = userDAO.findById(provider.getId()).get();
+
+        optEntity.setFirstname(provider.getFirstname());
+        optEntity.setLastname(provider.getLastname());
+
+    }
 }

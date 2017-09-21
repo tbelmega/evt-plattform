@@ -2,6 +2,7 @@ package de.belmega.eventers.auth;
 
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -14,7 +15,7 @@ import java.io.IOException;
 /**
  * Use this filter for all requests that contain the .xhtml file extension.
  */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"*/internal/*.xhtml"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/internal/*"})
 public class AuthFilter implements Filter {
 
     @Inject
@@ -33,10 +34,9 @@ public class AuthFilter implements Filter {
      */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        String url = httpRequest.getRequestURI();
+        HttpSession session = ((HttpServletRequest) request).getSession(false);
 
-        HttpSession session = httpRequest.getSession(false);
+        System.out.println(session);
 
         if (!userIsLoggedIn(session)) {
             System.out.println("Kein User eingeloggt, leite weiter zu Login");

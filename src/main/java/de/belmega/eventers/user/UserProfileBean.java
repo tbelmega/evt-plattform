@@ -1,5 +1,6 @@
 package de.belmega.eventers.user;
 
+import de.belmega.eventers.auth.LoginBean;
 import de.belmega.eventers.scheduling.EventProperties;
 import de.belmega.eventers.scheduling.ScheduleEventEntity;
 import de.belmega.eventers.scheduling.ScheduleEventService;
@@ -30,6 +31,9 @@ import static de.belmega.eventers.auth.AuthFilter.ATTRIBUTE_USER_ID;
 public class UserProfileBean implements Serializable {
 
     @Inject
+    LoginBean loginBean;
+
+    @Inject
     ProviderService providerService;
 
     @Inject
@@ -39,18 +43,15 @@ public class UserProfileBean implements Serializable {
 
     private DefaultScheduleEvent event = new DefaultScheduleEvent();
     private EventProperties eventProperties = new EventProperties();
+    private ProviderUserTO provider;
 
-    private Optional<ProviderUserTO> provider;
 
-    public void loadProfile() throws AuthException {
-        if (FacesContext.getCurrentInstance().isPostback()) return;
+    public void loadProfile() {
+        UserID id = loginBean.getSessionUser().getId();
 
-        UserID idFromSession = (UserID) getHttpSession().getAttribute(ATTRIBUTE_USER_ID);
-        this.provider = providerService.findProvider(idFromSession);
+        this.provider = providerService.findProvider(id).get();
 
-        if (!this.provider.isPresent()) getHttpSession().invalidate();
-
-        List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(idFromSession);
+        List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(id);
         for (ScheduleEventEntity event : events) {
             ScheduleEvent scheduleEvent = createScheduleEvent(event);
             eventModel.addEvent(scheduleEvent);
@@ -58,21 +59,8 @@ public class UserProfileBean implements Serializable {
 
     }
 
-    public void setProvider(ProviderUserTO provider) {
-        this.provider = Optional.of(provider);
-    }
-
-    public ProviderUserTO getProvider() {
-        return provider.get();
-    }
-
-    private HttpSession getHttpSession() {
-        return (HttpSession) FacesContext.getCurrentInstance()
-                .getExternalContext().getSession(false);
-    }
-
-    public Object save() {
-        return null;
+    public void save() {
+        providerService.update(this.provider);
     }
 
 
@@ -104,7 +92,8 @@ public class UserProfileBean implements Serializable {
     private ScheduleEventEntity createEventEntity(ScheduleEvent event) {
         ScheduleEventEntity scheduleEventEntity = new ScheduleEventEntity(event.getId(), event.getTitle(),
                 event.getStartDate(), event.getEndDate());
-        //scheduleEventEntity.setUser(this.provider);
+        Optional<ProviderUserEntity> userEntity = providerService.userDAO.findById(this.provider.getId());
+        scheduleEventEntity.setUser(userEntity.get());
         return scheduleEventEntity;
     }
 
@@ -136,5 +125,15 @@ public class UserProfileBean implements Serializable {
 
     public EventProperties getEventProperties() {
         return eventProperties;
+    }
+
+    public void setProvider(ProviderUserTO provider) {
+        this.provider = provider;
+    }
+
+    public ProviderUserTO getProvider() {
+        if (this.provider == null) loadProfile();
+
+        return provider;
     }
 }

@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.Optional;
@@ -31,11 +32,12 @@ public class LoginBean implements Serializable {
     @ConfigurationValue("urls.pages.registration")
     String registerPage;
 
-
     public static final String FACES_REDIRECT_TRUE_PARAMETER = "?faces-redirect=true";
 
     @Inject
     AuthService authService;
+
+    private ProviderUserEntity sessionUser;
 
     /** The values of the <input> elements on index.xhtml page are bound to these fields: */
     private String emailAdress;
@@ -64,12 +66,16 @@ public class LoginBean implements Serializable {
     public String validateUsernamePassword() {
         Optional<ProviderUserEntity> user = authService.validate(emailAdress, password);
         if (user.isPresent()) {
-            getHttpSession().setAttribute(ATTRIBUTE_USER_ID, user.get().getId());
+            this.sessionUser = user.get();
             System.out.println("Login succesful, welcome " + user.get().getFirstname());
+
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.setAttribute(AuthFilter.ATTRIBUTE_USER_ID, this.sessionUser.getId());
+
             String url = profilePage + FACES_REDIRECT_TRUE_PARAMETER;
-            System.out.println(url);
             return url;
         } else {
+            getHttpSession().invalidate();
             return loginPage + FACES_REDIRECT_TRUE_PARAMETER;
         }
 
@@ -94,5 +100,9 @@ public class LoginBean implements Serializable {
     public String registration() {
         System.out.println(registerPage);
         return registerPage;
+    }
+
+    public ProviderUserEntity getSessionUser() {
+        return sessionUser;
     }
 }
