@@ -1,5 +1,6 @@
 package de.belmega.eventers.user;
 
+import de.belmega.eventers.auth.AuthFilter;
 import de.belmega.eventers.auth.LoginBean;
 import de.belmega.eventers.scheduling.EventProperties;
 import de.belmega.eventers.scheduling.ScheduleEventEntity;
@@ -16,15 +17,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.security.auth.message.AuthException;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-
-import static de.belmega.eventers.auth.AuthFilter.ATTRIBUTE_USER_ID;
 
 @Named
 @SessionScoped
@@ -43,25 +40,11 @@ public class UserProfileBean implements Serializable {
 
     private DefaultScheduleEvent event = new DefaultScheduleEvent();
     private EventProperties eventProperties = new EventProperties();
-    private ProviderUserTO provider;
+    private ProviderUserEntity provider;
 
-
-    public void loadProfile() {
-        UserID id = loginBean.getSessionUser().getId();
-
-        System.out.println("Loading user for ID " + id);
-        this.provider = providerService.findProvider(id).get();
-
-        List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(id);
-        for (ScheduleEventEntity event : events) {
-            ScheduleEvent scheduleEvent = createScheduleEvent(event);
-            eventModel.addEvent(scheduleEvent);
-        }
-
-    }
 
     public void save() {
-        providerService.update(this.provider);
+        //TODO update entity?
     }
 
 
@@ -128,13 +111,32 @@ public class UserProfileBean implements Serializable {
         return eventProperties;
     }
 
-    public void setProvider(ProviderUserTO provider) {
+    public void setProvider(ProviderUserEntity provider) {
         this.provider = provider;
     }
 
-    public ProviderUserTO getProvider() {
-        if (this.provider == null) loadProfile();
+    public ProviderUserEntity getProvider() {
+        if (this.provider == null) this.provider = loadProfile();
 
-        return provider;
+        return this.provider;
     }
+
+    private ProviderUserEntity loadProfile() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        UserID userId = (UserID) session.getAttribute(AuthFilter.ATTRIBUTE_USER_ID);
+        Optional<ProviderUserEntity> providerUserEntity = providerService.findById(userId);
+
+        if (!providerUserEntity.isPresent()) throw new RuntimeException("Trying to load a user that does not exist.");
+
+        ProviderUserEntity userEntity = providerUserEntity.get();
+
+        List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(userEntity.getId());
+        for (ScheduleEventEntity event : events) {
+            ScheduleEvent scheduleEvent = createScheduleEvent(event);
+            eventModel.addEvent(scheduleEvent);
+        }
+
+        return userEntity;
+    }
+
 }

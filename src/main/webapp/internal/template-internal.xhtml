@@ -32,7 +32,7 @@
             <p:menuitem value="Aufträge" outcome="/internal/profile.xhtml">
                 <f:param name="i" value="40"/>
             </p:menuitem>
-            <p:menuitem value="Logout" outcome="#{loginBean.logout()}">
+            <p:menuitem value="Logout" action="#{loginBean.logout}">
                 <f:param name="i" value="50"/>
             </p:menuitem>
         </p:tabMenu>

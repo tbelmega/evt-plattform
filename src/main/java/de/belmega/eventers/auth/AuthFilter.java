@@ -33,13 +33,9 @@ public class AuthFilter implements Filter {
 
         HttpSession session = ((HttpServletRequest) request).getSession(false);
 
-        System.out.println(session);
-
         if (!userIsLoggedIn(session)) {
-            System.out.println("Kein User eingeloggt, leite weiter zu Login");
             redirectToLogin((HttpServletResponse) response);
         } else {
-            System.out.println("User ist eingeloggt, leite weiter.");
             chain.doFilter(request, response);
         }
     }

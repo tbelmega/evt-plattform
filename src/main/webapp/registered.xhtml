@@ -4,15 +4,16 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="template-public.xhtml">
 
-<ui:define name="main-content">
+    <ui:define name="main-content">
 
-    <div>
-        <div>Vielen Dank für Ihre Registrierung auf The Eventers.de.</div>
-        <div>Wir haben Ihnen soeben eine E-Mail geschickt, mit der Sie Ihre Registrierung bestätigen können. Dafür klicken Sie einfach auf den Bestätigungslink, den Sie erhalten haben.</div>
-        <div>Falls Sie keine Mail erhalten haben, prüfen Sie bitte Ihren SPAM-Ordner und/oder Ihre SPAM-Einstellungen.</div>
-        <h:outputLink value="javascript:void(0);" onclick="window.open ('#{registrationSuccesfulBean.testlink}', ''); return false">Zu Testzwecken Link hier</h:outputLink>
-    </div>
-</ui:define>
+        <div>
+            <div>Vielen Dank für Ihre Registrierung auf The Eventers.de.</div>
+            <div>Wir haben Ihnen soeben eine E-Mail geschickt, mit der Sie Ihre Registrierung bestätigen können. Dafür klicken Sie einfach auf den Bestätigungslink, den Sie erhalten haben.</div>
+            <div>Falls Sie keine Mail erhalten haben, prüfen Sie bitte Ihren SPAM-Ordner und/oder Ihre SPAM-Einstellungen.</div>
+            <h:outputLink value="javascript:void(0);"
+                          onclick="window.open ('#{registrationSuccesfulBean.testlink}', ''); return false">Zu Testzwecken Link hier</h:outputLink>
+        </div>
+    </ui:define>
 
 
 </ui:composition>

@@ -1,27 +1,21 @@
 package de.belmega.eventers.user.registration;
 
-import de.belmega.eventers.auth.AuthFilter;
-import de.belmega.eventers.auth.LoginBean;
+import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserID;
-import de.belmega.eventers.user.ProviderUserTO;
 import de.belmega.eventers.user.ProviderService;
+import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
 
 import java.io.Serializable;
 
-import static de.belmega.eventers.auth.AuthFilter.ATTRIBUTE_USER_ID;
-
 
 @Named
-@SessionScoped
+@RequestScoped
 public class RegisterProviderBean implements Serializable {
 
     @Inject
@@ -31,33 +25,34 @@ public class RegisterProviderBean implements Serializable {
     @ConfigurationValue("urls.pages.registered")
     String registeredSite;
 
-    private ProviderUserTO provider;
+    private ProviderUserEntity provider;
 
     @PostConstruct
     public void init() {
-        this.provider = new ProviderUserTO();
+        this.provider = new ProviderUserEntity();
     }
 
     public String clear() {
-        this.provider = new ProviderUserTO();
+        this.provider = new ProviderUserEntity();
         return "";
     }
 
     public String register() {
-        UserID serviceProviderID = providerService.registerNewProvider(provider);
 
-        System.out.println("Registered provider with ID " + serviceProviderID);
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        session.setAttribute(AuthFilter.ATTRIBUTE_USER_ID, serviceProviderID);
-
-        return registeredSite + "?faces-redirect=true";
+        try {
+            UserID serviceProviderID = providerService.registerNewProvider(provider);
+            return registeredSite + "?faces-redirect=true";
+        } catch (MailadressAlreadyInUse mailadressAlreadyInUse) {
+            mailadressAlreadyInUse.printStackTrace();
+            return "";
+        }
     }
 
-    public void setProvider(ProviderUserTO provider) {
+    public void setProvider(ProviderUserEntity provider) {
         this.provider = provider;
     }
 
-    public ProviderUserTO getProvider() {
+    public ProviderUserEntity getProvider() {
         return provider;
     }
 }

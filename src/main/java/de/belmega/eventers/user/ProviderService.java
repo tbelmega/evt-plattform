@@ -1,6 +1,7 @@
 package de.belmega.eventers.user;
 
 import de.belmega.eventers.auth.AuthService;
+import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,7 +16,11 @@ public class ProviderService {
     @Inject
     UserDAO userDAO;
 
-    public UserID registerNewProvider(ProviderUserTO provider) {
+    public UserID registerNewProvider(ProviderUserEntity provider) throws MailadressAlreadyInUse {
+
+        Optional<ProviderUserEntity> byEmailAdress = userDAO.findByEmailAdress(provider.getEmailadress());
+        if (byEmailAdress.isPresent()) throw new MailadressAlreadyInUse();
+
         ProviderUserEntity entity = new ProviderUserEntity();
         entity.setId(UserID.generateId());
 
@@ -33,37 +38,6 @@ public class ProviderService {
         userDAO.persist(entity);
 
         return entity.getId();
-    }
-
-    public Optional<ProviderUserTO> findProvider(UserID serviceProviderID) {
-
-        System.out.println(serviceProviderID);
-
-        Optional<ProviderUserEntity> optEntity = userDAO.findById(serviceProviderID);
-
-        if (!optEntity.isPresent()) return Optional.empty();
-
-
-        ProviderUserEntity entity = optEntity.get();
-        System.out.println(entity);
-
-        ProviderUserTO to = new ProviderUserTO();
-        to.setId(serviceProviderID);
-        to.setEmailadress(entity.getEmailadress());
-        to.setFirstname(entity.getFirstname());
-        to.setLastname(entity.getLastname());
-        to.setGreeting(entity.getGreeting());
-        to.setProfession(entity.getProfession());
-
-        return Optional.of(to);
-    }
-
-    public void update(ProviderUserTO provider) {
-        ProviderUserEntity optEntity = userDAO.findById(provider.getId()).get();
-
-        optEntity.setFirstname(provider.getFirstname());
-        optEntity.setLastname(provider.getLastname());
-
     }
 
     public Optional<ProviderUserEntity> findById(UserID userId) {

@@ -1,6 +1,7 @@
 package de.belmega.eventers;
 
 import de.belmega.eventers.user.*;
+import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
 import org.jboss.logging.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -29,7 +30,7 @@ public class TestDataGenerator {
 
 
 
-    public void setupTestData(@Observes @Initialized(ApplicationScoped.class) Object init) {
+    public void setupTestData(@Observes @Initialized(ApplicationScoped.class) Object init) throws MailadressAlreadyInUse {
         if (testEnvironment) {
             LOG.warn("Test environment detected. Generating test data.");
             generateTestData();
@@ -39,16 +40,15 @@ public class TestDataGenerator {
 
     }
 
-    private void generateTestData() {
+    private void generateTestData() throws MailadressAlreadyInUse {
         registerUser("1", "Belmega", "Thiemo", "foo", "foo");
         registerUser("2", "Wilfling", "Jochen", "info@coorgeist.de", "eventers789!");
 
         LOG.warn("Test data injection complete.");
     }
 
-    private void registerUser(String id, String surname, String firstname, String emailadress, String password) {
-        ProviderUserTO user = new ProviderUserTO();
-        user.setId(new UserID(id));
+    private void registerUser(String id, String surname, String firstname, String emailadress, String password) throws MailadressAlreadyInUse {
+        ProviderUserEntity user = new ProviderUserEntity();
         user.setLastname(surname);
         user.setFirstname(firstname);
         user.setEmailadress(emailadress);
