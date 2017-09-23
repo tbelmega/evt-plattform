@@ -48,7 +48,7 @@
 
             <h:commandLink class="toggle" onclick="$('.additional-section').toggleClass('invisible'); return false;">
                 <h3 class="slidedown-heading">Ergänzende Angaben</h3></h:commandLink>
-            <div class="additional-section invisible">
+            <div class="additional-section">
                 <h4>Ausbildung</h4>
                 <h:outputLabel for="inputDegree">Welches ist Ihr höchster Ausbildungsgrad?</h:outputLabel>
                 <h:inputText value="#{userProfileBean.provider.degree}" id="inputDegree"/>

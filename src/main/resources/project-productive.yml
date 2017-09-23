@@ -13,8 +13,12 @@ swarm:
         password: PutzDerSchwanJolly99
 
 urls:
-  hostname: http://the-eventers.de
+  hostname: http://vs221.vps4free.de:8080
   pages:
-    profil-fitness: /profil-fitness
+    login: /login.xhtml
+    profile: /internal/profile.xhtml
+    fitness: /internal/fitness.xhtml
+    registration: /register.xhtml
+    registered: /registered.xhtml
 
 test-environment: false
