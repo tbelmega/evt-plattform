@@ -25,52 +25,68 @@
 
             <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
             <h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname" required="true"
-                         class="width-medium"/>
+                         requiredMessage="Angabe benötigt."
+                         class="width-medium">
+                <f:validateRequired/>
+            </h:inputText>
+            <h:message for="inputFirstname" id="m_firstname" errorStyle="color: red" styleClass="message"/>
 
             <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
             <h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname" required="true"
-                         class="width-medium"/>
+                         requiredMessage="Angabe benötigt."
+                         class="width-medium">
+                <f:validateRequired/>
+            </h:inputText>
+            <h:message for="inputLastname" id="m_lastname" errorStyle="color: red" styleClass="message"/>
 
             <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
             <h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress" required="true"
+                         requiredMessage="Angabe benötigt."
                          class="width-medium">
                 <f:validator validatorId="confirmEmailadressValidator"/>
                 <f:attribute name="confirmEmailadress" value="#{confirmEmailadress.submittedValue}"/>
                 <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation" render="m_emailadress"/>
             </h:inputText>
-            <h:message for="inputEmailadress" id="m_emailadress"/>
+            <h:message for="inputEmailadress" id="m_emailadress" errorStyle="color: red" styleClass="message"/>
 
             <h:outputLabel for="inputEmailadressConfirmation">Emailadresse wiederholen</h:outputLabel>
             <h:inputText binding="#{confirmEmailadress}" id="inputEmailadressConfirmation" required="true"
+                         requiredMessage="Angabe benötigt."
                          class="width-medium">
                 <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation"
                         render="m_emailadress m_emailadress_confirm"/>
             </h:inputText>
-            <h:message for="inputEmailadressConfirmation" id="m_emailadress_confirm"/>
+            <h:message for="inputEmailadressConfirmation" id="m_emailadress_confirm" errorStyle="color: red"
+                       styleClass="message"/>
 
 
             <h:outputLabel for="inputPassword">Passwort</h:outputLabel>
 
             <h:inputSecret value="#{registerProviderBean.provider.passwordPlainText}" id="inputPassword"
-                           required="true" class="width-medium">
+                           required="true"
+                           requiredMessage="Angabe benötigt."
+                           class="width-medium">
                 <f:validator validatorId="confirmPasswordValidator"/>
                 <f:attribute name="confirmPassword" value="#{confirmPassword.submittedValue}"/>
                 <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation" render="m_password"/>
             </h:inputSecret>
-            <h:message for="inputPassword" id="m_password"/>
+            <h:message for="inputPassword" id="m_password" errorStyle="color: red" styleClass="message"/>
 
             <h:outputLabel for="inputPasswordConfirmation">Passwort wiederholen</h:outputLabel>
             <h:inputSecret binding="#{confirmPassword}" id="inputPasswordConfirmation" required="true"
+                           requiredMessage="Angabe benötigt."
                            class="width-medium">
                 <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation"
                         render="m_password m_password_confirm"/>
             </h:inputSecret>
-            <h:message for="inputPasswordConfirmation" id="m_password_confirm"/>
+            <h:message for="inputPasswordConfirmation" id="m_password_confirm" errorStyle="color: red"
+                       styleClass="message"/>
 
             <div class="buttons-hbox">
                 <h:commandLink value="Absenden" class="button button_green"
                                action="#{registerProviderBean.register()}" includeViewParams="true"/>
             </div>
+            <h:messages globalOnly="true" errorStyle="color: red"/>
         </h:form>
     </ui:define>
 

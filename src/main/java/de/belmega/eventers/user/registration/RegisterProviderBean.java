@@ -8,6 +8,8 @@ import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -43,7 +45,8 @@ public class RegisterProviderBean implements Serializable {
             UserID serviceProviderID = providerService.registerNewProvider(provider);
             return registeredSite + "?faces-redirect=true";
         } catch (MailadressAlreadyInUse mailadressAlreadyInUse) {
-            mailadressAlreadyInUse.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Diese Mailadresse wird bereits genutzt.", null));
             return "";
         }
     }
