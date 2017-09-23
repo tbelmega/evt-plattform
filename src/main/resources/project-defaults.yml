@@ -21,4 +21,5 @@ urls:
     registration: /register.xhtml
     registered: /registered.xhtml
 
+
 test-environment: true

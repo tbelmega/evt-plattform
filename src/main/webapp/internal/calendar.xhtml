@@ -23,16 +23,16 @@
                     </p:schedule>
                 </h:panelGrid>
 
-                <p:dialog widgetVar="eventDialog" header="Verfügbarkeit angeben" showEffect="clip" hideEffect="clip"
-                          locale="de">
+                <p:dialog widgetVar="eventDialog" header="Verfügbarkeit angeben"
+                          locale="de" resizable="false">
                     <h:panelGrid id="eventDetails" columns="2">
                         <p:outputLabel for="from" value="Von:"/>
                         <p:calendar id="from" value="#{userProfileBean.event.startDate}"
-                                    pattern="dd.MM.yyyy HH:mm" locale="de"/>
+                                    pattern="dd.MM.yyyy HH:mm" locale="de" showOn="button"/>
 
                         <p:outputLabel for="to" value="Bis:"/>
                         <p:calendar id="to" value="#{userProfileBean.event.endDate}"
-                                    pattern="dd.MM.yyyy HH:mm" locale="de"/>
+                                    pattern="dd.MM.yyyy HH:mm" locale="de" showOn="button"/>
                     </h:panelGrid>
 
                     <p:commandButton id="addButton" value="Speichern" actionListener="#{userProfileBean.addEvent}"
