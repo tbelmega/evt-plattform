@@ -1,0 +1,51 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="template-internal.xhtml">
+
+    <ui:define name="main-content">
+        <h:form>
+            <h3 class="slidedown-heading">Verfügbarkeit</h3>
+            <div class="scheduler-section">
+
+                <p:growl id="messages" showDetail="true"/>
+
+                <h:panelGrid columnClasses="value">
+                    <p:schedule id="schedule" value="#{userProfileBean.eventModel}" widgetVar="myschedule"
+                                locale="de" ignoreTimezone="false">
+
+                        <p:ajax event="dateSelect" listener="#{userProfileBean.onDateSelect}" update="eventDetails"
+                                oncomplete="PF('eventDialog').show();"/>
+                        <p:ajax event="eventSelect" listener="#{userProfileBean.onEventSelect}"
+                                update="eventDetails"
+                                oncomplete="PF('eventDialog').show();"/>
+                        <p:ajax event="eventResize" listener="#{userProfileBean.onEventResize}" update="messages"/>
+                    </p:schedule>
+                </h:panelGrid>
+
+                <p:dialog widgetVar="eventDialog" header="Verfügbarkeit angeben" showEffect="clip" hideEffect="clip"
+                          locale="de">
+                    <h:panelGrid id="eventDetails" columns="2">
+                        <p:outputLabel for="from" value="Von:"/>
+                        <p:calendar id="from" value="#{userProfileBean.event.startDate}"
+                                    pattern="dd.MM.yyyy HH:mm" locale="de"/>
+
+                        <p:outputLabel for="to" value="Bis:"/>
+                        <p:calendar id="to" value="#{userProfileBean.event.endDate}"
+                                    pattern="dd.MM.yyyy HH:mm" locale="de"/>
+                    </h:panelGrid>
+
+                    <p:commandButton id="addButton" value="Speichern" actionListener="#{userProfileBean.addEvent}"
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+
+                    <p:commandButton id="abortButton" value="Abbrechen"
+                                     oncomplete="PF('eventDialog').hide();"/>
+
+                </p:dialog>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+
