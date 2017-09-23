@@ -1,51 +1,35 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-                template="template-provider.xhtml">
+                template="template-internal.xhtml">
 
     <ui:define name="main-content">
 
-        <f:metadata>
-            <!-- When page is loaded, get ID from URL and store it in the bean. -->
-            <f:viewParam name="id" value="#{userProfileBean.serviceProviderId}"/>
-            <f:viewAction action="#{userProfileBean.loadProfile()}"/>
-        </f:metadata>
+        <h:form>
+            <h:commandLink class="toggle" onclick="$('.service-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Dienstleistung</h3></h:commandLink>
+            <div class="service-section">
 
-        <h:commandLink class="toggle" onclick="$('.service-section').toggleClass('invisible'); return false;">
-            <h3 class="slidedown-heading">Dienstleistung</h3></h:commandLink>
-        <div class="service-section invisible">
-            <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
-            <h:outputLabel for="selectServices" class="hint">Mehrfachauswahl durch Strg+Klick</h:outputLabel>
-            <h:selectManyListbox value="#{userProfileBean.provider.services}" id="selectServices">
-                <f:selectItem itemValue="CoachGym" itemLabel="Training als Personal Coach in einem Sportstudio" />
-                <f:selectItem itemValue="CoachRunning" itemLabel="Personal Coach Laufen / Joggen im Park" />
-                <f:selectItem itemValue="CoachWalking" itemLabel="Personal Coach Nordic Walking im Park" />
-                <f:selectItem itemValue="CoachClimbing" itemLabel="Personal Coach in einer Kletterhalle / Klettergarten" />
-                <f:selectItem itemValue="CoachYoga" itemLabel="Yoga / Tai Chi" />
-                <f:selectItem itemValue="CoachPilates" itemLabel="Pilates" />
-                <f:selectItem itemValue="CoachIndoorFootball" itemLabel="Begleitung als Trainer / Schiedsrichter / Spieler bei Indoor Fußball" />
-            </h:selectManyListbox>
+                <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
+                <h:selectManyCheckbox  value="#{fitnessServicesBean.offeredServicesByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableServices}"/>
+                </h:selectManyCheckbox>
 
-            <h4>Wo können Sie diese Leistungen erbringen?</h4>
-            <h:selectManyListbox value="#{userProfileBean.provider.locations}" id="selectLocation">
-                <f:selectItem itemValue="Indoor" itemLabel="Indoor" />
-                <f:selectItem itemValue="Outdoor" itemLabel="Outdoor" />
-                <f:selectItem itemValue="Gym" itemLabel="Gym" />
-                <f:selectItem itemValue="Hotel" itemLabel="Hotel" />
-            </h:selectManyListbox>
+                <h4>Wo können Sie diese Leistungen erbringen?</h4>
+                <h:selectManyCheckbox  value="#{fitnessServicesBean.offeredLocationsByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableLocations}"/>
+                </h:selectManyCheckbox>
 
-            <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
-            <h:selectManyListbox value="#{userProfileBean.provider.equipments}" id="selectEquipment">
-                <f:selectItem itemValue="WalkingStick" itemLabel="Nordic Walking Stöcke" />
-                <f:selectItem itemValue="RollMat" itemLabel="Isomatten" />
-                <f:selectItem itemValue="BadmintonSet" itemLabel="Federballsets" />
-                <f:selectItem itemValue="WalkingWeights" itemLabel="Walking Hanteln" />
-            </h:selectManyListbox>
+                <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
+                <h:selectManyCheckbox  value="#{fitnessServicesBean.ownedEquipmentByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableEquipment}"/>
+                </h:selectManyCheckbox>
 
-            <div class="buttons-hbox">
-                <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
+                </div>
             </div>
-        </div>
+        </h:form>
 
     </ui:define>
 

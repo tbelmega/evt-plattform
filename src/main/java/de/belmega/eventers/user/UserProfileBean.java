@@ -28,9 +28,6 @@ import java.util.Optional;
 public class UserProfileBean implements Serializable {
 
     @Inject
-    LoginBean loginBean;
-
-    @Inject
     ProviderService providerService;
 
     @Inject

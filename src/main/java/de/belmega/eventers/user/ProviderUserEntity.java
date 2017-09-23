@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class ProviderUserEntity {
@@ -37,9 +38,13 @@ public class ProviderUserEntity {
     private String contactable;
     private String mobility;
     private String hourlyRate;
-    private String services;
-    private String locations;
-    private String equipments;
+
+    @Transient // TODO add relational tables later
+    private List<String> services;
+    @Transient // TODO add relational tables later
+    private List<String> locations;
+    @Transient // TODO add relational tables later
+    private List<String> equipments;
 
 
     public UserID getId() {
@@ -214,27 +219,27 @@ public class ProviderUserEntity {
         this.hourlyRate = hourlyRate;
     }
 
-    public String getServices() {
+    public List<String> getServices() {
         return services;
     }
 
-    public void setServices(String services) {
+    public void setServices(List<String> services) {
         this.services = services;
     }
 
-    public String getLocations() {
+    public List<String> getLocations() {
         return locations;
     }
 
-    public void setLocations(String locations) {
+    public void setLocations(List<String> locations) {
         this.locations = locations;
     }
 
-    public String getEquipments() {
+    public List<String> getEquipments() {
         return equipments;
     }
 
-    public void setEquipments(String equipments) {
+    public void setEquipments(List<String> equipments) {
         this.equipments = equipments;
     }
 }
