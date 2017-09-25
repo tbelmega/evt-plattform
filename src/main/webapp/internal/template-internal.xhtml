@@ -44,7 +44,7 @@
     </script>
 </h:head>
 
-<h:body>
+<h:body style="max-width: 600px">
 
     <h:form>
         <p:tabMenu activeIndex="#{param.i}">
@@ -53,6 +53,9 @@
             </p:menuitem>
             <p:menuitem value="Fitness" outcome="/internal/fitness.xhtml">
                 <f:param name="i" value="20"/>
+            </p:menuitem>
+            <p:menuitem value="Massage" outcome="/internal/massage.xhtml">
+                <f:param name="i" value="21"/>
             </p:menuitem>
             <p:menuitem value="Kalender" outcome="/internal/calendar.xhtml">
                 <f:param name="i" value="30"/>

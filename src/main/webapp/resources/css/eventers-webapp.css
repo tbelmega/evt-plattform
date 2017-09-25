@@ -139,9 +139,10 @@ form label {
     line-height: 25px
 }
 
-.service-section label {
+.service-section label, .weekday-list label {
     display: inline;
 }
+
 
 /* Vertical spacing*/
 div {margin-bottom: 2.5em}
@@ -286,7 +287,7 @@ background-color: #fff;
 
 
 /* Grid 1240px ----------------------------------------------------------------------- */
-body								{ min-width: 960px;}
+body								{ min-width: 320px;}
 body.admin-bar						{ position:relative;}
 
 #Wrapper 							{ max-width: 1240px; margin: 0 auto; overflow:hidden; -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, .06); box-shadow: 0 0 15px rgba(0, 0, 0, .06);}

@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class UserProfileBean implements Serializable {
     private DefaultScheduleEvent event = new DefaultScheduleEvent();
     private EventProperties eventProperties = new EventProperties();
     private ProviderUserEntity provider;
+    private List<String> repetitions = Arrays.asList("1", "4");
 
 
     public void save() {
@@ -136,4 +138,15 @@ public class UserProfileBean implements Serializable {
         return userEntity;
     }
 
+    public void deleteEvent(ActionEvent actionEvent) {
+        //TODO
+    }
+
+    public List<String> getRepetitions() {
+        return repetitions;
+    }
+
+    public void setRepetitions(List<String> repetitions) {
+        this.repetitions = repetitions;
+    }
 }
