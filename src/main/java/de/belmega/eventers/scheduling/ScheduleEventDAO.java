@@ -2,6 +2,8 @@ package de.belmega.eventers.scheduling;
 
 import de.belmega.eventers.user.UserID;
 import de.belmega.eventers.scheduling.ScheduleEventEntity;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +29,11 @@ public class ScheduleEventDAO {
         List<ScheduleEventEntity> results = query.setParameter("id", id).getResultList();
 
         return results;
+    }
+
+
+    public void deleteEvent(String eventId) {
+        ScheduleEventEntity eventEntity = em.find(ScheduleEventEntity.class, eventId);
+        em.remove(eventEntity);
     }
 }

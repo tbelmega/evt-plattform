@@ -19,10 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Named
 @SessionScoped
@@ -37,9 +34,9 @@ public class UserProfileBean implements Serializable {
     private ScheduleModel eventModel = new DefaultScheduleModel();
 
     private DefaultScheduleEvent event = new DefaultScheduleEvent();
-    private EventProperties eventProperties = new EventProperties();
     private ProviderUserEntity provider;
-    private List<String> repetitions = Arrays.asList("1", "4");
+    private List<String> repetitions = new ArrayList<>();
+    private Date repeatUntil;
 
 
     public void save() {
@@ -68,8 +65,15 @@ public class UserProfileBean implements Serializable {
         }
         scheduleEventService.persistEvent(createEventEntity(event));
 
+        calculateRepitition();
+
         event = new DefaultScheduleEvent();
-        eventProperties = new EventProperties();
+    }
+
+    private void calculateRepitition() {
+        //TODO
+        System.out.println(repetitions);
+        System.out.println(repeatUntil);
     }
 
     private ScheduleEventEntity createEventEntity(ScheduleEvent event) {
@@ -96,18 +100,12 @@ public class UserProfileBean implements Serializable {
 
     public void onDateSelect(SelectEvent selectEvent) {
         event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+        repetitions = new ArrayList<>();
+        repeatUntil = new Date();
     }
 
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
-    public void setEventProperties(EventProperties eventProperties) {
-        this.eventProperties = eventProperties;
-    }
-
-    public EventProperties getEventProperties() {
-        return eventProperties;
     }
 
     public void setProvider(ProviderUserEntity provider) {
@@ -139,7 +137,8 @@ public class UserProfileBean implements Serializable {
     }
 
     public void deleteEvent(ActionEvent actionEvent) {
-        //TODO
+        scheduleEventService.deleteEvent(this.event.getId());
+        eventModel.deleteEvent(this.event);
     }
 
     public List<String> getRepetitions() {
@@ -148,5 +147,13 @@ public class UserProfileBean implements Serializable {
 
     public void setRepetitions(List<String> repetitions) {
         this.repetitions = repetitions;
+    }
+
+    public void setRepeatUntil(Date repeatUntil) {
+        this.repeatUntil = repeatUntil;
+    }
+
+    public Date getRepeatUntil() {
+        return repeatUntil;
     }
 }

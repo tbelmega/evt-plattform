@@ -49,22 +49,16 @@
     <h:form>
         <p:tabMenu activeIndex="#{param.i}">
             <p:menuitem value="Profil" outcome="/internal/profile.xhtml">
-                <f:param name="i" value="10"/>
             </p:menuitem>
             <p:menuitem value="Fitness" outcome="/internal/fitness.xhtml">
-                <f:param name="i" value="20"/>
             </p:menuitem>
             <p:menuitem value="Massage" outcome="/internal/massage.xhtml">
-                <f:param name="i" value="21"/>
             </p:menuitem>
             <p:menuitem value="Kalender" outcome="/internal/calendar.xhtml">
-                <f:param name="i" value="30"/>
             </p:menuitem>
             <p:menuitem value="Aufträge" outcome="/internal/assignments.xhtml">
-                <f:param name="i" value="40"/>
             </p:menuitem>
             <p:menuitem value="Logout" action="#{loginBean.logout}">
-                <f:param name="i" value="50"/>
             </p:menuitem>
         </p:tabMenu>
     </h:form>

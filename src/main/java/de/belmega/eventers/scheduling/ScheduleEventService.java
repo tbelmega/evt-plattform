@@ -1,6 +1,7 @@
 package de.belmega.eventers.scheduling;
 
 import de.belmega.eventers.user.UserID;
+import org.primefaces.model.DefaultScheduleEvent;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,5 +20,9 @@ public class ScheduleEventService {
 
     public List<ScheduleEventEntity> findEventsByUser(UserID id) {
         return scheduleEventDAO.findEventsByUser(id);
+    }
+
+    public void deleteEvent(String eventId) {
+        scheduleEventDAO.deleteEvent(eventId);
     }
 }
