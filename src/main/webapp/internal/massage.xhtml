@@ -9,7 +9,11 @@
             <h3 class="slidedown-heading">Dienstleistung</h3>
             <div class="service-section">
 
-                <h4>Überschrift</h4>
+                <h4>Wo liegen die Schwerpunkte Ihrer Leistungen?</h4>
+                <h:selectManyCheckbox value="#{massageServicesBean.focusByUser}" layout="pageDirection">
+                    <f:selectItems value="#{massageServicesBean.allAvailableFocuses}"/>
+                </h:selectManyCheckbox>
+
 
                 <!-- Put content here -->
 

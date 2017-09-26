@@ -8,7 +8,7 @@ swarm:
     data-sources:
       ExampleDS:
         driver-name: com.mysql
-        connection-url: jdbc:mysql://localhost:3306/eventers_testdatabase
+        connection-url: jdbc:mysql://vs221.vps4free.de:3306/eventers_productive
         user-name: eventers
         password: PutzDerSchwanJolly99
 
