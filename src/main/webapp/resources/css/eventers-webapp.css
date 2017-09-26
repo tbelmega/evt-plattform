@@ -172,6 +172,10 @@ input, select {margin-bottom: 1em; padding: 10px}
     margin-bottom: 1em;
 }
 
+td {
+    padding-bottom: 0.5em;
+}
+
 
 /* Buttons --------------------------------------------------------------------------- */
 a.tp-button{background:none;font-family:inherit!important;height:auto!important;line-height:inherit!important;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;letter-spacing:0!important;text-shadow:0 0 0!important;box-shadow:0 0 0!important;font-weight:400!important;border-width:1px!important}

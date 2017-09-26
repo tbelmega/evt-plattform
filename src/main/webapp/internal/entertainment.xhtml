@@ -11,11 +11,19 @@
 
                 <h4>Welche Fähigkeiten besitzen Sie, eine Gruppe zu unterhalten?</h4>
 
-                <h:selectManyCheckbox value="#{entertainmentServicesBean.offeredEntertainmentsByUser}" layout="pageDirection">
-
-                    <f:selectItems value="#{entertainmentServicesBean.allAvailableEntertainmentOffers}"/>
-
-                </h:selectManyCheckbox>
+                <h:dataTable var="entertainmentOffer"
+                             value="#{entertainmentServicesBean.allAvailableEntertainmentOffers}">
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{entertainmentOffer.enabled}"
+                                                 onclick="$('.#{entertainmentOffer.id}').toggleClass('invisible');"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{entertainmentOffer.name}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{entertainmentOffer.id} invisible"
+                                         cols="40" rows="5"
+                                         a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"/>
+                    </h:column>
+                </h:dataTable>
 
 
                 <div class="buttons-hbox">

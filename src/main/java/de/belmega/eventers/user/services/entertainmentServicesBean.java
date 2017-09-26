@@ -14,9 +14,16 @@ import java.util.List;
 @SessionScoped
 public class entertainmentServicesBean {
 
-  private List<String> offeredEntertainmentsByUser = new ArrayList<>();
-    private List<String> allAvailableEntertainmentOffers = Arrays.asList("Musiker/Sänger", "Illusionist",
-            "Entertainer/Moderator", "Schnellzeichner", "Schauspieler");
+    private List<String> offeredEntertainmentsByUser = new ArrayList<>();
+
+    // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
+    // Hence the class EntertainmentOffer
+    private List<EntertainmentOffer> allAvailableEntertainmentOffers = Arrays.asList(
+            new EntertainmentOffer("singer", "Musiker/Sänger"),
+            new EntertainmentOffer("illusionist", "Illusionist"),
+            new EntertainmentOffer("host", "Entertainer/Moderator"),
+            new EntertainmentOffer("painter", "Schnellzeichner"),
+            new EntertainmentOffer("actor", "Schauspieler"));
 
     public void setOfferedEntertainmentsByUser(List<String> offeredEntertainmentsByUser) {
         this.offeredEntertainmentsByUser = offeredEntertainmentsByUser;
@@ -26,11 +33,11 @@ public class entertainmentServicesBean {
         return offeredEntertainmentsByUser;
     }
 
-    public void setAllAvailableEntertainmentOffers(List<String> allAvailableEntertainmentOffers) {
+    public void setAllAvailableEntertainmentOffers(List<EntertainmentOffer> allAvailableEntertainmentOffers) {
         this.allAvailableEntertainmentOffers = allAvailableEntertainmentOffers;
     }
 
-    public List<String> getAllAvailableEntertainmentOffers() {
+    public List<EntertainmentOffer> getAllAvailableEntertainmentOffers() {
         return allAvailableEntertainmentOffers;
     }
 
