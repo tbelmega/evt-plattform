@@ -16,6 +16,8 @@ public class MassageServicesBean {
 
     private List<String> focusByUser = new ArrayList<>();
     private List<String> allAvailableFocuses = Arrays.asList("Ganzkörpermassage", "Medizinische Massage", "Wellnessmassage");
+    private List<String> selectionIfMassageTableIsAvailable = Arrays.asList("Nein");
+    private List<String> selectionIfMassageChairIsAvailable = Arrays.asList("Ja");
 
     public void setFocusByUser(List<String> focusByUser) {
         this.focusByUser = focusByUser;
@@ -31,5 +33,21 @@ public class MassageServicesBean {
 
     public List<String> getAllAvailableFocuses() {
         return allAvailableFocuses;
+    }
+
+    public void setSelectionIfMassageTableIsAvailable(List<String> selectionIfMassageTableIsAvailable) {
+        this.selectionIfMassageTableIsAvailable = selectionIfMassageTableIsAvailable;
+    }
+
+    public List<String> getSelectionIfMassageTableIsAvailable() {
+        return selectionIfMassageTableIsAvailable;
+    }
+
+    public void setSelectionIfMassageChairIsAvailable(List<String> selectionIfMassageChairIsAvailable) {
+        this.selectionIfMassageChairIsAvailable = selectionIfMassageChairIsAvailable;
+    }
+
+    public List<String> getSelectionIfMassageChairIsAvailable() {
+        return selectionIfMassageChairIsAvailable;
     }
 }

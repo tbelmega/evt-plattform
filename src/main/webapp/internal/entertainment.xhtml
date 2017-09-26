@@ -1,0 +1,36 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="template-internal.xhtml">
+
+    <ui:define name="main-content">
+
+        <h:form>
+            <h3 class="slidedown-heading">Dienstleistung</h3>
+            <div class="service-section">
+
+                <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
+                <h:selectManyCheckbox value="#{fitnessServicesBean.offeredServicesByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableServices}"/>
+                </h:selectManyCheckbox>
+
+                <h4>Wo können Sie diese Leistungen erbringen?</h4>
+                <h:selectManyCheckbox value="#{fitnessServicesBean.offeredLocationsByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableLocations}"/>
+                </h:selectManyCheckbox>
+
+                <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
+                <h:selectManyCheckbox value="#{fitnessServicesBean.ownedEquipmentByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableEquipment}"/>
+                </h:selectManyCheckbox>
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+

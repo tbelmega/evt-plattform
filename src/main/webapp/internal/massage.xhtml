@@ -14,6 +14,19 @@
                     <f:selectItems value="#{massageServicesBean.allAvailableFocuses}"/>
                 </h:selectManyCheckbox>
 
+                <h4>Ist eine Massageliege vorhanden?</h4>
+                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageTableIsAvailable}">
+                    <f:selectItem itemValue="Ja" itemLabel="Ja"/>
+                    <f:selectItem itemValue="Nein" itemLabel="Nein"/>
+                </h:selectOneRadio>
+
+                <h4>Ist ein Massagestuhl vorhanden?</h4>
+                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageChairIsAvailable}">
+                    <f:selectItem itemValue="Ja" itemLabel="Ja"/>
+                    <f:selectItem itemValue="Nein" itemLabel="Nein"/>
+                </h:selectOneRadio>
+
+
 
                 <!-- Put content here -->
 
