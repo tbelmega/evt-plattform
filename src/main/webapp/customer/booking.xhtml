@@ -1,0 +1,149 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="../template-public.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <!-- When page is loaded, get category from URL and store it in the bean. -->
+            <f:viewParam name="category" value="#{bookingBean.category}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <h:form>
+            <h4>Angebot buchen</h4>
+            <section class="booking-section1">
+                <h1>#{bookingBean.title}</h1>
+
+                <div class="float-left">
+                    <h:outputLabel for="eventDate" value="Datum"/>
+                    <p:calendar id="eventDate" value="#{bookingBean.booking.date}"
+                                pattern="dd.MM.yyyy" locale="de" showOn="button"/>
+                </div>
+                <div class="float-right">
+                    <h:outputLabel for="eventTime" value="Gewünschte Zeit"/>
+                    <p:calendar id="eventTime" value="#{bookingBean.booking.time}"
+                                pattern="HH:mm" timeOnly="true" locale="de" showOn="button"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
+
+
+                <div class="float-left">
+                    <h:outputLabel for="dropdownFlexibility">Zeitliche Flexibilität</h:outputLabel>
+                    <h:selectOneMenu value="#{bookingBean.booking.flexibility}" id="dropdownFlexibility">
+                        <f:selectItems value="#{bookingBean.allAvailableFlexibilities}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="float-right">
+                    <h:outputLabel for="dropdownDuration">Gewünschte Dauer</h:outputLabel>
+                    <h:selectOneMenu value="#{bookingBean.booking.duration}" id="dropdownDuration">
+                        <f:selectItems value="#{bookingBean.allAvailableDurations}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div style="clear: both; margin: 0"/>
+
+                <div class="float-left">
+                    <h:outputLabel for="inputAttendees">Anzahl der Teilnehmer</h:outputLabel>
+                    <h:inputText value="#{bookingBean.booking.attendees}" id="inputAttendees"/>
+                </div>
+                <div class="float-right">
+                    <h:outputLabel for="inputLocation">Treffpunkt</h:outputLabel>
+                    <h:inputText value="#{bookingBean.booking.location}" id="inputLocation"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
+                <div class="buttons-hbox">
+                    <p:commandLink class="button button_green"
+                                   onclick="$('.booking-section1').toggleClass('invisible');$('.booking-section2').toggleClass('invisible');return false;">
+                        Weiter
+                    </p:commandLink>
+                </div>
+            </section>
+
+            <section class="booking-section2 invisible">
+
+                <div class="float-left">
+                    <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
+                    <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting" class="width-medium">
+                        <f:selectItem itemLabel="Bitte auswählen..."/>
+                        <f:selectItem itemValue="mrs" itemLabel="Frau"/>
+                        <f:selectItem itemValue="mr" itemLabel="Herr"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="float-right">
+                    <h:outputLabel for="inputCompany">Firma</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.company}" id="inputCompany" class="width-medium"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
+
+                <div class="float-left">
+                    <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.firstname}" id="inputFirstname" class="width-medium"/>
+                </div>
+                <div class="float-right">
+                    <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.lastname}" id="inputLastname" class="width-medium"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
+
+                <div class="float-left">
+                    <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress" class="width-medium"
+                                 readonly="true"/>
+                </div>
+                <div class="float-right">
+                    <h:outputLabel for="inputPhoneMobile">Telefonnummer für Rückfragen</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.mobile}" id="inputPhoneMobile" class="width-medium"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
+
+                <div class="float-left">
+                    <h:outputLabel for="inputHotel">Adresse Hotel</h:outputLabel>
+                    <h:inputTextarea value="#{bookingBean.customer.hotelAdress}" id="inputHotel" cols="30" rows="5"
+                                     style="resize: none"/>
+                </div>
+                <div class="float-right">
+                    <h:outputLabel for="inputRemark">Bemerkungen zur Buchungsanfrage</h:outputLabel>
+                    <h:inputTextarea value="#{bookingBean.booking.remark}" id="inputRemark" cols="30" rows="5"
+                                     style="resize: none"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
+
+                <div class="buttons-hbox">
+                    <p:commandLink class="button button_green"
+                                   onclick="$('.booking-section2').toggleClass('invisible');$('.booking-section3').toggleClass('invisible');return false;">
+                        Weiter
+                    </p:commandLink>
+                </div>
+            </section>
+
+            <section class="booking-section3 invisible">
+
+                <div>[Paypal plugin]</div>
+
+                <h:selectBooleanCheckbox id="checkboxInvoice"
+                                         onclick="$('.invoice-adress-textarea').toggleClass('invisible');"/>
+                <h:outputLabel for="checkboxInvoice" style="display: inline">Rechnung erstellen</h:outputLabel>
+
+                <h:inputTextarea style="display: block; resize: none" styleClass="invoice-adress-textarea invisible"
+                                 cols="40" rows="5"
+                                 a:placeholder="Rechnungsadresse privat oder geschäftlich"
+                                 value="#{bookingBean.booking.createInvoice}"/>
+
+                <div class="buttons-hbox">
+                    <p:commandLink class="button button_green" action="#{bookingBean.submit}">
+                        Buchung abschließen
+                    </p:commandLink>
+                </div>
+            </section>
+            <h:messages globalOnly="true" errorStyle="color: red"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
+

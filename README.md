@@ -1,9 +1,8 @@
-##Notizen vom Telefonat mit Wilfling:
+##Notizen vom Telefonat mit Herrn Wilfling:
 * --Wiederholungsfunktion beim Terminanlegen (siehe Outlook), Checkboxen für Wochentage--
 * --Eingabe "Erreichbarkeit": Dropdown mit Minuten--
 * --Dienstleisterseite: Checkboxen statt Multiselect--
 * Sportutensilien: Datensätze aus DB
-* Wenn Dienstleister im Urlaub/gebucht -> nicht verfügbar
 * Testen auf Android
 
 
@@ -11,6 +10,7 @@
 * Buchung: Hoteladresse bereits eingetragen?
 
 ## Backlog
+* Wenn Dienstleister im Urlaub/gebucht -> nicht verfügbar
 * Profil: Wenn Emailadresse änderbar wird: Neue Bestätigung der Mailadresse?
 * Nutzer aktivieren?
 * Kunde Login?
