@@ -41,7 +41,7 @@
             </h:inputText>
             <h:message for="inputLastname" id="m_lastname" errorStyle="color: red" styleClass="message"/>
 
-            <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
+            <h:outputLabel for="inputEmailadress">E-Mail-Adresse</h:outputLabel>
             <h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress" required="true"
                          requiredMessage="Angabe benötigt."
                          class="width-medium">
@@ -51,7 +51,7 @@
             </h:inputText>
             <h:message for="inputEmailadress" id="m_emailadress" errorStyle="color: red" styleClass="message"/>
 
-            <h:outputLabel for="inputEmailadressConfirmation">Emailadresse wiederholen</h:outputLabel>
+            <h:outputLabel for="inputEmailadressConfirmation">E-Mail-Adresse wiederholen</h:outputLabel>
             <h:inputText binding="#{confirmEmailadress}" id="inputEmailadressConfirmation" required="true"
                          requiredMessage="Angabe benötigt."
                          class="width-medium">
