@@ -1,0 +1,38 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="template-internal.xhtml">
+
+    <ui:define name="main-content">
+
+        <h:form>
+            <h3 class="slidedown-heading">Dienstleistung</h3>
+            <div class="service-section">
+
+                <h4>Welche Transportleistungen können Sie erbringen?</h4>
+
+                <h:dataTable var="transportOffers"
+                             value="#{transportOffersServicesBean.allAvailableTransportOffers}">
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{transportOffers.enabled}"
+                                                 onclick="$('.#{transportOffers.id}').toggleClass('invisible');"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{transportOffers.name}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{transportOffers.id} invisible"
+                                         cols="40" rows="5"
+                                         a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"/>
+                    </h:column>
+                </h:dataTable>
+
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+
