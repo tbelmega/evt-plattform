@@ -1,14 +1,12 @@
-package de.belmega.eventers.user.services;
+package de.belmega.eventers.services;
 
-/**
- * Created by majab on 27.09.2017.
- */
-public class TransportOffers {
+public class EntertainmentOffer {
+
     private String name;
     private boolean enabled;
     private String id;
 
-    public TransportOffers(String id, String name) {
+    public EntertainmentOffer(String id, String name) {
         this.name = name;
         this.id = id;
     }

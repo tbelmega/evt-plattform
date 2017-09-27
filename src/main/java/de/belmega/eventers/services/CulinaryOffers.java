@@ -1,14 +1,14 @@
-package de.belmega.eventers.user.services;
+package de.belmega.eventers.services;
 
 /**
  * Created by majab on 27.09.2017.
  */
-public class CulturalOffers {
+public class CulinaryOffers {
     private String name;
     private boolean enabled;
     private String id;
 
-    public CulturalOffers(String id, String name) {
+    public CulinaryOffers(String id, String name) {
         this.name = name;
         this.id = id;
     }

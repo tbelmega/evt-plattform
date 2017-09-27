@@ -1,4 +1,4 @@
-package de.belmega.eventers.user.services;
+package de.belmega.eventers.services;
 
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
@@ -6,9 +6,7 @@ import de.belmega.eventers.user.UserProfileBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @Named
 @SessionScoped

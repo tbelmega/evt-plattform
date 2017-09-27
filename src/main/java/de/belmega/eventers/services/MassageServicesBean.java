@@ -1,10 +1,6 @@
-package de.belmega.eventers.user.services;
-
-import de.belmega.eventers.user.ProviderUserEntity;
-import de.belmega.eventers.user.UserProfileBean;
+package de.belmega.eventers.services;
 
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Arrays;

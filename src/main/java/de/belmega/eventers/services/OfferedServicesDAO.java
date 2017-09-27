@@ -1,4 +1,4 @@
-package de.belmega.eventers.user.services;
+package de.belmega.eventers.services;
 
 import de.belmega.eventers.user.ProviderUserEntity;
 
