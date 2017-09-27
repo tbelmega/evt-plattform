@@ -1,7 +1,11 @@
 package de.belmega.eventers;
 
+import de.belmega.eventers.services.CategoryDAO;
+import de.belmega.eventers.services.ServiceDAO;
 import de.belmega.eventers.user.*;
 import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
+import de.belmega.eventers.services.CategoryEntity;
+import de.belmega.eventers.services.ServiceEntity;
 import org.jboss.logging.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -11,16 +15,19 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class TestDataGenerator {
 
-    @PersistenceContext
-    EntityManager em;
-
+    @Inject
+    private ProviderService providerService;
 
     @Inject
-    ProviderService providerService;
+    private ServiceDAO serviceDAO;
+
+    @Inject
+    private CategoryDAO categoryDAO;
 
     @Inject
     @ConfigurationValue("test-environment")
@@ -31,6 +38,8 @@ public class TestDataGenerator {
 
 
     public void setupTestData(@Observes @Initialized(ApplicationScoped.class) Object init) throws MailadressAlreadyInUse {
+        generateProvidedServices();
+
         if (testEnvironment) {
             LOG.warn("Test environment detected. Generating test data.");
             generateTestData();
@@ -38,6 +47,32 @@ public class TestDataGenerator {
             LOG.warn("Productive environment detected. Not generating test data.");
         }
 
+    }
+
+    /**
+     * Creates the service categories and services from the specification and writes them into the database.
+     */
+    @Transactional
+    private void generateProvidedServices() {
+        CategoryEntity wellness = new CategoryEntity("Wellness");
+        categoryDAO.persist(wellness);
+
+        createServiceEntity(wellness, "Massage");
+        createServiceEntity(wellness, "Friseur");
+        createServiceEntity(wellness, "Make-up Artist");
+        createServiceEntity(wellness, "Kosmetik");
+        createServiceEntity(wellness, "Nageldesign");
+        createServiceEntity(wellness, "Typ-&Stilberatung");
+        createServiceEntity(wellness, "Pediküre");
+        createServiceEntity(wellness, "Maniküre");
+
+        // TODO: Add the other categories and services from Typen_Dienstleister.xlsx
+    }
+
+    @Transactional
+    private void createServiceEntity(CategoryEntity wellness, String serviceName) {
+        ServiceEntity massage = new ServiceEntity(wellness, serviceName);
+        serviceDAO.persist(massage);
     }
 
     private void generateTestData() throws MailadressAlreadyInUse {
