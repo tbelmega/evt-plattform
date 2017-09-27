@@ -52,24 +52,20 @@ public class TestDataGenerator {
     /**
      * Creates the service categories and services from the specification and writes them into the database.
      */
-    @Transactional
     private void generateProvidedServices() {
         CategoryEntity wellness = new CategoryEntity("Wellness");
         categoryDAO.persist(wellness);
 
         createServiceEntity(wellness, "Massage");
-        createServiceEntity(wellness, "Friseur");
-        createServiceEntity(wellness, "Make-up Artist");
         createServiceEntity(wellness, "Kosmetik");
         createServiceEntity(wellness, "Nageldesign");
-        createServiceEntity(wellness, "Typ-&Stilberatung");
-        createServiceEntity(wellness, "Pediküre");
-        createServiceEntity(wellness, "Maniküre");
+        createServiceEntity(wellness, "Make-up Artist");
+        createServiceEntity(wellness, "Friseur");
 
-        // TODO: Add the other categories and services from Typen_Dienstleister.xlsx
+        // TODO: Add the other categories and services from Erfassungsformular_Dienstleister_neu.xlsx Kategorien_Dienstl.
+        // Bewegung, Entertainment...
     }
 
-    @Transactional
     private void createServiceEntity(CategoryEntity wellness, String serviceName) {
         ServiceEntity massage = new ServiceEntity(wellness, serviceName);
         serviceDAO.persist(massage);
