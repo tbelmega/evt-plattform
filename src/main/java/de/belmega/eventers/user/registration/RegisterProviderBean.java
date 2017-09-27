@@ -1,19 +1,28 @@
 package de.belmega.eventers.user.registration;
 
+import de.belmega.eventers.services.CategoryDAO;
+import de.belmega.eventers.services.CategoryEntity;
+import de.belmega.eventers.services.ServiceDAO;
+import de.belmega.eventers.services.ServiceEntity;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserID;
 import de.belmega.eventers.user.ProviderService;
 import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
+import org.apache.commons.lang.StringUtils;
+import org.primefaces.context.RequestContext;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 
 @Named
@@ -24,10 +33,19 @@ public class RegisterProviderBean implements Serializable {
     ProviderService providerService;
 
     @Inject
+    CategoryDAO categoryDAO;
+
+    @Inject
+    ServiceDAO serviceDAO;
+
+    @Inject
     @ConfigurationValue("urls.pages.registered")
     String registeredSite;
 
     private ProviderUserEntity provider;
+    private List<CategoryEntity> allAvailableCategories;
+    private String category;
+    private Object service;
 
     @PostConstruct
     public void init() {
@@ -57,5 +75,36 @@ public class RegisterProviderBean implements Serializable {
 
     public ProviderUserEntity getProvider() {
         return provider;
+    }
+
+    public List<CategoryEntity> getAllAvailableCategories() {
+        return categoryDAO.findAll();
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public List<ServiceEntity> getServicesForCategory() {
+        // If no category selected yet, don't load services
+        if (StringUtils.isEmpty(category)) return Collections.emptyList();
+        else return serviceDAO.findServicesByCategory(category);
+    }
+
+    public void setService(Object service) {
+        this.service = service;
+    }
+
+    public Object getService() {
+        return service;
+    }
+
+    // This is called when user selects a category
+    public void categorySelected() {
+        RequestContext.getCurrentInstance().update("selectService");
     }
 }

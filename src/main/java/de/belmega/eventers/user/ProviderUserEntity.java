@@ -1,11 +1,8 @@
 package de.belmega.eventers.user;
 
-import de.belmega.eventers.user.UserID;
+import de.belmega.eventers.services.CategoryEntity;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,7 +23,6 @@ public class ProviderUserEntity {
     private String lastname;
     private String emailadress;
     private String greeting;
-    private String profession;
     private String street;
     private String zipcode;
     private String city;
@@ -87,14 +83,6 @@ public class ProviderUserEntity {
         this.greeting = greeting;
     }
 
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
-
     public void setEncryptedPassword(byte[] encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
     }
@@ -106,7 +94,6 @@ public class ProviderUserEntity {
                 ", lastname='" + lastname + '\'' +
                 ", emailadress='" + emailadress + '\'' +
                 ", greeting='" + greeting + '\'' +
-                ", profession='" + profession + '\'' +
                 ", id=" + id +
                 '}';
     }

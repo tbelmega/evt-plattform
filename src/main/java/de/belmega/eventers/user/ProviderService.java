@@ -33,7 +33,6 @@ public class ProviderService {
         entity.setLastname(provider.getLastname());
         entity.setEmailadress(provider.getEmailadress());
         entity.setGreeting(provider.getGreeting());
-        entity.setProfession(provider.getProfession());
 
         userDAO.persist(entity);
 

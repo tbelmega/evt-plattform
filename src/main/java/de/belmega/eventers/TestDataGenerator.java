@@ -64,6 +64,9 @@ public class TestDataGenerator {
 
         // TODO: Add the other categories and services from Erfassungsformular_Dienstleister_neu.xlsx Kategorien_Dienstl.
         // Bewegung, Entertainment...
+        CategoryEntity fitness = new CategoryEntity("Bewegung");
+        categoryDAO.persist(fitness);
+
     }
 
     private void createServiceEntity(CategoryEntity wellness, String serviceName) {

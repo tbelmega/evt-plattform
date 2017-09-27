@@ -1,16 +1,12 @@
 package de.belmega.eventers.services;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class CategoryEntity {
 
     @Id
-    @GeneratedValue
-    private long id;
-
+    @Column(unique = true)
     private String categoryName;
 
     public CategoryEntity(String categoryName) {
@@ -20,13 +16,6 @@ public class CategoryEntity {
     public CategoryEntity() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getCategoryName() {
         return categoryName;
@@ -34,5 +23,10 @@ public class CategoryEntity {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    @Override
+    public String toString() {
+        return categoryName;
     }
 }
