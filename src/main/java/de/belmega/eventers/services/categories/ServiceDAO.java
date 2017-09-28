@@ -1,17 +1,10 @@
-package de.belmega.eventers.services;
-
-import de.belmega.eventers.user.ProviderUserEntity;
+package de.belmega.eventers.services.categories;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 public class ServiceDAO {
 

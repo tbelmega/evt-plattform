@@ -1,7 +1,5 @@
 package de.belmega.eventers.user;
 
-import de.belmega.eventers.services.CategoryEntity;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;

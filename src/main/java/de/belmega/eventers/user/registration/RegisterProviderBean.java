@@ -1,9 +1,9 @@
 package de.belmega.eventers.user.registration;
 
-import de.belmega.eventers.services.CategoryDAO;
-import de.belmega.eventers.services.CategoryEntity;
-import de.belmega.eventers.services.ServiceDAO;
-import de.belmega.eventers.services.ServiceEntity;
+import de.belmega.eventers.services.categories.CategoryDAO;
+import de.belmega.eventers.services.categories.CategoryEntity;
+import de.belmega.eventers.services.categories.ServiceDAO;
+import de.belmega.eventers.services.categories.ServiceEntity;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserID;
 import de.belmega.eventers.user.ProviderService;
@@ -16,7 +16,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 

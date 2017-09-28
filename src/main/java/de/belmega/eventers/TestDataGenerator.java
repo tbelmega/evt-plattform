@@ -1,11 +1,11 @@
 package de.belmega.eventers;
 
-import de.belmega.eventers.services.CategoryDAO;
-import de.belmega.eventers.services.ServiceDAO;
+import de.belmega.eventers.services.categories.CategoryDAO;
+import de.belmega.eventers.services.categories.ServiceDAO;
 import de.belmega.eventers.user.*;
 import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
-import de.belmega.eventers.services.CategoryEntity;
-import de.belmega.eventers.services.ServiceEntity;
+import de.belmega.eventers.services.categories.CategoryEntity;
+import de.belmega.eventers.services.categories.ServiceEntity;
 import org.jboss.logging.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -13,9 +13,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @ApplicationScoped
 public class TestDataGenerator {

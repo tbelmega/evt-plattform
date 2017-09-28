@@ -1,4 +1,4 @@
-package de.belmega.eventers.services;
+package de.belmega.eventers.services.categories;
 
 import javax.persistence.*;
 

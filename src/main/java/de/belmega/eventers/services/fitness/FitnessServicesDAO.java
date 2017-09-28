@@ -1,6 +1,6 @@
 package de.belmega.eventers.services.fitness;
 
-import de.belmega.eventers.services.ServiceType;
+import de.belmega.eventers.services.categories.ServiceType;
 import de.belmega.eventers.user.ProviderUserEntity;
 
 import javax.persistence.EntityManager;
@@ -17,7 +17,7 @@ public class FitnessServicesDAO {
 
     // TODO: move to database. hard-coded values for testing only
     public Set<String> findServices(ServiceType fitness) {
-        return new HashSet(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 "Training als Personal Coach in einem Sportstudio",
                 "Personal Coach Laufen / Joggen im Park",
                 "Personal Coach Nordic Walking im Park",
@@ -29,13 +29,13 @@ public class FitnessServicesDAO {
 
     // TODO: move to database. hard-coded values for testing only
     public Set<String> findLocations(ServiceType fitness) {
-        return new HashSet(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 "Indoor", "Outdoor", "Gym", "Hotel"));
     }
 
     // TODO: move to database. hard-coded values for testing only
     public Set<String> findEquipment(ServiceType fitness) {
-        return new HashSet(Arrays.asList(
+        return new HashSet<>(Arrays.asList(
                 "Nordic Walking Stöcke", "Isomatten", "Federballsets", "Walking Hanteln"));
     }
 
@@ -70,7 +70,11 @@ public class FitnessServicesDAO {
 
     public Optional<FitnessServicesEntity> loadFitnessServicesEntityForUser(ProviderUserEntity provider) {
         // Prepare database query
-        String qlString = "SELECT f FROM FitnessServicesEntity f JOIN f.provider p WHERE p.id = :provider_id";
+        String qlString = "SELECT f FROM FitnessServicesEntity f JOIN f.provider p"
+                + " JOIN FETCH f.selectedServices " // tell JPA to load selectedServices *now* and not lazy. only required for Set properties
+                + " JOIN FETCH f.offeredLocations "
+                + " JOIN FETCH f.ownedEquipmentByUser "
+                + "WHERE p.id = :provider_id"; // tell JPA to load the FitnessServicesEntity for the given user
         TypedQuery<FitnessServicesEntity> query = em.createQuery(qlString, FitnessServicesEntity.class);
         query.setParameter("provider_id", provider.getId());
 

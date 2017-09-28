@@ -1,7 +1,7 @@
 package de.belmega.eventers.services;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * Created by majab on 26.09.2017.
  */
-@Named
+@ManagedBean
 @SessionScoped
-public class culturalOffersServicesBean {
+public class CulturalOffersServicesBean {
 
     private List<String> selectedCulturalOfferByUser = new ArrayList<>();
 

@@ -1,12 +1,12 @@
 package de.belmega.eventers.services;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Named
+@ManagedBean
 @SessionScoped
 public class MassageServicesBean {
 

@@ -22,13 +22,13 @@ public class FitnessServicesEntity {
     @OneToOne // every user has only one FitnessServicesEntity associated with it.
     private ProviderUserEntity provider;
 
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = String.class)
     private Set<String> selectedServices;
 
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = String.class)
     private Set<String> offeredLocations;
 
-    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = String.class)
     private Set<String> ownedEquipmentByUser;
 
 

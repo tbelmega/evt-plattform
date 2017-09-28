@@ -1,16 +1,18 @@
 package de.belmega.eventers.services.fitness;
 
-import de.belmega.eventers.services.ServiceType;
+import de.belmega.eventers.services.categories.ServiceType;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
 
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
-@Named
-@SessionScoped
+@ManagedBean
+@RequestScoped
 public class FitnessServicesBean {
 
     @Inject
