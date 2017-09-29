@@ -15,11 +15,11 @@
                              value="#{culturalOffersServicesBean.usersOfferSelectionSelections}">
                     <h:column>
                         <h:selectBooleanCheckbox value="#{culturalOffer.enabled}"
-                                                 onclick="$('.#{culturalOffer.id}').toggleClass('invisible');"/>
+                                                 onclick="$('.#{culturalOffer.serviceId}').toggleClass('invisible');"/>
                     </h:column>
                     <h:column>
-                        <h:outputText value="#{culturalOffer.name}"/>
-                        <h:inputTextarea style="display: block; resize: none" styleClass="#{culturalOffer.id} #{culturalOffersServicesBean.getVisibility(culturalOffer)}"
+                        <h:outputText value="#{culturalOffer.serviceName}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{culturalOffer.serviceId} #{culturalOffersServicesBean.getVisibility(culturalOffer)}"
                                          cols="40" rows="5"
                                          a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"
                                          value="#{culturalOffer.description}"/>

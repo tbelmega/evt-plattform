@@ -1,11 +1,8 @@
 package de.belmega.eventers;
 
-import de.belmega.eventers.services.categories.CategoryDAO;
-import de.belmega.eventers.services.categories.ServiceDAO;
+import de.belmega.eventers.services.categories.*;
 import de.belmega.eventers.user.*;
 import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
-import de.belmega.eventers.services.categories.CategoryEntity;
-import de.belmega.eventers.services.categories.ServiceEntity;
 import org.jboss.logging.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -50,8 +47,18 @@ public class TestDataGenerator {
      * Creates the service categories and services from the specification and writes them into the database.
      */
     private void generateProvidedServices() {
-        CategoryEntity wellness = new CategoryEntity("Wellness");
+        CategoryEntity wellness = new CategoryEntity(ServiceCategoryId.WELLNESS.name(), "Wellness");
         categoryDAO.persist(wellness);
+        CategoryEntity bewegung = new CategoryEntity(ServiceCategoryId.SPORTS.name(), "Bewegung");
+        categoryDAO.persist(bewegung);
+        CategoryEntity entertainment = new CategoryEntity(ServiceCategoryId.ENTERTAINMENT.name(), "Entertainment");
+        categoryDAO.persist(entertainment);
+        CategoryEntity kultur = new CategoryEntity(ServiceCategoryId.CULTURE.name(), "Kultur");
+        categoryDAO.persist(kultur);
+        CategoryEntity kulinarisches = new CategoryEntity(ServiceCategoryId.CULINARIC.name(), "Kulinarisches");
+        categoryDAO.persist(kulinarisches);
+        CategoryEntity transport = new CategoryEntity(ServiceCategoryId.TRANSPORTATION.name(), "Transport");
+        categoryDAO.persist(transport);
 
         createServiceEntity(wellness, "Massage");
         createServiceEntity(wellness, "Kosmetik");
@@ -59,10 +66,34 @@ public class TestDataGenerator {
         createServiceEntity(wellness, "Make-up Artist");
         createServiceEntity(wellness, "Friseur");
 
-        // TODO: Add the other categories and services from Erfassungsformular_Dienstleister_neu.xlsx Kategorien_Dienstl.
-        // Bewegung, Entertainment...
-        CategoryEntity fitness = new CategoryEntity("Bewegung");
-        categoryDAO.persist(fitness);
+        createServiceEntity(bewegung, "Fitnesstrainer / Personal Coach");
+        createServiceEntity(bewegung, "Wanderführer");
+        createServiceEntity(bewegung, "Tanzlehrer");
+        createServiceEntity(bewegung, "Yogalehrer");
+        createServiceEntity(bewegung, "Tai Chi/Qigong-Lehrer");
+
+        createServiceEntity(entertainment, "Musiker/Sänger");
+        createServiceEntity(entertainment, "Illusionist");
+        createServiceEntity(entertainment, "Entertainer/Moderator");
+        createServiceEntity(entertainment, "Kabarattist");
+        createServiceEntity(entertainment, "Schnellzeichner");
+        createServiceEntity(entertainment, "Schauspieler");
+
+        createServiceEntity(kultur, "Stadtführer");
+        createServiceEntity(kultur, "Kunstführer");
+        createServiceEntity(kultur, "Schriftsteller/Vorleser");
+
+        createServiceEntity(kulinarisches, "Sommelier");
+        createServiceEntity(kulinarisches, "Chocolatier");
+        createServiceEntity(kulinarisches, "Destilllateur");
+        createServiceEntity(kulinarisches, "Käsesommelier");
+        createServiceEntity(kulinarisches, "Barkeeper");
+        createServiceEntity(kulinarisches, "Restaurant");
+
+        createServiceEntity(transport, "Taxiunternehmen");
+        createServiceEntity(transport, "Limosinenservice");
+        createServiceEntity(transport, "Velotaxi-Unternehmen");
+        createServiceEntity(transport, "Fahrradverleih");
 
     }
 

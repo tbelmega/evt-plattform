@@ -34,13 +34,13 @@ public class CulinaryOffersServicesBean {
     // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
     // Hence the class EntertainmentOfferSelection
     private List<OfferSelection> usersCulinaryOfferSelections = Arrays.asList(
-            new OfferSelection("wine-tasting", "Weinverkostung"),
-            new OfferSelection("whiskey-tasting", "Whiskey-Tasting"),
-            new OfferSelection("cocktail-course", "Cocktail-Kurs"),
-            new OfferSelection("restaurant", "Restaurant"),
+            new OfferSelection("wine-tasting", "Weinverkostung", "Kulinarisches"),
+            new OfferSelection("whiskey-tasting", "Whiskey-Tasting", "Kulinarisches"),
+            new OfferSelection("cocktail-course", "Cocktail-Kurs", "Kulinarisches"),
+            new OfferSelection("restaurant", "Restaurant", "Kulinarisches"),
             new OfferSelection("chocolate-tasting", "Schokoladenverkostung " +
-                    "(idealerweise gilt das Angebot mit Wein- und Spirituosenverkostung)"),
-            new OfferSelection("cheese-tasting", "Käseverkostung"));
+                    "(idealerweise gilt das Angebot mit Wein- und Spirituosenverkostung)", "Kulinarisches"),
+            new OfferSelection("cheese-tasting", "Käseverkostung", "Kulinarisches"));
 
     public void setUsersCulinaryOfferSelections(List<OfferSelection> usersCulinaryOfferSelections) {
         this.usersCulinaryOfferSelections = usersCulinaryOfferSelections;

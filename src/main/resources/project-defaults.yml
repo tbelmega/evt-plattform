@@ -17,7 +17,6 @@ urls:
   pages:
     login: /login.xhtml
     profile: /internal/profile.xhtml
-    fitness: /internal/fitness.xhtml
     registration: /register.xhtml
     registered: /registered.xhtml
 

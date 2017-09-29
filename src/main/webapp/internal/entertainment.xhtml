@@ -15,12 +15,12 @@
                              value="#{entertainmentServicesBean.usersEntertainmentOfferSelections}">
                     <h:column>
                         <h:selectBooleanCheckbox value="#{entertainmentOffer.enabled}"
-                                                 onclick="$('.#{entertainmentOffer.id}').toggleClass('invisible');"/>
+                                                 onclick="$('.#{entertainmentOffer.serviceId}').toggleClass('invisible');"/>
                     </h:column>
                     <h:column>
-                        <h:outputText value="#{entertainmentOffer.name}"/>
+                        <h:outputText value="#{entertainmentOffer.serviceName}"/>
                         <h:inputTextarea style="display: block; resize: none"
-                                         styleClass="#{entertainmentOffer.id} #{entertainmentServicesBean.getVisibility(entertainmentOffer)}"
+                                         styleClass="#{entertainmentOffer.serviceId} #{entertainmentServicesBean.getVisibility(entertainmentOffer)}"
                                          cols="40" rows="5"
                                          a:placeholder="Bitte machen Sie genaue Angaben zu Ihrer Dienstleistung; ggf. Website"
                                          value="#{entertainmentOffer.description}"/>

@@ -1,6 +1,6 @@
 package de.belmega.eventers.services.fitness;
 
-import de.belmega.eventers.services.categories.ServiceType;
+import de.belmega.eventers.services.categories.ServiceCategoryId;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
 
@@ -31,9 +31,6 @@ public class FitnessServicesBean {
     }
 
     public Set<String> getOfferedServicesByUser() {
-        // Optional<FitnessServicesEntity> means: maybe there is a FitnessServicesEntity, may there is none. Optional "wraps" a FitnessServicesEntity there.
-        // when the user didn't fill out the form yet,
-        // there is no FitnessServicesEntity for him in the database, then the Optional<FitnessServicesEntity> is empty
         Optional<FitnessServicesEntity> fitnessServicesEntity = fitnessServicesDAO.loadFitnessServicesEntityForUser(getProvider());
 
         // If there is a FitnessServicesEntity for the user, return it's services selection
@@ -47,7 +44,7 @@ public class FitnessServicesBean {
     }
 
     public Set<String> getAllAvailableServices() {
-        return fitnessServicesDAO.findServices(ServiceType.FITNESS);
+        return fitnessServicesDAO.findServices(ServiceCategoryId.SPORTS);
     }
 
     public Set<String> getOfferedLocationsByUser() {
@@ -71,11 +68,11 @@ public class FitnessServicesBean {
     }
 
     public Set<String> getAllAvailableEquipment() {
-        return fitnessServicesDAO.findEquipment(ServiceType.FITNESS);
+        return fitnessServicesDAO.findEquipment(ServiceCategoryId.SPORTS);
     }
 
     public Set<String> getAllAvailableLocations() {
-        return fitnessServicesDAO.findLocations(ServiceType.FITNESS);
+        return fitnessServicesDAO.findLocations(ServiceCategoryId.SPORTS);
     }
 
     /**

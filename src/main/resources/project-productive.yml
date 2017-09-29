@@ -2,14 +2,14 @@ swarm:
   datasources:
     jdbc-drivers:
       com.mysql:
-        driver-class-name: com.mysql.jdbc.Driver
-        xa-datasource-class-name: com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
-        driver-module-name: com.mysql
+        driver-class-serviceName: com.mysql.jdbc.Driver
+        xa-datasource-class-serviceName: com.mysql.jdbc.jdbc2.optional.MysqlXADataSource
+        driver-module-serviceName: com.mysql
     data-sources:
       ExampleDS:
-        driver-name: com.mysql
+        driver-serviceName: com.mysql
         connection-url: jdbc:mysql://vs221.vps4free.de:3306/eventers_productive
-        user-name: eventers
+        user-serviceName: eventers
         password: PutzDerSchwanJolly99
 
 urls:

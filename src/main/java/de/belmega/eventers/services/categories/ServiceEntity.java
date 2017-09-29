@@ -31,4 +31,9 @@ public class ServiceEntity {
     public void setCategory(CategoryEntity category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return serviceName;
+    }
 }

@@ -1,23 +1,35 @@
 package de.belmega.eventers.services.common;
 
 public class OfferSelection {
-    private String name;
+    private String categoryName;
+
+    private String serviceId;
+    private String serviceName;
+
     private boolean enabled;
-    private String id;
     private String description;
 
 
-    public OfferSelection(String id, String name) {
-        this.name = name;
-        this.id = id;
+    public OfferSelection(String serviceId, String serviceName, String categoryName) {
+        this.serviceName = serviceName;
+        this.serviceId = serviceId;
+        this.categoryName = categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public OfferSelection(String categoryName, String serviceId, String serviceName, boolean enabled, String description) {
+        this.categoryName = categoryName;
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
+        this.enabled = enabled;
+        this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getServiceName() {
+        return serviceName;
     }
 
     public boolean isEnabled() {
@@ -28,12 +40,12 @@ public class OfferSelection {
         this.enabled = enabled;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public String getId() {
-        return id;
+    public String getServiceId() {
+        return serviceId;
     }
 
     public String getDescription() {
@@ -42,5 +54,13 @@ public class OfferSelection {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

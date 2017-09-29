@@ -20,7 +20,9 @@ public class SelectionEntity {
 
     private String description;
 
-    public SelectionEntity(ProviderUserEntity provider, String offerId, boolean enabled, String description) {
+    private String categoryName;
+
+    public SelectionEntity(ProviderUserEntity provider, String offerId, boolean enabled, String description, String categoryName) {
         this.provider = provider;
         this.offerId = offerId;
         this.enabled = enabled;
@@ -68,5 +70,13 @@ public class SelectionEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }

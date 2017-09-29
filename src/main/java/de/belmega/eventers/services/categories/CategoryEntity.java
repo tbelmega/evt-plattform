@@ -6,10 +6,12 @@ import javax.persistence.*;
 public class CategoryEntity {
 
     @Id
-    @Column(unique = true)
+    private String id;
+
     private String categoryName;
 
-    public CategoryEntity(String categoryName) {
+    public CategoryEntity(String id, String categoryName) {
+        this.id = id;
         this.categoryName = categoryName;
     }
 

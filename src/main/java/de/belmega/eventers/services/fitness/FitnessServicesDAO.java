@@ -1,6 +1,6 @@
 package de.belmega.eventers.services.fitness;
 
-import de.belmega.eventers.services.categories.ServiceType;
+import de.belmega.eventers.services.categories.ServiceCategoryId;
 import de.belmega.eventers.user.ProviderUserEntity;
 
 import javax.persistence.EntityManager;
@@ -16,7 +16,7 @@ public class FitnessServicesDAO {
     EntityManager em;
 
     // TODO: move to database. hard-coded values for testing only
-    public Set<String> findServices(ServiceType fitness) {
+    public Set<String> findServices(ServiceCategoryId fitness) {
         return new HashSet<>(Arrays.asList(
                 "Training als Personal Coach in einem Sportstudio",
                 "Personal Coach Laufen / Joggen im Park",
@@ -28,13 +28,13 @@ public class FitnessServicesDAO {
     }
 
     // TODO: move to database. hard-coded values for testing only
-    public Set<String> findLocations(ServiceType fitness) {
+    public Set<String> findLocations(ServiceCategoryId fitness) {
         return new HashSet<>(Arrays.asList(
                 "Indoor", "Outdoor", "Gym", "Hotel"));
     }
 
     // TODO: move to database. hard-coded values for testing only
-    public Set<String> findEquipment(ServiceType fitness) {
+    public Set<String> findEquipment(ServiceCategoryId fitness) {
         return new HashSet<>(Arrays.asList(
                 "Nordic Walking Stöcke", "Isomatten", "Federballsets", "Walking Hanteln"));
     }

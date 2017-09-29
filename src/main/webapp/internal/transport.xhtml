@@ -15,11 +15,11 @@
                              value="#{transportOffersServicesBean.usersTransportOfferSelections}">
                     <h:column>
                         <h:selectBooleanCheckbox value="#{transportOffer.enabled}"
-                                                 onclick="$('.#{transportOffers.id}').toggleClass('invisible');"/>
+                                                 onclick="$('.#{transportOffers.serviceId}').toggleClass('invisible');"/>
                     </h:column>
                     <h:column>
-                        <h:outputText value="#{transportOffer.name}"/>
-                        <h:inputTextarea style="display: block; resize: none" styleClass="#{transportOffer.id} #{transportOffersServicesBean.getVisibility(transportOffer)}"
+                        <h:outputText value="#{transportOffer.serviceName}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{transportOffer.serviceId} #{transportOffersServicesBean.getVisibility(transportOffer)}"
                                          cols="40" rows="5"
                                          a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"
                                          value="#{transportOffer.description}"/>

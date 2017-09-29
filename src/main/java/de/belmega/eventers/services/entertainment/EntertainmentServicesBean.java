@@ -33,11 +33,11 @@ public class EntertainmentServicesBean {
     // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
     // Hence the class EntertainmentOfferSelection
     private List<OfferSelection> usersEntertainmentOfferSelections = Arrays.asList(
-            new OfferSelection("singer", "Musiker/Sänger"),
-            new OfferSelection("illusionist", "Illusionist"),
-            new OfferSelection("host", "Entertainer/Moderator"),
-            new OfferSelection("painter", "Schnellzeichner"),
-            new OfferSelection("actor", "Schauspieler"));
+            new OfferSelection("singer", "Musiker/Sänger", "Entertainment"),
+            new OfferSelection("illusionist", "Illusionist", "Entertainment"),
+            new OfferSelection("host", "Entertainer/Moderator", "Entertainment"),
+            new OfferSelection("painter", "Schnellzeichner", "Entertainment"),
+            new OfferSelection("actor", "Schauspieler", "Entertainment"));
 
     public List<OfferSelection> getUsersEntertainmentOfferSelections() {
         return usersEntertainmentOfferSelections;

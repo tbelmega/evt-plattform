@@ -7,7 +7,10 @@
 
 
 ## Rückfragen an Wilfling:
+* Kategorien & Services: Startseite und Einzelseiten übereinstimmend?
+* Kategorie Massage
 * Buchung: Hoteladresse bereits eingetragen?
+* Bezahlung: An the-eventers? An Dienstleiser?
 
 ## Backlog
 * Wenn Dienstleister im Urlaub/gebucht -> nicht verfügbar

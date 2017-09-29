@@ -15,11 +15,11 @@
                              value="#{culinaryOffersServicesBean.usersCulinaryOfferSelections}">
                     <h:column>
                         <h:selectBooleanCheckbox value="#{culinaryOfferSelection.enabled}"
-                                                 onclick="$('.#{culinaryOfferSelection.id}').toggleClass('invisible');"/>
+                                                 onclick="$('.#{culinaryOfferSelection.serviceId}').toggleClass('invisible');"/>
                     </h:column>
                     <h:column>
-                        <h:outputText value="#{culinaryOfferSelection.name}"/>
-                        <h:inputTextarea style="display: block; resize: none" styleClass="#{culinaryOfferSelection.id} #{culinaryOffersServicesBean.getVisibility(culinaryOfferSelection)}"
+                        <h:outputText value="#{culinaryOfferSelection.serviceName}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{culinaryOfferSelection.serviceId} #{culinaryOffersServicesBean.getVisibility(culinaryOfferSelection)}"
                                          cols="40" rows="5"
                                          a:placeholder="Bitte machen Sie genaue Angaben zu Ihrer Dienstleistung; ggf. Website"
                                          value="#{culinaryOfferSelection.description}"/>
