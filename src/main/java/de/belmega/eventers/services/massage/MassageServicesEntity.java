@@ -21,16 +21,14 @@ public class MassageServicesEntity {
     @ElementCollection(targetClass = String.class)
     List<String> focusByUser;
 
-    @ElementCollection(targetClass = String.class)
-    List<String> massageTable;
+    boolean massageTable;
 
-    @ElementCollection(targetClass = String.class)
-    List<String> chair;
+    boolean chair;
 
 
 
 
-    public MassageServicesEntity(ProviderUserEntity provider, List<String> focusByUser, List<String> massageTable, List<String> chair) {
+    public MassageServicesEntity(ProviderUserEntity provider, List<String> focusByUser, boolean massageTable, boolean chair) {
         this.provider = provider;
         this.focusByUser = focusByUser;
         this.massageTable = massageTable;
@@ -64,19 +62,19 @@ public class MassageServicesEntity {
         this.focusByUser = focusByUser;
     }
 
-    public List<String> getMassageTable() {
+    public boolean isMassageTable() {
         return massageTable;
     }
 
-    public void setMassageTable(List<String> massageTable) {
+    public void setMassageTable(boolean massageTable) {
         this.massageTable = massageTable;
     }
 
-    public List<String> getChair() {
+    public boolean isChair() {
         return chair;
     }
 
-    public void setChair(List<String> chair) {
+    public void setChair(boolean chair) {
         this.chair = chair;
     }
 }

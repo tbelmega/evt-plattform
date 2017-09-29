@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @ManagedBean
@@ -26,8 +27,8 @@ public class MassageServicesBean {
 
     // User selection lists:
     private List<String> focusByUser = new ArrayList<>();
-    private List<String> selectionIfMassageTableIsAvailable = new ArrayList<>();
-    private List<String> selectionIfMassageChairIsAvailable = new ArrayList<>();
+    private boolean selectionIfMassageTableIsAvailable;
+    private boolean selectionIfMassageChairIsAvailable;
 
     public void setFocusByUser(List<String> focusByUser) {
         this.focusByUser = focusByUser;
@@ -45,24 +46,43 @@ public class MassageServicesBean {
         return allAvailableFocuses;
     }
 
-    public void setSelectionIfMassageTableIsAvailable(List<String> selectionIfMassageTableIsAvailable) {
-        this.selectionIfMassageTableIsAvailable = selectionIfMassageTableIsAvailable;
+    public UserProfileBean getUserProfileBean() {
+        return userProfileBean;
     }
 
-    public List<String> getSelectionIfMassageTableIsAvailable() {
+    public void setUserProfileBean(UserProfileBean userProfileBean) {
+        this.userProfileBean = userProfileBean;
+    }
+
+    public MassageServicesDAO getMassageServicesDAO() {
+        return massageServicesDAO;
+    }
+
+    public void setMassageServicesDAO(MassageServicesDAO massageServicesDAO) {
+        this.massageServicesDAO = massageServicesDAO;
+    }
+
+    public boolean isSelectionIfMassageTableIsAvailable() {
         return selectionIfMassageTableIsAvailable;
     }
 
-    public void setSelectionIfMassageChairIsAvailable(List<String> selectionIfMassageChairIsAvailable) {
-        this.selectionIfMassageChairIsAvailable = selectionIfMassageChairIsAvailable;
+    public void setSelectionIfMassageTableIsAvailable(boolean selectionIfMassageTableIsAvailable) {
+        this.selectionIfMassageTableIsAvailable = selectionIfMassageTableIsAvailable;
     }
 
-    public List<String> getSelectionIfMassageChairIsAvailable() {
+    public boolean isSelectionIfMassageChairIsAvailable() {
         return selectionIfMassageChairIsAvailable;
     }
 
+    public void setSelectionIfMassageChairIsAvailable(boolean selectionIfMassageChairIsAvailable) {
+        this.selectionIfMassageChairIsAvailable = selectionIfMassageChairIsAvailable;
+    }
+
     public String save() {
-        System.out.println(focusByUser.size() + " " + selectionIfMassageTableIsAvailable.size() + " " + selectionIfMassageChairIsAvailable);
+        // if user didn't select anything (= focusByUser is null), set empty list to prevent NullPointer
+        if (focusByUser == null) focusByUser = Collections.emptyList();
+
+        System.out.println(focusByUser + " " + selectionIfMassageTableIsAvailable + " " + selectionIfMassageChairIsAvailable);
         massageServicesDAO.update(getProvider(), focusByUser, selectionIfMassageTableIsAvailable, selectionIfMassageChairIsAvailable);
         return "";
     }

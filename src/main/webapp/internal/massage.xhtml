@@ -14,16 +14,20 @@
                     <f:selectItems value="#{massageServicesBean.allAvailableFocuses}"/>
                 </h:selectManyCheckbox>
 
+                <h:message for="selectTable" errorStyle="color: red"
+                           styleClass="message"/>
                 <h4>Ist eine Massageliege vorhanden?</h4>
-                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageTableIsAvailable}">
-                    <f:selectItem itemValue="Ja" itemLabel="Ja"/>
-                    <f:selectItem itemValue="Nein" itemLabel="Nein"/>
+                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageTableIsAvailable}" required="true" requiredMessage="Angabe benötigt." id="selectTable">
+                    <f:selectItem itemValue="#{true}" itemLabel="Ja"/>
+                    <f:selectItem itemValue="#{false}" itemLabel="Nein"/>
                 </h:selectOneRadio>
 
+                <h:message for="selectChair" errorStyle="color: red"
+                           styleClass="message"/>
                 <h4>Ist ein Massagestuhl vorhanden?</h4>
-                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageChairIsAvailable}">
-                    <f:selectItem itemValue="Ja" itemLabel="Ja"/>
-                    <f:selectItem itemValue="Nein" itemLabel="Nein"/>
+                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageChairIsAvailable}" required="true" requiredMessage="Angabe benötigt." id="selectChair">
+                    <f:selectItem itemValue="#{true}" itemLabel="Ja"/>
+                    <f:selectItem itemValue="#{false}" itemLabel="Nein"/>
                 </h:selectOneRadio>
 
                 <div class="buttons-hbox">

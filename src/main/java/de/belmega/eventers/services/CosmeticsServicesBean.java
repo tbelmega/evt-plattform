@@ -13,7 +13,7 @@ import java.util.List;
 @SessionScoped
 public class CosmeticsServicesBean {
     private List<String> selectedCosmeticOffersByUser = new ArrayList<>();
-    private List<String> allAvailableCosmeticOffers = Arrays.asList("Kosmtik allgemein", "Pediküre", "Maniküre", "Typ-& Stilberatung",
+    private List<String> allAvailableCosmeticOffers = Arrays.asList("Kosmetik allgemein", "Pediküre", "Maniküre", "Typ-& Stilberatung",
             "Make up Artist", "Nageldesign", "Hair Stylist/Friseur");
 
     public void setSelectedCosmeticOffersByUser(List<String> selectedCosmeticOffersByUser) {
