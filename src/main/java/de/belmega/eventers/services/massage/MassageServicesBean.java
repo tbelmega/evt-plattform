@@ -1,19 +1,33 @@
-package de.belmega.eventers.services;
+package de.belmega.eventers.services.massage;
+
+import de.belmega.eventers.user.ProviderUserEntity;
+import de.belmega.eventers.user.UserProfileBean;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class MassageServicesBean {
 
-    private List<String> focusByUser = new ArrayList<>();
+
+    @Inject
+    private UserProfileBean userProfileBean;
+
+    @Inject
+    MassageServicesDAO massageServicesDAO;
+
     private List<String> allAvailableFocuses = Arrays.asList("Ganzkörpermassage", "Medizinische Massage", "Wellnessmassage");
-    private List<String> selectionIfMassageTableIsAvailable = Arrays.asList("Nein");
-    private List<String> selectionIfMassageChairIsAvailable = Arrays.asList("Ja");
+
+    // User selection lists:
+    private List<String> focusByUser = new ArrayList<>();
+    private List<String> selectionIfMassageTableIsAvailable = new ArrayList<>();
+    private List<String> selectionIfMassageChairIsAvailable = new ArrayList<>();
 
     public void setFocusByUser(List<String> focusByUser) {
         this.focusByUser = focusByUser;
@@ -45,5 +59,16 @@ public class MassageServicesBean {
 
     public List<String> getSelectionIfMassageChairIsAvailable() {
         return selectionIfMassageChairIsAvailable;
+    }
+
+    public String save() {
+        System.out.println(focusByUser.size() + " " + selectionIfMassageTableIsAvailable.size() + " " + selectionIfMassageChairIsAvailable);
+        massageServicesDAO.update(getProvider(), focusByUser, selectionIfMassageTableIsAvailable, selectionIfMassageChairIsAvailable);
+        return "";
+    }
+
+    // Get the currently logged in user from the userProfileBean
+    private ProviderUserEntity getProvider() {
+        return userProfileBean.getProvider();
     }
 }
