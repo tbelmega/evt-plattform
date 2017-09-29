@@ -17,7 +17,7 @@ public class CulturalOffersServicesBean {
     private List<String> selectedCulturalOfferByUser = new ArrayList<>();
 
     // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
-    // Hence the class EntertainmentOffer
+    // Hence the class EntertainmentOfferSelection
     private List<CulturalOffers> allAvailableCulturalOffers = Arrays.asList(
             new CulturalOffers("city-guide", "Stadtführung"),
             new CulturalOffers("museum-guide", "Museumsführung/Kulturführung"),

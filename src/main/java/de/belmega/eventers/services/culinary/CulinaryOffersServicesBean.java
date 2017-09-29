@@ -32,7 +32,7 @@ public class CulinaryOffersServicesBean {
 
 
     // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
-    // Hence the class EntertainmentOffer
+    // Hence the class EntertainmentOfferSelection
     private List<CulinaryOfferSelection> usersCulinaryOfferSelections = Arrays.asList(
             new CulinaryOfferSelection("wine-tasting", "Weinverkostung"),
             new CulinaryOfferSelection("whiskey-tasting", "Whiskey-Tasting"),

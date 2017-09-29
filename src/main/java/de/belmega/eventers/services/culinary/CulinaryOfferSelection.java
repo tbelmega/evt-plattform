@@ -51,13 +51,4 @@ public class CulinaryOfferSelection {
         return description;
     }
 
-    @Override
-    public String toString() {
-        return "CulinaryOfferSelection{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", enabled=" + enabled +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }

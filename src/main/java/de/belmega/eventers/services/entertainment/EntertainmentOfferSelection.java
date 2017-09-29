@@ -1,12 +1,16 @@
-package de.belmega.eventers.services;
+package de.belmega.eventers.services.entertainment;
 
-public class EntertainmentOffer {
+/**
+ * This class combines the information of a EntertainmentSelectionEntity and the related EntertainmentOfferEntity for display purposes.
+ */
+public class EntertainmentOfferSelection {
 
     private String name;
     private boolean enabled;
     private String id;
+    private String description;
 
-    public EntertainmentOffer(String id, String name) {
+    public EntertainmentOfferSelection(String id, String name) {
         this.name = name;
         this.id = id;
     }
@@ -33,5 +37,13 @@ public class EntertainmentOffer {
 
     public String getId() {
         return id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -39,7 +39,7 @@ public class CulinaryServicesDAO {
 
     private Optional<CulinarySelectionEntity> loadCulinarySelectionEntityForUser(ProviderUserEntity provider, String offerId) {
         String qlString = "SELECT f FROM CulinarySelectionEntity f JOIN f.provider p "
-                + "WHERE p.id = :provider_id " // tell JPA to load the FitnessServicesEntity for the given user
+                + "WHERE p.id = :provider_id " // tell JPA to load the CulinarySelectionEntity for the given user
                 + "AND f.offerId = :offer_id";
         TypedQuery<CulinarySelectionEntity> query = em.createQuery(qlString, CulinarySelectionEntity.class);
         query.setParameter("provider_id", provider.getId());
