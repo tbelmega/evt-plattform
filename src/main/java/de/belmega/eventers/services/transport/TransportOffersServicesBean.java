@@ -1,4 +1,4 @@
-package de.belmega.eventers.services.entertainment;
+package de.belmega.eventers.services.transport;
 
 import de.belmega.eventers.services.common.OfferSelection;
 import de.belmega.eventers.services.common.SelectionServicesDAO;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @ManagedBean
 @SessionScoped
-public class EntertainmentServicesBean {
+public class TransportOffersServicesBean {
 
     @Inject
     private SelectionServicesDAO selectionServicesDAO;
@@ -30,21 +30,23 @@ public class EntertainmentServicesBean {
         return userProfileBean.getProvider();
     }
 
+
     // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
     // Hence the class EntertainmentOfferSelection
-    private List<OfferSelection> usersEntertainmentOfferSelections = Arrays.asList(
-            new OfferSelection("singer", "Musiker/Sänger"),
-            new OfferSelection("illusionist", "Illusionist"),
-            new OfferSelection("host", "Entertainer/Moderator"),
-            new OfferSelection("painter", "Schnellzeichner"),
-            new OfferSelection("actor", "Schauspieler"));
+    private List<OfferSelection> usersTransportOfferSelections = Arrays.asList(
+            new OfferSelection("taxi-service", "Taxi-Service"),
+            new OfferSelection("limousine-service", "Limosinen-Service"),
+            new OfferSelection("velo-taxi", "Velotaxi-Service"),
+            new OfferSelection("bicycle-rentals", "Fahrradverleih"));
 
-    public List<OfferSelection> getUsersEntertainmentOfferSelections() {
-        return usersEntertainmentOfferSelections;
+
+
+    public void setUsersTransportOfferSelections(List<OfferSelection> allAvailableCulturalOffers) {
+        this.usersTransportOfferSelections = allAvailableCulturalOffers;
     }
 
-    public void setUsersEntertainmentOfferSelections(List<OfferSelection> usersEntertainmentOfferSelections) {
-        this.usersEntertainmentOfferSelections = usersEntertainmentOfferSelections;
+    public List<OfferSelection> getUsersTransportOfferSelections() {
+        return usersTransportOfferSelections;
     }
 
     public String getVisibility(OfferSelection offer) {
@@ -53,6 +55,6 @@ public class EntertainmentServicesBean {
 
 
     public void save() {
-        selectionServicesDAO.update(getProvider(), usersEntertainmentOfferSelections);
+        selectionServicesDAO.update(getProvider(), usersTransportOfferSelections);
     }
 }

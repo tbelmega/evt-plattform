@@ -11,23 +11,24 @@
 
                 <h4>Welche Transportleistungen können Sie erbringen?</h4>
 
-                <h:dataTable var="transportOffers"
-                             value="#{transportOffersServicesBean.allAvailableTransportOffers}">
+                <h:dataTable var="transportOffer"
+                             value="#{transportOffersServicesBean.usersTransportOfferSelections}">
                     <h:column>
-                        <h:selectBooleanCheckbox value="#{transportOffers.enabled}"
+                        <h:selectBooleanCheckbox value="#{transportOffer.enabled}"
                                                  onclick="$('.#{transportOffers.id}').toggleClass('invisible');"/>
                     </h:column>
                     <h:column>
-                        <h:outputText value="#{transportOffers.name}"/>
-                        <h:inputTextarea style="display: block; resize: none" styleClass="#{transportOffers.id} invisible"
+                        <h:outputText value="#{transportOffer.name}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{transportOffer.id} #{transportOffersServicesBean.getVisibility(transportOffer)}"
                                          cols="40" rows="5"
-                                         a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"/>
+                                         a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"
+                                         value="#{transportOffer.description}"/>
                     </h:column>
                 </h:dataTable>
 
 
                 <div class="buttons-hbox">
-                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save()}"/>
+                    <h:commandLink class="button button_green" value="Speichern" action="#{transportOffersServicesBean.save}"/>
                 </div>
             </div>
         </h:form>

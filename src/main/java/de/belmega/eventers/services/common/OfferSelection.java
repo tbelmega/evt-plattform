@@ -1,20 +1,13 @@
-package de.belmega.eventers.services.culinary;
+package de.belmega.eventers.services.common;
 
-
-/**
- * This class combines the information of a CulinarySelectionEntity and the related CulinaryOfferEntity for display purposes.
- */
-public class CulinaryOfferSelection {
-
-    private String id;
-
+public class OfferSelection {
     private String name;
-
     private boolean enabled;
-
+    private String id;
     private String description;
 
-    public CulinaryOfferSelection(String id, String name) {
+
+    public OfferSelection(String id, String name) {
         this.name = name;
         this.id = id;
     }
@@ -43,12 +36,11 @@ public class CulinaryOfferSelection {
         return id;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

@@ -1,12 +1,13 @@
 package de.belmega.eventers.services.culinary;
 
+import de.belmega.eventers.services.common.OfferSelection;
+import de.belmega.eventers.services.common.SelectionServicesDAO;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CulinaryOffersServicesBean {
 
 
     @Inject
-    private CulinaryServicesDAO culinaryServicesDAO;
+    private SelectionServicesDAO selectionServicesDAO;
 
     @Inject
     private UserProfileBean userProfileBean;
@@ -30,33 +31,31 @@ public class CulinaryOffersServicesBean {
         return userProfileBean.getProvider();
     }
 
-
     // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
     // Hence the class EntertainmentOfferSelection
-    private List<CulinaryOfferSelection> usersCulinaryOfferSelections = Arrays.asList(
-            new CulinaryOfferSelection("wine-tasting", "Weinverkostung"),
-            new CulinaryOfferSelection("whiskey-tasting", "Whiskey-Tasting"),
-            new CulinaryOfferSelection("cocktail-course", "Cocktail-Kurs"),
-            new CulinaryOfferSelection("restaurant", "Restaurant"),
-            new CulinaryOfferSelection("chocolate-tasting", "Schokoladenverkostung " +
+    private List<OfferSelection> usersCulinaryOfferSelections = Arrays.asList(
+            new OfferSelection("wine-tasting", "Weinverkostung"),
+            new OfferSelection("whiskey-tasting", "Whiskey-Tasting"),
+            new OfferSelection("cocktail-course", "Cocktail-Kurs"),
+            new OfferSelection("restaurant", "Restaurant"),
+            new OfferSelection("chocolate-tasting", "Schokoladenverkostung " +
                     "(idealerweise gilt das Angebot mit Wein- und Spirituosenverkostung)"),
-            new CulinaryOfferSelection("cheese-tasting", "Käseverkostung"));
+            new OfferSelection("cheese-tasting", "Käseverkostung"));
 
-    public void setUsersCulinaryOfferSelections(List<CulinaryOfferSelection> usersCulinaryOfferSelections) {
+    public void setUsersCulinaryOfferSelections(List<OfferSelection> usersCulinaryOfferSelections) {
         this.usersCulinaryOfferSelections = usersCulinaryOfferSelections;
     }
 
-    public List<CulinaryOfferSelection> getUsersCulinaryOfferSelections() {
+    public List<OfferSelection> getUsersCulinaryOfferSelections() {
         return usersCulinaryOfferSelections;
     }
 
-
     public void save() {
-        culinaryServicesDAO.update(getProvider(), usersCulinaryOfferSelections);
+        selectionServicesDAO.update(getProvider(), usersCulinaryOfferSelections);
     }
 
     // if offer is not enabled, hide the text area
-    public String getVisibility(CulinaryOfferSelection culinaryOfferSelection) {
+    public String getVisibility(OfferSelection culinaryOfferSelection) {
         return culinaryOfferSelection.isEnabled() ? "" : "invisible"; // returns either nothing or the CSS-Class "invisible"
     }
 }

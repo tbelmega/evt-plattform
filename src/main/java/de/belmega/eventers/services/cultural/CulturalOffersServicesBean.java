@@ -1,4 +1,4 @@
-package de.belmega.eventers.services.entertainment;
+package de.belmega.eventers.services.cultural;
 
 import de.belmega.eventers.services.common.OfferSelection;
 import de.belmega.eventers.services.common.SelectionServicesDAO;
@@ -17,10 +17,11 @@ import java.util.List;
  */
 @ManagedBean
 @SessionScoped
-public class EntertainmentServicesBean {
+public class CulturalOffersServicesBean {
 
     @Inject
     private SelectionServicesDAO selectionServicesDAO;
+
 
     @Inject
     private UserProfileBean userProfileBean;
@@ -32,27 +33,26 @@ public class EntertainmentServicesBean {
 
     // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
     // Hence the class EntertainmentOfferSelection
-    private List<OfferSelection> usersEntertainmentOfferSelections = Arrays.asList(
-            new OfferSelection("singer", "Musiker/Sänger"),
-            new OfferSelection("illusionist", "Illusionist"),
-            new OfferSelection("host", "Entertainer/Moderator"),
-            new OfferSelection("painter", "Schnellzeichner"),
-            new OfferSelection("actor", "Schauspieler"));
+    private List<OfferSelection> usersOfferSelectionSelections = Arrays.asList(
+            new OfferSelection("city-guide", "Stadtführung"),
+            new OfferSelection("museum-guide", "Museumsführung/Kulturführung"),
+            new OfferSelection("reader", "Vorleser/Schriftsteller"));
 
-    public List<OfferSelection> getUsersEntertainmentOfferSelections() {
-        return usersEntertainmentOfferSelections;
+    public void setUsersOfferSelectionSelections(List<OfferSelection> usersOfferSelectionSelections) {
+        this.usersOfferSelectionSelections = usersOfferSelectionSelections;
     }
 
-    public void setUsersEntertainmentOfferSelections(List<OfferSelection> usersEntertainmentOfferSelections) {
-        this.usersEntertainmentOfferSelections = usersEntertainmentOfferSelections;
+    public List<OfferSelection> getUsersOfferSelectionSelections() {
+        return usersOfferSelectionSelections;
     }
 
     public String getVisibility(OfferSelection offer) {
         return offer.isEnabled() ? "" : "invisible"; // returns either nothing or the CSS-Class "invisible"
     }
 
-
     public void save() {
-        selectionServicesDAO.update(getProvider(), usersEntertainmentOfferSelections);
+        selectionServicesDAO.update(getProvider(), usersOfferSelectionSelections);
     }
+
+
 }

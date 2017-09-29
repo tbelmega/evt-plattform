@@ -1,21 +1,17 @@
-package de.belmega.eventers.services.culinary;
+package de.belmega.eventers.services.common;
 
 import de.belmega.eventers.user.ProviderUserEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
-public class CulinarySelectionEntity {
-
+public class SelectionEntity {
 
     @Id
     @GeneratedValue
     private long id;
 
-    @OneToOne // every user has only one CulinarySelectionEntity associated with it.
+    @ManyToOne
     private ProviderUserEntity provider;
 
     private String offerId;
@@ -24,14 +20,14 @@ public class CulinarySelectionEntity {
 
     private String description;
 
-    public CulinarySelectionEntity(ProviderUserEntity provider, String offerId, boolean enabled, String description) {
+    public SelectionEntity(ProviderUserEntity provider, String offerId, boolean enabled, String description) {
         this.provider = provider;
         this.offerId = offerId;
         this.enabled = enabled;
         this.description = description;
     }
 
-    public CulinarySelectionEntity() {
+    public SelectionEntity() {
     }
 
     public long getId() {
