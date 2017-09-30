@@ -15,7 +15,7 @@
                              value="#{transportOffersServicesBean.usersTransportOfferSelections}">
                     <h:column>
                         <h:selectBooleanCheckbox value="#{transportOffer.enabled}"
-                                                 onclick="$('.#{transportOffers.serviceId}').toggleClass('invisible');"/>
+                                                 onclick="$('.#{transportOffer.serviceId}').toggleClass('invisible');"/>
                     </h:column>
                     <h:column>
                         <h:outputText value="#{transportOffer.serviceName}"/>

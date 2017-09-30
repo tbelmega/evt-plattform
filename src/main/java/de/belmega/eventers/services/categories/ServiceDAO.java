@@ -16,12 +16,12 @@ public class ServiceDAO {
         em.persist(massage);
     }
 
-    public List<ServiceEntity> findServicesByCategory(String categoryName) {
+    public List<ServiceEntity> findServicesByCategory(String categoryId) {
 
-        String qlString = "SELECT s FROM ServiceEntity s JOIN s.category c WHERE c.categoryName = :category_name";
+        String qlString = "SELECT s FROM ServiceEntity s JOIN s.category c WHERE c.id = :category_id";
         TypedQuery<ServiceEntity> query =
                 em.createQuery(qlString, ServiceEntity.class);
 
-        return query.setParameter("category_name", categoryName).getResultList();
+        return query.setParameter("category_id", categoryId).getResultList();
     }
 }

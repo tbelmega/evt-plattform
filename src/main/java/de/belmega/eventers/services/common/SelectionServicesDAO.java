@@ -64,21 +64,21 @@ public class SelectionServicesDAO {
     }
 
     /**
-     * Get the OfferSelection values for the given user and category.
+     * Get the OfferSelection values for the given user and categoryId.
      * Represents what the user selected / entered and saved to database.
      */
-    public List<OfferSelection> findSelectionsForUser(ProviderUserEntity provider, ServiceCategoryId category) {
+    public List<OfferSelection> findSelectionsForUser(ProviderUserEntity provider, ServiceCategoryId categoryId) {
 
-        List<ServiceEntity> servicesByCategory = serviceDAO.findServicesByCategory(category.name());
+        List<ServiceEntity> servicesByCategory = serviceDAO.findServicesByCategory(categoryId.name());
 
         List<OfferSelection> selections = new ArrayList<>();
         for (ServiceEntity service : servicesByCategory) {
-            SelectionEntity selectionEntity = getSelectionEntity(provider, category, service);
+            SelectionEntity selectionEntity = getSelectionEntity(provider, categoryId, service);
 
             // Combine loaded data of ServiceEntity and SelectionEntity to OfferSelection object
             selections.add(
                     new OfferSelection(
-                            category.name(),
+                            categoryId.name(),
                             service.getServiceName(),
                             service.getServiceName(),
                             selectionEntity.isEnabled(),
