@@ -7,12 +7,13 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Transactional
 public class UserDAO {
 
     @PersistenceContext
     EntityManager em;
 
-    @Transactional
+
     public void persist(ProviderUserEntity entity) {
         em.persist(entity);
     }
@@ -35,5 +36,9 @@ public class UserDAO {
             return Optional.empty();
         }
 
+    }
+
+    public void update(ProviderUserEntity provider) {
+        em.merge(provider);
     }
 }

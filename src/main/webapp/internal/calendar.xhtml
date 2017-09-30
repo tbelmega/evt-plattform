@@ -11,7 +11,7 @@
                 <p:growl id="messages" showDetail="true"/>
 
                 <h:panelGrid columnClasses="value">
-                    <p:schedule id="schedule" value="#{userProfileBean.eventModel}" widgetVar="myschedule"
+                    <p:schedule id="schedule" value="#{calendarBean.eventModel}" widgetVar="myschedule"
                                 locale="de" ignoreTimezone="false">
 
                         <p:ajax event="dateSelect" listener="#{userProfileBean.onDateSelect}" update="eventDetails"
