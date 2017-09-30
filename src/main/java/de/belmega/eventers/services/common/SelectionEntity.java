@@ -3,6 +3,7 @@ package de.belmega.eventers.services.common;
 import de.belmega.eventers.user.ProviderUserEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class SelectionEntity {
@@ -14,19 +15,22 @@ public class SelectionEntity {
     @ManyToOne
     private ProviderUserEntity provider;
 
+    @Column(nullable = false)
     private String offerId;
 
     private boolean enabled;
 
     private String description;
 
+    @Column(nullable = false)
     private String categoryName;
 
-    public SelectionEntity(ProviderUserEntity provider, String offerId, boolean enabled, String description, String categoryName) {
+    public SelectionEntity(ProviderUserEntity provider, String offerId, boolean enabled, String description, String categoryId) {
         this.provider = provider;
         this.offerId = offerId;
         this.enabled = enabled;
         this.description = description;
+        this.categoryName = categoryId;
     }
 
     public SelectionEntity() {
