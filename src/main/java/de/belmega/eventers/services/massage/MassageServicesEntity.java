@@ -2,8 +2,10 @@ package de.belmega.eventers.services.massage;
 
 import de.belmega.eventers.user.ProviderUserEntity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * Created by majab on 29.09.2017.
@@ -18,9 +20,6 @@ public class MassageServicesEntity {
     @OneToOne // every user has only one FitnessServicesEntity associated with it.
     ProviderUserEntity provider;
 
-    @ElementCollection(targetClass = String.class)
-    List<String> focusByUser;
-
     boolean massageTable;
 
     boolean chair;
@@ -28,9 +27,8 @@ public class MassageServicesEntity {
 
 
 
-    public MassageServicesEntity(ProviderUserEntity provider, List<String> focusByUser, boolean massageTable, boolean chair) {
+    public MassageServicesEntity(ProviderUserEntity provider, boolean massageTable, boolean chair) {
         this.provider = provider;
-        this.focusByUser = focusByUser;
         this.massageTable = massageTable;
         this.chair = chair;
     }
@@ -52,14 +50,6 @@ public class MassageServicesEntity {
 
     public void setProvider(ProviderUserEntity provider) {
         this.provider = provider;
-    }
-
-    public List<String> getFocusByUser() {
-        return focusByUser;
-    }
-
-    public void setFocusByUser(List<String> focusByUser) {
-        this.focusByUser = focusByUser;
     }
 
     public boolean isMassageTable() {

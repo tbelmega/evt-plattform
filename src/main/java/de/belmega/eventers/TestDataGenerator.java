@@ -49,6 +49,8 @@ public class TestDataGenerator {
     private void generateProvidedServices() {
         CategoryEntity wellness = new CategoryEntity(ServiceCategoryId.WELLNESS.name(), "Wellness");
         categoryDAO.persist(wellness);
+        CategoryEntity massage = new CategoryEntity(ServiceCategoryId.MASSAGE.name(), "Massage");
+        categoryDAO.persist(massage);
         CategoryEntity bewegung = new CategoryEntity(ServiceCategoryId.SPORTS.name(), "Bewegung");
         categoryDAO.persist(bewegung);
         CategoryEntity entertainment = new CategoryEntity(ServiceCategoryId.ENTERTAINMENT.name(), "Entertainment");
@@ -65,6 +67,10 @@ public class TestDataGenerator {
         createServiceEntity("nails", wellness, "Nageldesign");
         createServiceEntity("make-up", wellness, "Make-up Artist");
         createServiceEntity("barber", wellness, "Friseur");
+
+        createServiceEntity("body", massage, "Ganzkörpermassage");
+        createServiceEntity("medical", massage, "Medizinische Massage");
+        createServiceEntity("wellness-massage", massage, "Wellnessmassage");
 
         createServiceEntity("personal-coach", bewegung, "Fitnesstrainer / Personal Coach");
         createServiceEntity("hiking-guide", bewegung, "Wanderführer");
@@ -97,8 +103,8 @@ public class TestDataGenerator {
 
     }
 
-    private void createServiceEntity(String serviceId, CategoryEntity wellness, String serviceName) {
-        ServiceEntity massage = new ServiceEntity(serviceId, wellness, serviceName);
+    private void createServiceEntity(String serviceId, CategoryEntity categoryEntity, String serviceName) {
+        ServiceEntity massage = new ServiceEntity(serviceId, categoryEntity, serviceName);
         serviceDAO.persist(massage);
     }
 

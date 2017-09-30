@@ -1,7 +1,7 @@
 package de.belmega.eventers.services.common;
 
 public class OfferSelection {
-    private String categoryName;
+    private String categoryId;
 
     private String serviceId;
     private String serviceName;
@@ -9,15 +9,8 @@ public class OfferSelection {
     private boolean enabled;
     private String description;
 
-
-    public OfferSelection(String serviceId, String serviceName, String categoryName) {
-        this.serviceName = serviceName;
-        this.serviceId = serviceId;
-        this.categoryName = categoryName;
-    }
-
-    public OfferSelection(String categoryName, String serviceId, String serviceName, boolean enabled, String description) {
-        this.categoryName = categoryName;
+    public OfferSelection(String categoryId, String serviceId, String serviceName, boolean enabled, String description) {
+        this.categoryId = categoryId;
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.enabled = enabled;
@@ -56,11 +49,11 @@ public class OfferSelection {
         this.description = description;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 }

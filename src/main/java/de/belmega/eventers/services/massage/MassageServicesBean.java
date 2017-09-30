@@ -1,5 +1,8 @@
 package de.belmega.eventers.services.massage;
 
+import de.belmega.eventers.services.categories.ServiceCategoryId;
+import de.belmega.eventers.services.common.OfferSelection;
+import de.belmega.eventers.services.common.SelectionServicesDAO;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
 
@@ -23,27 +26,24 @@ public class MassageServicesBean {
     @Inject
     MassageServicesDAO massageServicesDAO;
 
-    private List<String> allAvailableFocuses = Arrays.asList("Ganzkörpermassage", "Medizinische Massage", "Wellnessmassage");
 
-    // User selection lists:
-    private List<String> focusByUser = new ArrayList<>();
-    private boolean selectionIfMassageTableIsAvailable;
-    private boolean selectionIfMassageChairIsAvailable;
+    @Inject
+    private SelectionServicesDAO selectionServicesDAO;
 
-    public void setFocusByUser(List<String> focusByUser) {
-        this.focusByUser = focusByUser;
+    private List<OfferSelection> usersMassageOfferSelections;
+
+    private Boolean selectionIfMassageTableIsAvailable;
+    private Boolean selectionIfMassageChairIsAvailable;
+
+    public List<OfferSelection> getUsersMassageOfferSelections() {
+        if (usersMassageOfferSelections == null) usersMassageOfferSelections =
+                selectionServicesDAO.findSelectionsForUser(getProvider(), ServiceCategoryId.MASSAGE);
+
+        return usersMassageOfferSelections;
     }
 
-    public List<String> getFocusByUser() {
-        return focusByUser;
-    }
-
-    public void setAllAvailableFocuses(List<String> allAvailableFocuses) {
-        this.allAvailableFocuses = allAvailableFocuses;
-    }
-
-    public List<String> getAllAvailableFocuses() {
-        return allAvailableFocuses;
+    public void setUsersMassageOfferSelections(List<OfferSelection> usersMassageOfferSelections) {
+        this.usersMassageOfferSelections = usersMassageOfferSelections;
     }
 
     public UserProfileBean getUserProfileBean() {
@@ -52,14 +52,6 @@ public class MassageServicesBean {
 
     public void setUserProfileBean(UserProfileBean userProfileBean) {
         this.userProfileBean = userProfileBean;
-    }
-
-    public MassageServicesDAO getMassageServicesDAO() {
-        return massageServicesDAO;
-    }
-
-    public void setMassageServicesDAO(MassageServicesDAO massageServicesDAO) {
-        this.massageServicesDAO = massageServicesDAO;
     }
 
     public boolean isSelectionIfMassageTableIsAvailable() {
@@ -79,11 +71,8 @@ public class MassageServicesBean {
     }
 
     public String save() {
-        // if user didn't select anything (= focusByUser is null), set empty list to prevent NullPointer
-        if (focusByUser == null) focusByUser = Collections.emptyList();
-
-        System.out.println(focusByUser + " " + selectionIfMassageTableIsAvailable + " " + selectionIfMassageChairIsAvailable);
-        massageServicesDAO.update(getProvider(), focusByUser, selectionIfMassageTableIsAvailable, selectionIfMassageChairIsAvailable);
+        selectionServicesDAO.update(getProvider(), usersMassageOfferSelections);
+        massageServicesDAO.update(getProvider(), selectionIfMassageTableIsAvailable, selectionIfMassageChairIsAvailable);
         return "";
     }
 

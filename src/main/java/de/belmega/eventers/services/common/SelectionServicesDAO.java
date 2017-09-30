@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,7 @@ public class SelectionServicesDAO {
                 updateEntity(selection, entertainmentSelectionEntity.get());
             } else {
                 //if no, create a new entity and store in the database
-                createSelectionEntity(provider, selection.getServiceId(), selection.isEnabled(), selection.getDescription(), selection.getCategoryName());
+                createSelectionEntity(provider, selection.getServiceId(), selection.isEnabled(), selection.getDescription(), selection.getCategoryId());
             }
         }
     }
@@ -60,7 +59,7 @@ public class SelectionServicesDAO {
     private void updateEntity(OfferSelection selection, SelectionEntity entity) {
         entity.setEnabled(selection.isEnabled());
         entity.setDescription(selection.getDescription());
-        entity.setCategoryName(selection.getCategoryName());
+        entity.setCategoryName(selection.getCategoryId());
     }
 
     /**
@@ -91,19 +90,19 @@ public class SelectionServicesDAO {
     }
 
     private SelectionEntity getSelectionEntity(ProviderUserEntity provider, ServiceCategoryId category, ServiceEntity service) {
-        String serviceName = service.getServiceName();
-        Optional<SelectionEntity> selectionEntity = loadSelectionEntityForUser(provider, serviceName);
+        String serviceId = service.getServiceId();
+        Optional<SelectionEntity> selectionEntity = loadSelectionEntityForUser(provider, serviceId);
 
         if (selectionEntity.isPresent())
             return selectionEntity.get();
         else
-            return createSelectionEntity(provider, serviceName, false, "", category.name());
+            return createSelectionEntity(provider, serviceId, false, "", category.name());
     }
 
-    private SelectionEntity createSelectionEntity(ProviderUserEntity provider, String serviceName, boolean enabled, String description, String name) {
+    private SelectionEntity createSelectionEntity(ProviderUserEntity provider, String serviceId, boolean enabled, String description, String name) {
         SelectionEntity entity = new SelectionEntity(
                 provider,
-                serviceName,
+                serviceId,
                 enabled,
                 description,
                 name
