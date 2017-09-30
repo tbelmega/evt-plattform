@@ -1,5 +1,6 @@
 package de.belmega.eventers.services.entertainment;
 
+import de.belmega.eventers.services.categories.ServiceCategoryId;
 import de.belmega.eventers.services.common.OfferSelection;
 import de.belmega.eventers.services.common.SelectionServicesDAO;
 import de.belmega.eventers.user.ProviderUserEntity;
@@ -30,16 +31,13 @@ public class EntertainmentServicesBean {
         return userProfileBean.getProvider();
     }
 
-    // Since the h:datatable wants to access the .name and .id and .enabled of each list element, it needs to be a full object instead of as string.
-    // Hence the class EntertainmentOfferSelection
-    private List<OfferSelection> usersEntertainmentOfferSelections = Arrays.asList(
-            new OfferSelection("singer", "Musiker/Sänger", "Entertainment"),
-            new OfferSelection("illusionist", "Illusionist", "Entertainment"),
-            new OfferSelection("host", "Entertainer/Moderator", "Entertainment"),
-            new OfferSelection("painter", "Schnellzeichner", "Entertainment"),
-            new OfferSelection("actor", "Schauspieler", "Entertainment"));
+    private List<OfferSelection> usersEntertainmentOfferSelections;
 
     public List<OfferSelection> getUsersEntertainmentOfferSelections() {
+
+        if (usersEntertainmentOfferSelections == null) usersEntertainmentOfferSelections =
+                selectionServicesDAO.findSelectionsForUser(getProvider(), ServiceCategoryId.CULTURE);
+
         return usersEntertainmentOfferSelections;
     }
 

@@ -4,6 +4,10 @@
 * --Dienstleisterseite: Checkboxen statt Multiselect--
 * Sportutensilien: Datensätze aus DB
 * Testen auf Android
+* Styling: Eingabefelder breiter, Dropdowns gleichbreit
+* Ggf statt Embedded Formular externes Formular
+* Dienleisterseiten in eine. Sichtbarkeit nach Rolle
+
 
 
 ## Rückfragen an Wilfling:
