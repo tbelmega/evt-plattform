@@ -5,6 +5,7 @@ import de.belmega.eventers.auth.LoginBean;
 import de.belmega.eventers.scheduling.EventProperties;
 import de.belmega.eventers.scheduling.ScheduleEventEntity;
 import de.belmega.eventers.scheduling.ScheduleEventService;
+import de.belmega.eventers.services.categories.ServiceCategoryId;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
@@ -155,5 +156,40 @@ public class UserProfileBean implements Serializable {
 
     public Date getRepeatUntil() {
         return repeatUntil;
+    }
+
+    public boolean isInRoleFitness() {
+        String fitness = ServiceCategoryId.SPORTS.name();
+        return getProvider().getCategoryIds().contains(fitness);
+    }
+
+    public boolean isInRoleCulinaric() {
+        String fitness = ServiceCategoryId.CULINARIC.name();
+        return getProvider().getCategoryIds().contains(fitness);
+    }
+
+    public boolean isInRoleCulture() {
+        String fitness = ServiceCategoryId.CULTURE.name();
+        return getProvider().getCategoryIds().contains(fitness);
+    }
+
+    public boolean isInRoleWellness() {
+        String fitness = ServiceCategoryId.WELLNESS.name();
+        return getProvider().getCategoryIds().contains(fitness);
+    }
+
+    public boolean isInRoleMassage() {
+        String fitness = ServiceCategoryId.MASSAGE.name();
+        return getProvider().getCategoryIds().contains(fitness);
+    }
+
+    public boolean isInRoleEntertainment() {
+        String fitness = ServiceCategoryId.ENTERTAINMENT.name();
+        return getProvider().getCategoryIds().contains(fitness);
+    }
+
+    public boolean isInRoleTransportation() {
+        String fitness = ServiceCategoryId.TRANSPORTATION.name();
+        return getProvider().getCategoryIds().contains(fitness);
     }
 }

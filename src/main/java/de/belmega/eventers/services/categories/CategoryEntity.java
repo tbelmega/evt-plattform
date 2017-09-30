@@ -27,8 +27,7 @@ public class CategoryEntity {
         this.categoryName = categoryName;
     }
 
-    @Override
-    public String toString() {
-        return categoryName;
+    public String getId() {
+        return id;
     }
 }

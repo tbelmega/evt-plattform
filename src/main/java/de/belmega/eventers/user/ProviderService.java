@@ -21,22 +21,16 @@ public class ProviderService {
         Optional<ProviderUserEntity> byEmailAdress = userDAO.findByEmailAdress(provider.getEmailadress());
         if (byEmailAdress.isPresent()) throw new MailadressAlreadyInUse();
 
-        ProviderUserEntity entity = new ProviderUserEntity();
-        entity.setId(UserID.generateId());
+        provider.setId(UserID.generateId());
 
         byte[] salt = authService.generateSalt();
-        entity.setSalt(salt);
+        provider.setSalt(salt);
 
-        entity.setEncryptedPassword(authService.encrypt(provider.getPasswordPlainText().toCharArray(), salt));
+        provider.setEncryptedPassword(authService.encrypt(provider.getPasswordPlainText().toCharArray(), salt));
 
-        entity.setFirstname(provider.getFirstname());
-        entity.setLastname(provider.getLastname());
-        entity.setEmailadress(provider.getEmailadress());
-        entity.setGreeting(provider.getGreeting());
+        userDAO.persist(provider);
 
-        userDAO.persist(entity);
-
-        return entity.getId();
+        return provider.getId();
     }
 
     public Optional<ProviderUserEntity> findById(UserID userId) {

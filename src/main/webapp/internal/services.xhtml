@@ -7,7 +7,7 @@
 
         <h:form>
 
-            <h:panelGroup layout="block" rendered="#{false}">
+            <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleFitness}">
                 <h:commandLink class="toggle" onclick="$('.fitness-section').toggleClass('invisible'); return false;">
                     <h3 class="slidedown-heading">Fitness</h3></h:commandLink>
                 <div class="fitness-section service-section">
@@ -35,7 +35,7 @@
             </h:panelGroup>
 
 
-            <h:panelGroup layout="block" rendered="#{false}">
+            <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleWellness}">
                 <h:commandLink class="toggle" onclick="$('.cosmetic-section').toggleClass('invisible'); return false;">
                     <h3 class="slidedown-heading">Kosmetik</h3></h:commandLink>
 
@@ -55,7 +55,7 @@
             </h:panelGroup>
 
 
-            <h:panelGroup layout="block" rendered="#{false}">
+            <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleCulinaric}">
                 <h:commandLink class="toggle" onclick="$('.culinary-section').toggleClass('invisible'); return false;">
                     <h3 class="slidedown-heading">Kulinarisches</h3></h:commandLink>
                 <div class="culinary-section service-section">
@@ -86,7 +86,7 @@
             </h:panelGroup>
 
 
-            <h:panelGroup layout="block" rendered="#{false}">
+            <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleCulture}">
                 <h:commandLink class="toggle" onclick="$('.cultural-section').toggleClass('invisible'); return false;">
                     <h3 class="slidedown-heading">Kultur</h3></h:commandLink>
                 <div class="cultural-section service-section">
@@ -118,7 +118,7 @@
             </h:panelGroup>
 
 
-            <h:panelGroup layout="block" rendered="#{true}">
+            <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleEntertainment}">
 
                 <h:commandLink class="toggle"
                                onclick="$('.entertainment-section').toggleClass('invisible'); return false;">
@@ -152,7 +152,7 @@
             </h:panelGroup>
 
 
-            <h:panelGroup layout="block" rendered="#{true}">
+            <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleMassage}">
                 <h:commandLink class="toggle" onclick="$('.massage-section').toggleClass('invisible'); return false;">
                     <h3 class="slidedown-heading">Massage</h3></h:commandLink>
                 <div class="massage-section service-section">
@@ -194,7 +194,7 @@
             </h:panelGroup>
 
 
-            <h:panelGroup layout="block" rendered="#{false}">
+            <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleTransportation}">
                 <h:commandLink class="toggle" onclick="$('.transport-section').toggleClass('invisible'); return false;">
                     <h3 class="slidedown-heading">Transport</h3></h:commandLink>
                 <div class="transport-section service-section">

@@ -10,6 +10,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,21 +114,52 @@ public class TestDataGenerator {
     }
 
     private void generateTestData() throws MailadressAlreadyInUse {
-        Optional<ProviderUserEntity> testUser = providerService.findById(new UserID("1"));
-        if (testUser.isPresent()) return;
 
-        registerUser("1", "Belmega", "Thiemo", "foo", "foo");
-        registerUser("2", "Wilfling", "Jochen", "info@coorgeist.de", "eventers789!");
+        try {
+            registerUser("1", "Belmega", "Thiemo", "foo", "foo",
+                    Arrays.asList(ServiceCategoryId.values()));
+            registerUser("2", "Wilfling", "Jochen", "info@coorgeist.de", "eventers789!",
+                    Arrays.asList(ServiceCategoryId.values()));
+
+            registerUser("3", "3", "3", "3", "3",
+                    Arrays.asList(ServiceCategoryId.CULINARIC));
+
+            registerUser("4", "4", "4", "4", "4",
+                    Arrays.asList(ServiceCategoryId.CULTURE));
+
+            registerUser("5", "5", "5", "5", "5",
+                    Arrays.asList(ServiceCategoryId.ENTERTAINMENT));
+
+            registerUser("6", "6", "6", "6", "6",
+                    Arrays.asList(ServiceCategoryId.MASSAGE));
+
+            registerUser("7", "7", "7", "7", "7",
+                    Arrays.asList(ServiceCategoryId.SPORTS));
+
+            registerUser("8", "8", "8", "8", "8",
+                    Arrays.asList(ServiceCategoryId.TRANSPORTATION));
+
+            registerUser("9", "9", "9", "9", "9",
+                    Arrays.asList(ServiceCategoryId.WELLNESS));
+
+        } catch (MailadressAlreadyInUse e) {
+            LOG.warn("Test users already existing.");
+        }
 
         LOG.warn("Test data injection complete.");
     }
 
-    private void registerUser(String id, String surname, String firstname, String emailadress, String password) throws MailadressAlreadyInUse {
+    private void registerUser(String id, String surname, String firstname, String emailadress, String password, List<ServiceCategoryId> categories) throws MailadressAlreadyInUse {
         ProviderUserEntity user = new ProviderUserEntity();
         user.setLastname(surname);
         user.setFirstname(firstname);
         user.setEmailadress(emailadress);
         user.setPasswordPlainText(password);
+
+        HashSet<String> categoryIds = new HashSet<>();
+        for (ServiceCategoryId categoryId: categories)
+            categoryIds.add(categoryId.name());
+        user.setCategoryIds(categoryIds);
 
         providerService.registerNewProvider(user);
     }

@@ -23,7 +23,8 @@ public class UserDAO {
     }
 
     public Optional<ProviderUserEntity> findByEmailAdress(String emailAdress) {
-        String qlString = "SELECT u FROM ProviderUserEntity u WHERE u.emailadress = :emailadress";
+        String qlString = "SELECT u FROM ProviderUserEntity u LEFT OUTER JOIN FETCH u.categoryIds " +
+                "WHERE u.emailadress = :emailadress";
         TypedQuery<ProviderUserEntity> query =
                 em.createQuery(qlString, ProviderUserEntity.class);
 

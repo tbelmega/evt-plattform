@@ -21,7 +21,9 @@ import javax.inject.Named;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Named
@@ -42,7 +44,6 @@ public class RegisterProviderBean implements Serializable {
     String registeredSite;
 
     private ProviderUserEntity provider;
-    private List<CategoryEntity> allAvailableCategories;
     private String category;
     private Object service;
 
@@ -57,7 +58,9 @@ public class RegisterProviderBean implements Serializable {
     }
 
     public String register() {
-
+        Set<String> categories = new HashSet<>();
+        categories.add(category);
+        provider.setCategoryIds(categories);
         try {
             UserID serviceProviderID = providerService.registerNewProvider(provider);
             return registeredSite + "?faces-redirect=true";

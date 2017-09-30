@@ -7,6 +7,7 @@ import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by majab on 26.09.2017.
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class CulturalOffersServicesBean {
 
     @Inject

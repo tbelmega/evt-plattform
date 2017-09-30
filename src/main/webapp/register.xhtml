@@ -12,7 +12,7 @@
                              class="width-medium">
                 <f:ajax execute="@this" listener="#{registerProviderBean.categorySelected}" render="selectService" />
                 <f:selectItem itemLabel="Bitte auswählen..."/>
-                <f:selectItems value="#{registerProviderBean.allAvailableCategories}"/>
+                <f:selectItems value="#{registerProviderBean.allAvailableCategories}" var="cat" itemLabel="#{cat.categoryName}" itemValue="#{cat.id}"/>
             </h:selectOneMenu>
             <h:selectOneMenu value="#{registerProviderBean.service}" id="selectService"
                              class="width-medium">

@@ -3,6 +3,7 @@ package de.belmega.eventers.user;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ProviderUserEntity {
@@ -33,12 +34,8 @@ public class ProviderUserEntity {
     private String mobility;
     private String hourlyRate;
 
-    @Transient // TODO add relational tables later
-    private List<String> services;
-    @Transient // TODO add relational tables later
-    private List<String> locations;
-    @Transient // TODO add relational tables later
-    private List<String> equipments;
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    private Set<String> categoryIds;
 
 
     public UserID getId() {
@@ -204,27 +201,11 @@ public class ProviderUserEntity {
         this.hourlyRate = hourlyRate;
     }
 
-    public List<String> getServices() {
-        return services;
+    public Set<String> getCategoryIds() {
+        return categoryIds;
     }
 
-    public void setServices(List<String> services) {
-        this.services = services;
-    }
-
-    public List<String> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(List<String> locations) {
-        this.locations = locations;
-    }
-
-    public List<String> getEquipments() {
-        return equipments;
-    }
-
-    public void setEquipments(List<String> equipments) {
-        this.equipments = equipments;
+    public void setCategoryIds(Set<String> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 }

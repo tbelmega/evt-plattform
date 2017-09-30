@@ -7,13 +7,14 @@ import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import java.util.List;
 
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class TransportOffersServicesBean {
 
     @Inject
