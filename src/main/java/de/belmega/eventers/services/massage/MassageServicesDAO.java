@@ -19,30 +19,18 @@ public class MassageServicesDAO {
     EntityManager em;
 
 
-    public void update(ProviderUserEntity provider, boolean massageTable, boolean chair) {
-        // Check if there is already an MassageServicesEntity for this user in the database
-        Optional<MassageServicesEntity> massageServicesEntity = loadMassageServicesEntityForUser(provider);
-
-        if (massageServicesEntity.isPresent()) {
-            // if yes, update that entity. JPA will store that to the database
-            updateEntity(massageTable, chair, massageServicesEntity.get());
-        } else {
-            //if no, create a new entity and store in the database
-            createEntity(provider, massageTable, chair);
-        }
+    public void update(ProviderUserEntity provider, MassageServicesEntity entity) {
+        em.merge(entity);
     }
 
-    private void createEntity(ProviderUserEntity provider, boolean massageTable, boolean chair) {
-        MassageServicesEntity entity = new MassageServicesEntity(provider, massageTable, chair);
+    private MassageServicesEntity createEntity(ProviderUserEntity provider) {
+        MassageServicesEntity entity = new MassageServicesEntity(provider, null, null);
         em.persist(entity);
+        return entity;
     }
 
-    private void updateEntity(boolean massageTable, boolean chair, MassageServicesEntity entity) {
-        entity.setChair(chair);
-        entity.setMassageTable(massageTable);
-    }
 
-    public Optional<MassageServicesEntity> loadMassageServicesEntityForUser(ProviderUserEntity provider) {
+    public MassageServicesEntity loadMassageServicesEntityForUser(ProviderUserEntity provider) {
         // Prepare database query
         String qlString = "SELECT f FROM MassageServicesEntity f JOIN f.provider p "
                 + "WHERE p.id = :provider_id"; // tell JPA to load the MassageServicesEntity for the given user
@@ -53,7 +41,7 @@ public class MassageServicesDAO {
         List<MassageServicesEntity> resultList = query.getResultList();
 
         // Return either an empty value or the found result
-        if (resultList.isEmpty()) return Optional.empty();
-        else return Optional.of(resultList.get(0));
+        if (resultList.isEmpty()) return createEntity(provider);
+        else return resultList.get(0);
     }
 }

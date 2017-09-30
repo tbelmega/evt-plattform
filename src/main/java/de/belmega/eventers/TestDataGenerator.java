@@ -10,6 +10,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class TestDataGenerator {
@@ -32,7 +34,8 @@ public class TestDataGenerator {
 
 
     public void setupTestData(@Observes @Initialized(ApplicationScoped.class) Object init) throws MailadressAlreadyInUse {
-        generateProvidedServices();
+        List<CategoryEntity> all = categoryDAO.findAll();
+        if (all.isEmpty()) generateProvidedServices();
 
         if (testEnvironment) {
             LOG.warn("Test environment detected. Generating test data.");
@@ -109,6 +112,9 @@ public class TestDataGenerator {
     }
 
     private void generateTestData() throws MailadressAlreadyInUse {
+        Optional<ProviderUserEntity> testUser = providerService.findById(new UserID("1"));
+        if (testUser.isPresent()) return;
+
         registerUser("1", "Belmega", "Thiemo", "foo", "foo");
         registerUser("2", "Wilfling", "Jochen", "info@coorgeist.de", "eventers789!");
 

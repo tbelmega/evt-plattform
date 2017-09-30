@@ -20,14 +20,11 @@ public class MassageServicesEntity {
     @OneToOne // every user has only one FitnessServicesEntity associated with it.
     ProviderUserEntity provider;
 
-    boolean massageTable;
+    private Boolean massageTable;
 
-    boolean chair;
+    private Boolean chair;
 
-
-
-
-    public MassageServicesEntity(ProviderUserEntity provider, boolean massageTable, boolean chair) {
+    public MassageServicesEntity(ProviderUserEntity provider, Boolean massageTable, Boolean chair) {
         this.provider = provider;
         this.massageTable = massageTable;
         this.chair = chair;
@@ -52,19 +49,19 @@ public class MassageServicesEntity {
         this.provider = provider;
     }
 
-    public boolean isMassageTable() {
+    public Boolean getMassageTable() {
         return massageTable;
     }
 
-    public void setMassageTable(boolean massageTable) {
+    public void setMassageTable(Boolean massageTable) {
         this.massageTable = massageTable;
     }
 
-    public boolean isChair() {
+    public Boolean getChair() {
         return chair;
     }
 
-    public void setChair(boolean chair) {
+    public void setChair(Boolean chair) {
         this.chair = chair;
     }
 }

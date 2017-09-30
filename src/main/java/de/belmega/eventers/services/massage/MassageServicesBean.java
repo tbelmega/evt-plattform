@@ -32,8 +32,8 @@ public class MassageServicesBean {
 
     private List<OfferSelection> usersMassageOfferSelections;
 
-    private Boolean selectionIfMassageTableIsAvailable;
-    private Boolean selectionIfMassageChairIsAvailable;
+    private MassageServicesEntity data;
+
 
     public List<OfferSelection> getUsersMassageOfferSelections() {
         if (usersMassageOfferSelections == null) usersMassageOfferSelections =
@@ -50,29 +50,19 @@ public class MassageServicesBean {
         return userProfileBean;
     }
 
-    public void setUserProfileBean(UserProfileBean userProfileBean) {
-        this.userProfileBean = userProfileBean;
+    public MassageServicesEntity getData() {
+        if (data == null)
+            data = massageServicesDAO.loadMassageServicesEntityForUser(getProvider());
+        return data;
     }
 
-    public boolean isSelectionIfMassageTableIsAvailable() {
-        return selectionIfMassageTableIsAvailable;
-    }
-
-    public void setSelectionIfMassageTableIsAvailable(boolean selectionIfMassageTableIsAvailable) {
-        this.selectionIfMassageTableIsAvailable = selectionIfMassageTableIsAvailable;
-    }
-
-    public boolean isSelectionIfMassageChairIsAvailable() {
-        return selectionIfMassageChairIsAvailable;
-    }
-
-    public void setSelectionIfMassageChairIsAvailable(boolean selectionIfMassageChairIsAvailable) {
-        this.selectionIfMassageChairIsAvailable = selectionIfMassageChairIsAvailable;
+    public void setData(MassageServicesEntity data) {
+        this.data = data;
     }
 
     public String save() {
         selectionServicesDAO.update(getProvider(), usersMassageOfferSelections);
-        massageServicesDAO.update(getProvider(), selectionIfMassageTableIsAvailable, selectionIfMassageChairIsAvailable);
+        massageServicesDAO.update(getProvider(), data);
         return "";
     }
 
