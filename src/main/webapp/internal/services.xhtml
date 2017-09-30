@@ -13,17 +13,17 @@
                 <div class="fitness-section service-section">
 
                     <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
-                    <h:selectManyCheckbox value="#{fitnessServicesBean.offeredServicesByUser}" layout="pageDirection">
+                    <h:selectManyCheckbox value="#{fitnessServicesBean.data.selectedServices}" layout="pageDirection">
                         <f:selectItems value="#{fitnessServicesBean.allAvailableServices}"/>
                     </h:selectManyCheckbox>
 
                     <h4>Wo können Sie diese Leistungen erbringen?</h4>
-                    <h:selectManyCheckbox value="#{fitnessServicesBean.offeredLocationsByUser}" layout="pageDirection">
+                    <h:selectManyCheckbox value="#{fitnessServicesBean.data.selectedLocations}" layout="pageDirection">
                         <f:selectItems value="#{fitnessServicesBean.allAvailableLocations}"/>
                     </h:selectManyCheckbox>
 
                     <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
-                    <h:selectManyCheckbox value="#{fitnessServicesBean.ownedEquipmentByUser}" layout="pageDirection">
+                    <h:selectManyCheckbox value="#{fitnessServicesBean.data.ownedEquipmentByUser}" layout="pageDirection">
                         <f:selectItems value="#{fitnessServicesBean.allAvailableEquipment}"/>
                     </h:selectManyCheckbox>
 

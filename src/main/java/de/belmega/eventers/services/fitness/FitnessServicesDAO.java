@@ -39,50 +39,49 @@ public class FitnessServicesDAO {
                 "Nordic Walking Stöcke", "Isomatten", "Federballsets", "Walking Hanteln"));
     }
 
-    public void update(ProviderUserEntity provider, Set<String> selectedServices, Set<String> offeredLocations, Set<String> ownedEquipmentByUser) {
 
-        // Check if there is already an FitnessServicesEntity for this user in the database
-        Optional<FitnessServicesEntity> fitnessServicesEntity = loadFitnessServicesEntityForUser(provider);
+    public FitnessServicesDTO loadFitnessServicesDataForUser(ProviderUserEntity provider) {
+        FitnessServicesEntity entity = getFitnessServicesEntity(provider);
 
-        if (fitnessServicesEntity.isPresent()) {
-            // if yes, update that entity. JPA will store that to the database
-            updateEntity(selectedServices, offeredLocations, ownedEquipmentByUser, fitnessServicesEntity.get());
-        } else {
-            //if no, create a new entity and store in the database
-            createEntity(provider, selectedServices, offeredLocations, ownedEquipmentByUser);
-        }
+        FitnessServicesDTO dto = new FitnessServicesDTO();
+        dto.setOwnedEquipmentByUser(entity.getOwnedEquipmentByUser());
+        dto.setSelectedLocations(entity.getOfferedLocations());
+        dto.setSelectedServices(entity.getSelectedServices());
 
+        return dto;
     }
 
-
-    private void createEntity(ProviderUserEntity provider, Set<String> selectedServices, Set<String> offeredLocations, Set<String> ownedEquipmentByUser) {
-        FitnessServicesEntity entity = new FitnessServicesEntity(provider, selectedServices, offeredLocations, ownedEquipmentByUser);
-        em.persist(entity);
-        System.out.println("FitnessServicesEntity created."); // Remove later. Is just to check if code was executed.
-    }
-
-    private void updateEntity(Set<String> selectedServices, Set<String> offeredLocations, Set<String> ownedEquipmentByUser, FitnessServicesEntity entity) {
-        entity.setSelectedServices(selectedServices);
-        entity.setOfferedLocations(offeredLocations);
-        entity.setOwnedEquipmentByUser(ownedEquipmentByUser);
-        System.out.println("FitnessServicesEntity updated.");
-    }
-
-    public Optional<FitnessServicesEntity> loadFitnessServicesEntityForUser(ProviderUserEntity provider) {
-        // Prepare database query
+    private FitnessServicesEntity getFitnessServicesEntity(ProviderUserEntity provider) {
         String qlString = "SELECT f FROM FitnessServicesEntity f JOIN f.provider p"
-                + " JOIN FETCH f.selectedServices " // tell JPA to load selectedServices *now* and not lazy. only required for Set properties
-                + " JOIN FETCH f.offeredLocations "
-                + " JOIN FETCH f.ownedEquipmentByUser "
+                + " LEFT OUTER JOIN FETCH f.selectedServices " // tell JPA to load selectedServices *now* and not lazy. only required for Set properties
+                + " LEFT OUTER JOIN FETCH f.offeredLocations "
+                + " LEFT OUTER JOIN FETCH f.ownedEquipmentByUser "
                 + "WHERE p.id = :provider_id"; // tell JPA to load the FitnessServicesEntity for the given user
         TypedQuery<FitnessServicesEntity> query = em.createQuery(qlString, FitnessServicesEntity.class);
         query.setParameter("provider_id", provider.getId());
 
-        // Execute query; should find 0 to 1 results
         List<FitnessServicesEntity> resultList = query.getResultList();
 
-        // Return either an empty value or the found result
-        if (resultList.isEmpty()) return Optional.empty();
-        else return Optional.of(resultList.get(0));
+        return getResultOrNewEntity(resultList, provider);
+    }
+
+    private FitnessServicesEntity getResultOrNewEntity(List<FitnessServicesEntity> resultList, ProviderUserEntity provider) {
+        FitnessServicesEntity entity;
+
+        if (resultList.isEmpty()) {
+            entity = new FitnessServicesEntity();
+            entity.setProvider(provider);
+            em.persist(entity);
+        } else {
+            entity = resultList.get(0);
+        }
+        return entity;
+    }
+
+    public void update(ProviderUserEntity provider, FitnessServicesDTO data) {
+        FitnessServicesEntity fitnessServicesEntity = getFitnessServicesEntity(provider);
+        fitnessServicesEntity.setOfferedLocations(data.getSelectedLocations());
+        fitnessServicesEntity.setOwnedEquipmentByUser(data.getOwnedEquipmentByUser());
+        fitnessServicesEntity.setSelectedServices(data.getSelectedServices());
     }
 }
