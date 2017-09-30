@@ -36,7 +36,7 @@ public class EntertainmentServicesBean {
     public List<OfferSelection> getUsersEntertainmentOfferSelections() {
 
         if (usersEntertainmentOfferSelections == null) usersEntertainmentOfferSelections =
-                selectionServicesDAO.findSelectionsForUser(getProvider(), ServiceCategoryId.CULTURE);
+                selectionServicesDAO.findSelectionsForUser(getProvider(), ServiceCategoryId.ENTERTAINMENT);
 
         return usersEntertainmentOfferSelections;
     }

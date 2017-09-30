@@ -79,7 +79,7 @@ public class SelectionServicesDAO {
             selections.add(
                     new OfferSelection(
                             categoryId.name(),
-                            service.getServiceName(),
+                            service.getServiceId(),
                             service.getServiceName(),
                             selectionEntity.isEnabled(),
                             selectionEntity.getDescription()

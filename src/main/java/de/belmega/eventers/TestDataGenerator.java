@@ -60,45 +60,45 @@ public class TestDataGenerator {
         CategoryEntity transport = new CategoryEntity(ServiceCategoryId.TRANSPORTATION.name(), "Transport");
         categoryDAO.persist(transport);
 
-        createServiceEntity(wellness, "Massage");
-        createServiceEntity(wellness, "Kosmetik");
-        createServiceEntity(wellness, "Nageldesign");
-        createServiceEntity(wellness, "Make-up Artist");
-        createServiceEntity(wellness, "Friseur");
+        createServiceEntity("massage", wellness, "Massage");
+        createServiceEntity("cosmetics", wellness, "Kosmetik");
+        createServiceEntity("nails", wellness, "Nageldesign");
+        createServiceEntity("make-up", wellness, "Make-up Artist");
+        createServiceEntity("barber", wellness, "Friseur");
 
-        createServiceEntity(bewegung, "Fitnesstrainer / Personal Coach");
-        createServiceEntity(bewegung, "Wanderführer");
-        createServiceEntity(bewegung, "Tanzlehrer");
-        createServiceEntity(bewegung, "Yogalehrer");
-        createServiceEntity(bewegung, "Tai Chi/Qigong-Lehrer");
+        createServiceEntity("personal-coach", bewegung, "Fitnesstrainer / Personal Coach");
+        createServiceEntity("hiking-guide", bewegung, "Wanderführer");
+        createServiceEntity("dancing", bewegung, "Tanzlehrer");
+        createServiceEntity("yoga", bewegung, "Yogalehrer");
+        createServiceEntity("tai-chi", bewegung, "Tai Chi/Qigong-Lehrer");
 
-        createServiceEntity(entertainment, "Musiker/Sänger");
-        createServiceEntity(entertainment, "Illusionist");
-        createServiceEntity(entertainment, "Entertainer/Moderator");
-        createServiceEntity(entertainment, "Kabarattist");
-        createServiceEntity(entertainment, "Schnellzeichner");
-        createServiceEntity(entertainment, "Schauspieler");
+        createServiceEntity("musician", entertainment, "Musiker/Sänger");
+        createServiceEntity("illusionist", entertainment, "Illusionist");
+        createServiceEntity("entertainer", entertainment, "Entertainer/Moderator");
+        createServiceEntity("cabaret", entertainment, "Kabarattist");
+        createServiceEntity("drawer", entertainment, "Schnellzeichner");
+        createServiceEntity("actor", entertainment, "Schauspieler");
 
-        createServiceEntity(kultur, "Stadtführer");
-        createServiceEntity(kultur, "Kunstführer");
-        createServiceEntity(kultur, "Schriftsteller oder Vorleser");
+        createServiceEntity("city-guide", kultur, "Stadtführer");
+        createServiceEntity("art-guide", kultur, "Kunstführer");
+        createServiceEntity("", kultur, "Schriftsteller oder Vorleser");
 
-        createServiceEntity(kulinarisches, "Sommelier");
-        createServiceEntity(kulinarisches, "Chocolatier");
-        createServiceEntity(kulinarisches, "Destilllateur");
-        createServiceEntity(kulinarisches, "Käsesommelier");
-        createServiceEntity(kulinarisches, "Barkeeper");
-        createServiceEntity(kulinarisches, "Restaurant");
+        createServiceEntity("sommelier", kulinarisches, "Sommelier");
+        createServiceEntity("chocolatier", kulinarisches, "Chocolatier");
+        createServiceEntity("destillateuer", kulinarisches, "Destilllateur");
+        createServiceEntity("cheese", kulinarisches, "Käsesommelier");
+        createServiceEntity("barkeeper", kulinarisches, "Barkeeper");
+        createServiceEntity("restaurant", kulinarisches, "Restaurant");
 
-        createServiceEntity(transport, "Taxiunternehmen");
-        createServiceEntity(transport, "Limosinenservice");
-        createServiceEntity(transport, "Velotaxi-Unternehmen");
-        createServiceEntity(transport, "Fahrradverleih");
+        createServiceEntity("taxi", transport, "Taxiunternehmen");
+        createServiceEntity("limosine", transport, "Limosinenservice");
+        createServiceEntity("velotaxi", transport, "Velotaxi-Unternehmen");
+        createServiceEntity("bike-rental", transport, "Fahrradverleih");
 
     }
 
-    private void createServiceEntity(CategoryEntity wellness, String serviceName) {
-        ServiceEntity massage = new ServiceEntity(wellness, serviceName);
+    private void createServiceEntity(String serviceId, CategoryEntity wellness, String serviceName) {
+        ServiceEntity massage = new ServiceEntity(serviceId, wellness, serviceName);
         serviceDAO.persist(massage);
     }
 
