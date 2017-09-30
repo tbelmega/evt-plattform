@@ -81,7 +81,7 @@ public class TestDataGenerator {
 
         createServiceEntity("city-guide", kultur, "Stadtführer");
         createServiceEntity("art-guide", kultur, "Kunstführer");
-        createServiceEntity("", kultur, "Schriftsteller oder Vorleser");
+        createServiceEntity("author", kultur, "Schriftsteller oder Vorleser");
 
         createServiceEntity("sommelier", kulinarisches, "Sommelier");
         createServiceEntity("chocolatier", kulinarisches, "Chocolatier");
