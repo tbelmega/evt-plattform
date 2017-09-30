@@ -1,0 +1,203 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="template-internal.xhtml">
+
+    <ui:define name="main-content">
+
+        <h:form>
+            <h:commandLink class="toggle" onclick="$('.fitness-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Fitness</h3></h:commandLink>
+
+            <div class="fitness-section">
+
+                <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
+                <h:selectManyCheckbox value="#{fitnessServicesBean.offeredServicesByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableServices}"/>
+                </h:selectManyCheckbox>
+
+                <h4>Wo können Sie diese Leistungen erbringen?</h4>
+                <h:selectManyCheckbox value="#{fitnessServicesBean.offeredLocationsByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableLocations}"/>
+                </h:selectManyCheckbox>
+
+                <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
+                <h:selectManyCheckbox value="#{fitnessServicesBean.ownedEquipmentByUser}" layout="pageDirection">
+                    <f:selectItems value="#{fitnessServicesBean.allAvailableEquipment}"/>
+                </h:selectManyCheckbox>
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{fitnessServicesBean.save}"/>
+                </div>
+            </div>
+
+
+
+            <h:commandLink class="toggle" onclick="$('.cosmetic-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Kosmetik</h3></h:commandLink>
+
+            <div class="cosmetic-section">
+
+                <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
+                <h:selectManyCheckbox value="#{cosmeticsServicesBean.selectedCosmeticOffersByUser}" layout="pageDirection">
+                    <f:selectItems value="#{cosmeticsServicesBean.allAvailableCosmeticOffers}"/>
+                </h:selectManyCheckbox>
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{cosmeticsServicesBean.save}"/>
+                </div>
+            </div>
+
+
+            <h:commandLink class="toggle" onclick="$('.culinary-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Kulinarisches</h3></h:commandLink>
+            <div class="culinary-section">
+
+                <h4>Welche Qualifikationen besitzen Sie, um eine der untenstehenden kulturellen Angebote zu erbringen?</h4>
+
+                <h:dataTable var="culinaryOfferSelection"
+                             value="#{culinaryOffersServicesBean.usersCulinaryOfferSelections}">
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{culinaryOfferSelection.enabled}"
+                                                 onclick="$('.#{culinaryOfferSelection.serviceId}').toggleClass('invisible');"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{culinaryOfferSelection.serviceName}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{culinaryOfferSelection.serviceId} #{culinaryOffersServicesBean.getVisibility(culinaryOfferSelection)}"
+                                         cols="40" rows="5"
+                                         a:placeholder="Bitte machen Sie genaue Angaben zu Ihrer Dienstleistung; ggf. Website"
+                                         value="#{culinaryOfferSelection.description}"/>
+                    </h:column>
+                </h:dataTable>
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern"
+                                   action="#{culinaryOffersServicesBean.save}"/>
+                </div>
+            </div>
+
+
+
+            <h:commandLink class="toggle" onclick="$('.cultural-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Kultur</h3></h:commandLink>
+            <div class="cultural-section">
+
+                <h4>Welche Qualifikationen besitzen Sie, um eines der untenstehenden kulturellen Angebote zu erbringen?</h4>
+
+                <h:dataTable var="culturalOffer"
+                             value="#{culturalOffersServicesBean.usersOfferSelectionSelections}">
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{culturalOffer.enabled}"
+                                                 onclick="$('.#{culturalOffer.serviceId}').toggleClass('invisible');"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{culturalOffer.serviceName}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{culturalOffer.serviceId} #{culturalOffersServicesBean.getVisibility(culturalOffer)}"
+                                         cols="40" rows="5"
+                                         a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"
+                                         value="#{culturalOffer.description}"/>
+                    </h:column>
+                </h:dataTable>
+
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{culturalOffersServicesBean.save}"/>
+                </div>
+            </div>
+
+
+            <h:commandLink class="toggle" onclick="$('.entertainment-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Entertainment</h3></h:commandLink>
+            <div class="entertainment-section">
+
+                <h4>Welche Fähigkeiten besitzen Sie, eine Gruppe zu unterhalten?</h4>
+
+                <h:dataTable var="entertainmentOffer"
+                             value="#{entertainmentServicesBean.usersEntertainmentOfferSelections}">
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{entertainmentOffer.enabled}"
+                                                 onclick="$('.#{entertainmentOffer.serviceId}').toggleClass('invisible');"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{entertainmentOffer.serviceName}"/>
+                        <h:inputTextarea style="display: block; resize: none"
+                                         styleClass="#{entertainmentOffer.serviceId} #{entertainmentServicesBean.getVisibility(entertainmentOffer)}"
+                                         cols="40" rows="5"
+                                         a:placeholder="Bitte machen Sie genaue Angaben zu Ihrer Dienstleistung; ggf. Website"
+                                         value="#{entertainmentOffer.description}"/>
+                    </h:column>
+                </h:dataTable>
+
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern"
+                                   action="#{entertainmentServicesBean.save}"/>
+                </div>
+            </div>
+
+
+
+            <h:commandLink class="toggle" onclick="$('.massage-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Massage</h3></h:commandLink>
+            <div class="massage-section">
+
+                <h4>Wo liegen die Schwerpunkte Ihrer Leistungen?</h4>
+                <h:selectManyCheckbox value="#{massageServicesBean.focusByUser}" layout="pageDirection">
+                    <f:selectItems value="#{massageServicesBean.allAvailableFocuses}"/>
+                </h:selectManyCheckbox>
+
+                <h:message for="selectTable" errorStyle="color: red"
+                           styleClass="message"/>
+                <h4>Ist eine Massageliege vorhanden?</h4>
+                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageTableIsAvailable}" required="true" requiredMessage="Angabe benötigt." id="selectTable">
+                    <f:selectItem itemValue="#{true}" itemLabel="Ja"/>
+                    <f:selectItem itemValue="#{false}" itemLabel="Nein"/>
+                </h:selectOneRadio>
+
+                <h:message for="selectChair" errorStyle="color: red"
+                           styleClass="message"/>
+                <h4>Ist ein Massagestuhl vorhanden?</h4>
+                <h:selectOneRadio value="#{massageServicesBean.selectionIfMassageChairIsAvailable}" required="true" requiredMessage="Angabe benötigt." id="selectChair">
+                    <f:selectItem itemValue="#{true}" itemLabel="Ja"/>
+                    <f:selectItem itemValue="#{false}" itemLabel="Nein"/>
+                </h:selectOneRadio>
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{massageServicesBean.save}"/>
+                </div>
+            </div>
+
+
+            <h:commandLink class="toggle" onclick="$('.transport-section').toggleClass('invisible'); return false;">
+                <h3 class="slidedown-heading">Transport</h3></h:commandLink>
+            <div class="transport-section">
+
+                <h4>Welche Transportleistungen können Sie erbringen?</h4>
+
+                <h:dataTable var="transportOffer"
+                             value="#{transportOffersServicesBean.usersTransportOfferSelections}">
+                    <h:column>
+                        <h:selectBooleanCheckbox value="#{transportOffer.enabled}"
+                                                 onclick="$('.#{transportOffer.serviceId}').toggleClass('invisible');"/>
+                    </h:column>
+                    <h:column>
+                        <h:outputText value="#{transportOffer.serviceName}"/>
+                        <h:inputTextarea style="display: block; resize: none" styleClass="#{transportOffer.serviceId} #{transportOffersServicesBean.getVisibility(transportOffer)}"
+                                         cols="40" rows="5"
+                                         a:placeholder="Bitte machen Sie genaue Angabe zu Ihrer Dienstleistung; ggf. Website"
+                                         value="#{transportOffer.description}"/>
+                    </h:column>
+                </h:dataTable>
+
+
+                <div class="buttons-hbox">
+                    <h:commandLink class="button button_green" value="Speichern" action="#{transportOffersServicesBean.save}"/>
+                </div>
+            </div>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
+
