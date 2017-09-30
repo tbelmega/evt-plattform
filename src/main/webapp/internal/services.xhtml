@@ -42,10 +42,17 @@
                 <div class="cosmetic-section service-section">
 
                     <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
-                    <h:selectManyCheckbox value="#{cosmeticsServicesBean.selectedCosmeticOffersByUser}"
-                                          layout="pageDirection">
-                        <f:selectItems value="#{cosmeticsServicesBean.allAvailableCosmeticOffers}"/>
-                    </h:selectManyCheckbox>
+
+                    <h:dataTable var="cosmeticOfferSelection"
+                                 value="#{cosmeticsServicesBean.selectedCosmeticOffersByUser}">
+                        <h:column>
+                            <h:selectBooleanCheckbox value="#{cosmeticOfferSelection.enabled}"
+                                                     onclick="$('.#{cosmeticOfferSelection.serviceId}').toggleClass('invisible');"/>
+                        </h:column>
+                        <h:column>
+                            <h:outputText value="#{cosmeticOfferSelection.serviceName}"/>
+                        </h:column>
+                    </h:dataTable>
 
                     <div class="buttons-hbox">
                         <h:commandLink class="button button_green" value="Speichern"

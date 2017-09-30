@@ -1,5 +1,8 @@
 package de.belmega.eventers.services.cosmetics;
 
+import de.belmega.eventers.services.categories.ServiceCategoryId;
+import de.belmega.eventers.services.common.OfferSelection;
+import de.belmega.eventers.services.common.SelectionServicesDAO;
 import de.belmega.eventers.services.massage.MassageServicesDAO;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
@@ -22,32 +25,25 @@ public class CosmeticsServicesBean {
     private UserProfileBean userProfileBean;
 
     @Inject
-    CosmeticsServicesDAO cosmeticsServicesDAO;
+    private SelectionServicesDAO selectionServicesDAO;
 
-    private List<String> selectedCosmeticOffersByUser = new ArrayList<>();
-    private List<String> allAvailableCosmeticOffers = Arrays.asList("Kosmetik allgemein", "Pediküre", "Maniküre", "Typ-& Stilberatung",
-            "Make up Artist", "Nageldesign", "Hair Stylist/Friseur");
 
-    public void setSelectedCosmeticOffersByUser(List<String> selectedCosmeticOffersByUser) {
+    private List<OfferSelection> selectedCosmeticOffersByUser;
+
+    public void setSelectedCosmeticOffersByUser(List<OfferSelection> selectedCosmeticOffersByUser) {
         this.selectedCosmeticOffersByUser = selectedCosmeticOffersByUser;
     }
 
-    public List<String> getSelectedCosmeticOffersByUser() {
+    public List<OfferSelection> getSelectedCosmeticOffersByUser() {
+
+        if (selectedCosmeticOffersByUser == null) selectedCosmeticOffersByUser =
+                selectionServicesDAO.findSelectionsForUser(getProvider(), ServiceCategoryId.WELLNESS);
+
         return selectedCosmeticOffersByUser;
     }
 
-    public void setAllAvailableCosmeticOffers(List<String> allAvailableCosmeticOffers) {
-        this.allAvailableCosmeticOffers = allAvailableCosmeticOffers;
-    }
-
-    public List<String> getAllAvailableCosmeticOffers() {
-        return allAvailableCosmeticOffers;
-    }
-
     public String save() {
-        if (selectedCosmeticOffersByUser == null) selectedCosmeticOffersByUser = Collections.emptyList();
-
-        cosmeticsServicesDAO.update(getProvider(), selectedCosmeticOffersByUser);
+        selectionServicesDAO.update(getProvider(), selectedCosmeticOffersByUser);
         return "";
     }
 
