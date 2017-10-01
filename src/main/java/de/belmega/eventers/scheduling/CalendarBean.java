@@ -31,6 +31,8 @@ public class CalendarBean {
     private ScheduleModel eventModel;
 
     private DefaultScheduleEvent event = new DefaultScheduleEvent();
+    DefaultScheduleEvent previousEvent = event;
+
 
     private ProviderUserEntity providerUserEntity;
 
@@ -80,6 +82,7 @@ public class CalendarBean {
         if (!repetitions.isEmpty())
             calculateRepitition(event);
 
+        previousEvent = event;
         event = new DefaultScheduleEvent();
     }
 
@@ -172,7 +175,16 @@ public class CalendarBean {
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
+
         event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+        if (previousEvent != null && previousEvent.getId() != null) {
+            event.getStartDate().setHours(previousEvent.getStartDate().getHours());
+            event.getEndDate().setHours(previousEvent.getEndDate().getHours());
+
+            event.getStartDate().setMinutes(previousEvent.getStartDate().getMinutes());
+            event.getEndDate().setMinutes(previousEvent.getEndDate().getMinutes());
+        }
+
         repetitions = new ArrayList<>();
         repeatUntil = new Date();
     }

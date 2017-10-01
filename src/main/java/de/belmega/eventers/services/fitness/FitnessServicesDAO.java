@@ -44,11 +44,30 @@ public class FitnessServicesDAO {
         FitnessServicesEntity entity = getFitnessServicesEntity(provider);
 
         FitnessServicesDTO dto = new FitnessServicesDTO();
-        dto.setOwnedEquipmentByUser(new HashSet<>(entity.getOwnedEquipmentByUser()));
-        dto.setSelectedLocations(new HashSet<>(entity.getOfferedLocations()));
-        dto.setSelectedServices(new HashSet<>(entity.getSelectedServices()));
+
+        setOwnedEquipment(dto, entity.getOwnedEquipmentByUser());
+        setSelectedLocations(dto, entity.getOfferedLocations());
+        setSelectedServices(dto, entity.getSelectedServices());
 
         return dto;
+    }
+
+    private void setOwnedEquipment(FitnessServicesDTO dto, Set<String> ownedEquipmentByUser) {
+        if (ownedEquipmentByUser != null) {
+            dto.setOwnedEquipmentByUser(new HashSet<>(ownedEquipmentByUser));
+        }
+    }
+
+    private void setSelectedLocations(FitnessServicesDTO dto, Set<String> selectedLocations) {
+        if (selectedLocations != null) {
+            dto.setSelectedLocations(new HashSet<>(selectedLocations));
+        }
+    }
+
+    private void setSelectedServices(FitnessServicesDTO dto, Set<String> selectedServices) {
+        if (selectedServices != null) {
+            dto.setSelectedServices(new HashSet<>(selectedServices));
+        }
     }
 
     private FitnessServicesEntity getFitnessServicesEntity(ProviderUserEntity provider) {
