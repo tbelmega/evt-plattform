@@ -25,7 +25,7 @@ public class CalendarBean {
     ScheduleEventService scheduleEventService;
 
 
-    private List<Integer> repetitions = new ArrayList<>();
+    private List<String> repetitions = new ArrayList<>();
     private Date repeatUntil;
 
     private ScheduleModel eventModel;
@@ -84,20 +84,69 @@ public class CalendarBean {
     }
 
     private void calculateRepitition(DefaultScheduleEvent event) {
+        List<Integer> repititionsAsIntegers = getRepetitionsAsIntegers(repetitions);
         Calendar cal = Calendar.getInstance();
         Date startDate = event.getStartDate();
+
+        if (repeatUntil == null)
+            repeatUntil = defaultEndDate(cal, startDate);
+
         cal.setTime(startDate);
 
-        for (int i = 0; i <= 7; i++) {
+        for (int i = 1; i <= 7; i++) {
             cal.add(Calendar.DATE, 1);
             int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-            if (repetitions.contains(dayOfWeek)) {
-                System.out.println(cal.getTime());
-            }
-
+            if (repititionsAsIntegers.contains(dayOfWeek))
+                addEventSeries(cal.getTime(), event, repeatUntil);
         }
 
         System.out.println(repeatUntil);
+    }
+
+    /**
+     * From the given startDate, add a copy of the event every week until the endOfRepititionDate.
+     */
+    private void addEventSeries(Date startDate, DefaultScheduleEvent event, Date endOfRepititionDate) {
+
+        while (startDate.getTime() < endOfRepititionDate.getTime()) {
+
+            Date endTime = new Date(startDate.getTime());
+            endTime.setHours(event.getEndDate().getHours());
+            endTime.setMinutes(event.getEndDate().getMinutes());
+
+            DefaultScheduleEvent nextEvent = new DefaultScheduleEvent();
+            nextEvent.setStartDate(startDate);
+            nextEvent.setEndDate(endTime);
+            nextEvent.setTitle(event.getTitle());
+            nextEvent.setData(event.getData());
+            nextEvent.setDescription(event.getDescription());
+
+            eventModel.addEvent(nextEvent);
+            ScheduleEventEntity eventEntity = createEventEntity(nextEvent);
+            scheduleEventService.persistEvent(eventEntity);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(startDate);
+            calendar.add(Calendar.WEEK_OF_MONTH, 1);
+            startDate = calendar.getTime();
+        }
+    }
+
+    /**
+     * Set three month after start date as default end date for the repitition.
+     */
+    private Date defaultEndDate(Calendar cal, Date startDate) {
+        cal.setTime(startDate);
+        cal.add(Calendar.MONTH, 3);
+        return cal.getTime();
+    }
+
+    private List<Integer> getRepetitionsAsIntegers(List<String> repetitions) {
+        List<Integer> result = new ArrayList<>();
+        for (String s: repetitions)
+            result.add(Integer.parseInt(s));
+
+        return result;
     }
 
     private ScheduleEventEntity createEventEntity(ScheduleEvent event) {
@@ -133,11 +182,11 @@ public class CalendarBean {
         eventModel.deleteEvent(this.event);
     }
 
-    public List<Integer> getRepetitions() {
+    public List<String> getRepetitions() {
         return repetitions;
     }
 
-    public void setRepetitions(List<Integer> repetitions) {
+    public void setRepetitions(List<String> repetitions) {
         this.repetitions = repetitions;
     }
 
