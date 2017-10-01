@@ -22,7 +22,7 @@ public class ScheduleEventService {
         return scheduleEventDAO.findEventsByUser(id);
     }
 
-    public void deleteEvent(String eventId) {
+    public void deleteEvent(DefaultScheduleEvent eventId) {
         scheduleEventDAO.deleteEvent(eventId);
     }
 }

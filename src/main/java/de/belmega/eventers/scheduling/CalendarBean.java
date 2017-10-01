@@ -12,10 +12,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @ManagedBean
 @SessionScoped
@@ -28,32 +25,36 @@ public class CalendarBean {
     ScheduleEventService scheduleEventService;
 
 
-    private List<String> repetitions = new ArrayList<>();
+    private List<Integer> repetitions = new ArrayList<>();
     private Date repeatUntil;
+
+    private ScheduleModel eventModel;
+
+    private DefaultScheduleEvent event = new DefaultScheduleEvent();
 
     private ProviderUserEntity providerUserEntity;
 
-    private ProviderUserEntity getProvider(){
 
+    private ProviderUserEntity getProvider() {
         if (providerUserEntity == null) {
-
             providerUserEntity = userProfileBean.getProvider();
+        }
+        return providerUserEntity;
+    }
 
-            List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(providerUserEntity.getId());
+
+    public ScheduleModel getEventModel() {
+        if (eventModel == null) {
+            eventModel = new DefaultScheduleModel();
+
+            List<ScheduleEventEntity> events = scheduleEventService.findEventsByUser(getProvider().getId());
+
             for (ScheduleEventEntity event : events) {
                 ScheduleEvent scheduleEvent = createScheduleEvent(event);
                 eventModel.addEvent(scheduleEvent);
             }
         }
-        return providerUserEntity;
-    }
 
-    private ScheduleModel eventModel = new DefaultScheduleModel();
-
-    private DefaultScheduleEvent event = new DefaultScheduleEvent();
-
-
-    public ScheduleModel getEventModel() {
         return eventModel;
     }
 
@@ -76,14 +77,26 @@ public class CalendarBean {
         ScheduleEventEntity eventEntity = createEventEntity(event);
         scheduleEventService.persistEvent(eventEntity);
 
-        calculateRepitition();
+        if (!repetitions.isEmpty())
+            calculateRepitition(event);
 
         event = new DefaultScheduleEvent();
     }
 
-    private void calculateRepitition() {
-        //TODO
-        System.out.println(repetitions);
+    private void calculateRepitition(DefaultScheduleEvent event) {
+        Calendar cal = Calendar.getInstance();
+        Date startDate = event.getStartDate();
+        cal.setTime(startDate);
+
+        for (int i = 0; i <= 7; i++) {
+            cal.add(Calendar.DATE, 1);
+            int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+            if (repetitions.contains(dayOfWeek)) {
+                System.out.println(cal.getTime());
+            }
+
+        }
+
         System.out.println(repeatUntil);
     }
 
@@ -116,15 +129,15 @@ public class CalendarBean {
     }
 
     public void deleteEvent(ActionEvent actionEvent) {
-        scheduleEventService.deleteEvent(this.event.getId());
+        scheduleEventService.deleteEvent(this.event);
         eventModel.deleteEvent(this.event);
     }
 
-    public List<String> getRepetitions() {
+    public List<Integer> getRepetitions() {
         return repetitions;
     }
 
-    public void setRepetitions(List<String> repetitions) {
+    public void setRepetitions(List<Integer> repetitions) {
         this.repetitions = repetitions;
     }
 

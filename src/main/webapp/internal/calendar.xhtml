@@ -14,12 +14,12 @@
                     <p:schedule id="schedule" value="#{calendarBean.eventModel}" widgetVar="myschedule"
                                 locale="de" ignoreTimezone="false">
 
-                        <p:ajax event="dateSelect" listener="#{userProfileBean.onDateSelect}" update="eventDetails"
+                        <p:ajax event="dateSelect" listener="#{calendarBean.onDateSelect}" update="eventDetails"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax event="eventSelect" listener="#{userProfileBean.onEventSelect}"
+                        <p:ajax event="eventSelect" listener="#{calendarBean.onEventSelect}"
                                 update="eventDetails"
                                 oncomplete="PF('eventDialog').show();"/>
-                        <p:ajax event="eventResize" listener="#{userProfileBean.onEventResize}" update="messages"/>
+                        <p:ajax event="eventResize" listener="#{calendarBean.onEventResize}" update="messages"/>
                     </p:schedule>
                 </h:panelGrid>
 
@@ -27,39 +27,39 @@
                           locale="de" resizable="false">
                     <h:panelGrid id="eventDetails" columns="2">
                         <p:outputLabel for="from" value="Von:"/>
-                        <p:calendar id="from" value="#{userProfileBean.event.startDate}"
+                        <p:calendar id="from" value="#{calendarBean.event.startDate}"
                                     pattern="dd.MM.yyyy HH:mm" locale="de" showOn="button"/>
 
                         <p:outputLabel for="to" value="Bis:"/>
-                        <p:calendar id="to" value="#{userProfileBean.event.endDate}"
+                        <p:calendar id="to" value="#{calendarBean.event.endDate}"
                                     pattern="HH:mm" timeOnly="true" locale="de" showOn="button"/>
                     </h:panelGrid>
 
                     <section>
                         <h3 class="slidedown-heading">Wiederholen</h3>
-                        <h:selectManyCheckbox value="#{userProfileBean.repetitions}" layout="pageDirection"
+                        <h:selectManyCheckbox value="#{calendarBean.repetitions}" layout="pageDirection"
                                               styleClass="weekday-list">
-                            <f:selectItem itemValue="1" itemLabel="Jeden Montag"/>
-                            <f:selectItem itemValue="2" itemLabel="Jeden Dienstag"/>
-                            <f:selectItem itemValue="3" itemLabel="Jeden Mittwoch"/>
-                            <f:selectItem itemValue="4" itemLabel="Jeden Donnerstag"/>
-                            <f:selectItem itemValue="5" itemLabel="Jeden Freitag"/>
-                            <f:selectItem itemValue="6" itemLabel="Jeden Samstag"/>
-                            <f:selectItem itemValue="0" itemLabel="Jeden Sonntag"/>
+                            <f:selectItem itemValue="2" itemLabel="Jeden Montag"/>
+                            <f:selectItem itemValue="3" itemLabel="Jeden Dienstag"/>
+                            <f:selectItem itemValue="4" itemLabel="Jeden Mittwoch"/>
+                            <f:selectItem itemValue="5" itemLabel="Jeden Donnerstag"/>
+                            <f:selectItem itemValue="6" itemLabel="Jeden Freitag"/>
+                            <f:selectItem itemValue="7" itemLabel="Jeden Samstag"/>
+                            <f:selectItem itemValue="1" itemLabel="Jeden Sonntag"/>
                         </h:selectManyCheckbox>
                         <h:panelGrid columns="2">
                             <p:outputLabel for="repeatUntil" value="Ende:"/>
-                            <p:calendar id="repeatUntil" value="#{userProfileBean.repeatUntil}"
+                            <p:calendar id="repeatUntil" value="#{calendarBean.repeatUntil}"
                                         pattern="dd.MM.yyyy" locale="de" showOn="button"/>
                         </h:panelGrid>
                     </section>
 
                     <section>
-                        <p:commandButton id="addButton" value="Speichern" actionListener="#{userProfileBean.addEvent}"
+                        <p:commandButton id="addButton" value="Speichern" actionListener="#{calendarBean.addEvent}"
                                          oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
 
                         <p:commandButton id="deleteButton" value="Löschen"
-                                         actionListener="#{userProfileBean.deleteEvent}"
+                                         actionListener="#{calendarBean.deleteEvent}"
                                          oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
 
                         <p:commandButton id="abortButton" value="Abbrechen"
