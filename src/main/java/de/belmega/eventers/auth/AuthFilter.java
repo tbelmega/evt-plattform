@@ -13,7 +13,7 @@ import java.io.IOException;
 
 
 /**
- * Use this filter for all requests that contain the .xhtml file extension.
+ * Use this filter for all requests that contain the /internal path element.
  */
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"/internal/*"})
 public class AuthFilter implements Filter {

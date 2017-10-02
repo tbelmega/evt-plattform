@@ -1,67 +1,67 @@
 package de.belmega.eventers.booking;
 
 public class Customer {
-    private Object greeting;
-    private Object firstname;
-    private Object lastname;
-    private Object emailadress;
-    private Object mobile;
-    private Object company;
-    private Object hotelAdress;
+    private String greeting;
+    private String firstname;
+    private String lastname;
+    private String emailadress;
+    private String mobile;
+    private String company;
+    private String hotelAdress;
 
-    public void setGreeting(Object greeting) {
+    public void setGreeting(String greeting) {
         this.greeting = greeting;
     }
 
-    public Object getGreeting() {
+    public String getGreeting() {
         return greeting;
     }
 
-    public void setFirstname(Object firstname) {
+    public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
-    public Object getFirstname() {
+    public String getFirstname() {
         return firstname;
     }
 
-    public void setLastname(Object lastname) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
-    public Object getLastname() {
+    public String getLastname() {
         return lastname;
     }
 
-    public void setEmailadress(Object emailadress) {
+    public void setEmailadress(String emailadress) {
         this.emailadress = emailadress;
     }
 
-    public Object getEmailadress() {
+    public String getEmailadress() {
         return emailadress;
     }
 
-    public void setMobile(Object mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public Object getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setCompany(Object company) {
+    public void setCompany(String company) {
         this.company = company;
     }
 
-    public Object getCompany() {
+    public String getCompany() {
         return company;
     }
 
-    public void setHotelAdress(Object hotelAdress) {
+    public void setHotelAdress(String hotelAdress) {
         this.hotelAdress = hotelAdress;
     }
 
-    public Object getHotelAdress() {
+    public String getHotelAdress() {
         return hotelAdress;
     }
 }

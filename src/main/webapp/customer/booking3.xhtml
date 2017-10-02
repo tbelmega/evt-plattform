@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="template-booking.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <!-- When page is loaded, get category from URL and store it in the bean. -->
+            <f:viewParam name="category" value="#{bookingBean.category}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="main-content">
+
+        <h:form>
+            <h1>#{bookingBean.title}</h1>
+
+            <div>[Paypal plugin]</div>
+
+            <h:selectBooleanCheckbox id="checkboxInvoice"
+                                     onclick="$('.invoice-adress-textarea').toggleClass('invisible');"/>
+            <h:outputLabel for="checkboxInvoice" style="display: inline">Rechnung erstellen</h:outputLabel>
+
+            <h:inputTextarea style="display: block; resize: none" styleClass="invoice-adress-textarea invisible"
+                             cols="40" rows="5"
+                             a:placeholder="Rechnungsadresse privat oder geschäftlich"
+                             value="#{bookingBean.booking.createInvoice}"/>
+
+            <div class="buttons-hbox">
+                <p:commandLink class="button button_green" action="#{bookingBean.submit}">
+                    Buchung abschließen
+                </p:commandLink>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
+

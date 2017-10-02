@@ -1,72 +1,78 @@
 package de.belmega.eventers.booking;
 
-public class Booking {
-    private Object date;
-    private Object time;
-    private Object duration;
-    private Object flexibility;
-    private Object attendees;
-    private Object location;
-    private Object remark;
-    private Object createInvoice;
+import java.util.Date;
 
-    public void setDate(Object date) {
+public class Booking {
+    private Date date;
+    private Date time;
+    private String duration;
+    private String flexibility;
+    private String attendees;
+    private String location;
+    private String remark;
+    private Boolean createInvoice;
+
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public Object getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setTime(Object time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 
-    public Object getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setDuration(Object duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public Object getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setFlexibility(Object flexibility) {
+    public void setFlexibility(String flexibility) {
         this.flexibility = flexibility;
     }
 
-    public Object getFlexibility() {
+    public String getFlexibility() {
         return flexibility;
     }
 
-    public Object getAttendees() {
+    public String getAttendees() {
         return attendees;
     }
 
-    public void setLocation(Object location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public Object getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setRemark(Object remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    public Object getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setCreateInvoice(Object createInvoice) {
+    public void setCreateInvoice(Boolean createInvoice) {
         this.createInvoice = createInvoice;
     }
 
-    public Object getCreateInvoice() {
+    public Boolean getCreateInvoice() {
         return createInvoice;
+    }
+
+    public void setAttendees(String attendees) {
+        this.attendees = attendees;
     }
 }

@@ -1,12 +1,14 @@
 package de.belmega.eventers.booking;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import org.apache.commons.lang.StringUtils;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-@Named
+@ManagedBean
 @SessionScoped
 public class BookingBean implements Serializable {
 
@@ -22,13 +24,28 @@ public class BookingBean implements Serializable {
 
     public String getTitle() {
         switch (category) {
-            case "entertainment": return "Unterhaltung";
-            default: return "Titel";
+            case "entertainment":
+                return "Unterhaltung";
+            case "wellness":
+                return "Wellness";
+            case "fitness":
+                return "Fitness";
+            case "culinary":
+                return "Kulinarisches";
+            case "culture":
+                return "Kultur";
+            case "massage":
+                return "Massage";
+            case "transportation":
+                return "Transport";
+            default:
+                return "Titel";
         }
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        if (StringUtils.isNotEmpty(category))
+            this.category = category;
     }
 
     public String getCategory() {
@@ -44,6 +61,7 @@ public class BookingBean implements Serializable {
     }
 
     public Booking getBooking() {
+        if (booking == null) booking = new Booking();
         return booking;
     }
 
@@ -73,6 +91,15 @@ public class BookingBean implements Serializable {
     }
 
     public Customer getCustomer() {
+        if (customer == null) customer = new Customer();
         return this.customer;
+    }
+
+    public String saveOffer() {
+        return "booking2.xhtml?step=1&faces-redirect=true";
+    }
+
+    public String saveCustomer() {
+        return "booking3.xhtml?step=2&faces-redirect=true";
     }
 }

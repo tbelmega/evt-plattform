@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="template-booking.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <!-- When page is loaded, get category from URL and store it in the bean. -->
+            <f:viewParam name="category" value="#{bookingBean.category}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="main-content">
+
+        <h:form>
+            <h1>#{bookingBean.title}</h1>
+
+            <div class="float-left">
+                <h:outputLabel for="eventDate" value="Datum"/>
+                <p:calendar id="eventDate" value="#{bookingBean.booking.date}"
+                            pattern="dd.MM.yyyy" locale="de" showOn="button"/>
+            </div>
+            <div class="float-right">
+                <h:outputLabel for="eventTime" value="Gewünschte Zeit"/>
+                <p:calendar id="eventTime" value="#{bookingBean.booking.time}"
+                            pattern="HH:mm" timeOnly="true" locale="de" showOn="button"/>
+            </div>
+            <div style="clear: both; margin: 0"/>
+
+            <div class="float-left">
+                <h:outputLabel for="dropdownFlexibility">Zeitliche Flexibilität</h:outputLabel>
+                <h:selectOneMenu value="#{bookingBean.booking.flexibility}" id="dropdownFlexibility">
+                    <f:selectItems value="#{bookingBean.allAvailableFlexibilities}"/>
+                </h:selectOneMenu>
+            </div>
+            <div class="float-right">
+                <h:outputLabel for="dropdownDuration">Gewünschte Dauer</h:outputLabel>
+                <h:selectOneMenu value="#{bookingBean.booking.duration}" id="dropdownDuration">
+                    <f:selectItems value="#{bookingBean.allAvailableDurations}"/>
+                </h:selectOneMenu>
+            </div>
+            <div style="clear: both; margin: 0"/>
+
+            <div class="float-left">
+                <h:outputLabel for="inputAttendees">Anzahl der Teilnehmer</h:outputLabel>
+                <h:inputText value="#{bookingBean.booking.attendees}" id="inputAttendees"/>
+            </div>
+            <div class="float-right">
+                <h:outputLabel for="inputLocation">Treffpunkt</h:outputLabel>
+                <h:inputText value="#{bookingBean.booking.location}" id="inputLocation"/>
+            </div>
+            <div style="clear: both; margin: 0"/>
+            <div class="buttons-hbox">
+                <p:commandButton value="Weiter"
+                                 action="#{bookingBean.saveOffer}" ajax="false"/>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
+
