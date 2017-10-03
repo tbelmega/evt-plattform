@@ -9,7 +9,7 @@
     <ui:define name="metadata">
         <f:metadata>
             <!-- When page is loaded, get category from URL and store it in the bean. -->
-            <f:viewParam name="category" value="#{bookingBean.category}"/>
+            <f:viewParam name="service" value="#{bookingBean.serviceId}"/>
         </f:metadata>
     </ui:define>
 
@@ -46,7 +46,7 @@
 
             <div class="float-left">
                 <h:outputLabel for="inputAttendees">Anzahl der Teilnehmer</h:outputLabel>
-                <h:inputText value="#{bookingBean.booking.attendees}" id="inputAttendees"/>
+                <h:inputText value="#{bookingBean.booking.attendees}" id="inputAttendees" converter="javax.faces.Integer"/>
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputLocation">Treffpunkt</h:outputLabel>
@@ -54,8 +54,7 @@
             </div>
             <div style="clear: both; margin: 0"/>
             <div class="buttons-hbox">
-                <p:commandButton value="Weiter"
-                                 action="#{bookingBean.saveOffer}" ajax="false"/>
+                <p:commandButton value="Weiter" action="#{bookingBean.saveOffer}" ajax="false"/>
             </div>
 
         </h:form>

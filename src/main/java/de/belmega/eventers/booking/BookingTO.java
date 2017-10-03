@@ -2,12 +2,13 @@ package de.belmega.eventers.booking;
 
 import java.util.Date;
 
-public class Booking {
-    private Date date;
+public class BookingTO {
+    private Long id;
+    private Date date = new Date();
     private Date time;
-    private String duration;
-    private String flexibility;
-    private String attendees;
+    private EventDuration duration;
+    private EventFlexibility flexibility;
+    private Integer attendees;
     private String location;
     private String remark;
     private Boolean createInvoice;
@@ -28,23 +29,23 @@ public class Booking {
         return time;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(EventDuration duration) {
         this.duration = duration;
     }
 
-    public String getDuration() {
+    public EventDuration getDuration() {
         return duration;
     }
 
-    public void setFlexibility(String flexibility) {
+    public void setFlexibility(EventFlexibility flexibility) {
         this.flexibility = flexibility;
     }
 
-    public String getFlexibility() {
+    public EventFlexibility getFlexibility() {
         return flexibility;
     }
 
-    public String getAttendees() {
+    public Integer getAttendees() {
         return attendees;
     }
 
@@ -72,7 +73,15 @@ public class Booking {
         return createInvoice;
     }
 
-    public void setAttendees(String attendees) {
+    public void setAttendees(Integer attendees) {
         this.attendees = attendees;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

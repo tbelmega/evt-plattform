@@ -112,6 +112,7 @@ iframe {
 }
 
 .container-fluid {
+    margin: auto;
     position: relative;
     background-color: white;
     max-width: 1280px;
@@ -119,9 +120,6 @@ iframe {
     padding: 0;
 }
 
-#container {
-    max-width: 1280px;
-}
 
 .container-fluid div {
     padding: 0.25em;
@@ -248,9 +246,7 @@ and (max-device-width: 640px) {
 and (min-device-width: 640px) {
     .width-medium {
         min-width: 200px;
-        width: 25%;
-        color: #2cff13;
-
+        width: 40%;
 
         -ms-box-sizing:content-box;
         -moz-box-sizing:content-box;
@@ -728,11 +724,6 @@ body.admin-bar {
 }
 
 .section_wrapper,
-.container {
-    max-width: 1220px;
-    margin: 0 auto;
-    position: relative;
-}
 
 .section.full-width > .section_wrapper {
     max-width: 100% !important;
@@ -740,8 +731,7 @@ body.admin-bar {
     padding-right: 0 !important;
 }
 
-.section_wrapper:after,
-.container:after {
+.section_wrapper:after {
     clear: both;
     content: " ";
     display: block;
@@ -1140,13 +1130,6 @@ body.admin-bar {
 }
 
 /* Clearing -------------------------------------------------------------------------- */
-.container:after {
-    content: "\0020";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden
-}
 
 .clearfix:before, .clearfix:after {
     content: '\0020';

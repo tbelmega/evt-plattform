@@ -49,17 +49,16 @@
 </h:head>
 
 <h:body>
-    <h4 style="margin-top:0">Angebot buchen</h4>
-    <p:steps activeIndex="#{param.step}" styleClass="custom" readonly="false">
-        <p:menuitem value="Angebot" url="booking1.xhtml?step=0"/>
-        <p:menuitem value="Kundendaten" url="booking2.xhtml?step=1"/>
-        <p:menuitem value="Bezahlung" url="booking3.xhtml?step=2"/>
-    </p:steps>
+    <div class="container-fluid">
+        <h4 style="margin-top:0">Angebot buchen</h4>
+        <p:steps activeIndex="#{param.step}" styleClass="custom" readonly="false">
+            <p:menuitem value="Angebot" url="booking1.xhtml?step=0"/>
+            <p:menuitem value="Kundendaten" url="booking2.xhtml?step=1"/>
+            <p:menuitem value="Bezahlung" url="booking3.xhtml?step=2"/>
+        </p:steps>
 
-    <p:growl id="growl" sticky="true" showDetail="true"/>
-    <p:messages/>
+        <p:growl id="growl" sticky="true" showDetail="true"/>
 
-    <div id="container">
         <div id="main">
             <ui:insert name="main-content">
 

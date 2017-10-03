@@ -3,7 +3,7 @@
 * --Eingabe "Erreichbarkeit": Dropdown mit Minuten--
 * --Dienstleisterseite: Checkboxen statt Multiselect--
 * Sportutensilien: Datensätze aus DB
-* Testen auf Android
+* Testen auf Android, ggf Styling für mobile
 * --Styling: Eingabefelder breiter, Dropdowns gleichbreit--
 * --Ggf statt Embedded Formular externes Formular--
 * --Dienleisterseiten in eine. Sichtbarkeit nach Rolle--
@@ -17,11 +17,11 @@
 * Textarea: breiter
 * Statt "Label" style, "heading" style
 * Kalender: Drrag&Drop für "kopieren"
-* Rechnerleistung mit Alex besprechen
+* Serverleistung mit Alex besprechen
 * Erfassungsformular für Studenten
 * Nach Auftragsausführung soll Dienstleister bestätigigen: Mail mit Link
-* Massagio-App testen 
-
+* Massagio-App anschauen zur Orientierung 
+* Styling: Auf großen Bildschirmen mehr mittig
 
 
 ## Rückfragen an Herrn Wilfling:

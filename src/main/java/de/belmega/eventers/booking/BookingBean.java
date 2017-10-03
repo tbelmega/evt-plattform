@@ -1,9 +1,12 @@
 package de.belmega.eventers.booking;
 
+import de.belmega.eventers.services.categories.ServiceDAO;
+import de.belmega.eventers.services.categories.ServiceEntity;
 import org.apache.commons.lang.StringUtils;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -12,94 +15,78 @@ import java.util.List;
 @SessionScoped
 public class BookingBean implements Serializable {
 
+    @Inject
+    private ServiceDAO serviceDAO;
 
-    private String title;
-    private String category;
-    private Booking booking;
-    private Customer customer;
+    @Inject
+    private BookingDAO bookingDAO;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    @Inject
+    private CustomerDAO customerDAO;
+
+    private String serviceId;
+    private BookingTO booking;
+    private CustomerTO customer;
+    private ServiceEntity service;
 
     public String getTitle() {
-        switch (category) {
-            case "entertainment":
-                return "Unterhaltung";
-            case "wellness":
-                return "Wellness";
-            case "fitness":
-                return "Fitness";
-            case "culinary":
-                return "Kulinarisches";
-            case "culture":
-                return "Kultur";
-            case "massage":
-                return "Massage";
-            case "transportation":
-                return "Transport";
-            default:
-                return "Titel";
-        }
+        return getService().getServiceName();
     }
 
-    public void setCategory(String category) {
-        if (StringUtils.isNotEmpty(category))
-            this.category = category;
+    public void setServiceId(String serviceId) {
+        if (StringUtils.isNotEmpty(serviceId))
+            this.serviceId = serviceId;
     }
 
-    public String getCategory() {
-        return category;
+    public String getServiceId() {
+        return serviceId;
     }
 
     public String submit() {
-        return "http://the-eventers.de";
+        return "http://www.the-eventers.de";
     }
 
-    public void setBooking(Booking booking) {
+    public void setBooking(BookingTO booking) {
         this.booking = booking;
     }
 
-    public Booking getBooking() {
-        if (booking == null) booking = new Booking();
+    public BookingTO getBooking() {
+        if (booking == null) booking = new BookingTO();
         return booking;
     }
 
-    public List<String> getAllAvailableDurations() {
-        return Arrays.asList(
-                "30 Minuten",
-                "1 Stunde",
-                "1,5 Stunden",
-                "2 Stunden",
-                "2,5 Stunden",
-                "3 Stunden",
-                "4 Stunden",
-                "5 Stunden");
+    public List<EventDuration> getAllAvailableDurations() {
+        return Arrays.asList(EventDuration.values());
     }
 
-    public List<String> getAllAvailableFlexibilities() {
-        return Arrays.asList(
-                "nicht flexibel",
-                "30 Minuten",
-                "1 Stunde",
-                "1,5 Stunden",
-                "2 Stunden",
-                "2,5 Stunden",
-                "3 Stunden",
-                "4 Stunden",
-                "5 Stunden");
+    public List<EventFlexibility> getAllAvailableFlexibilities() {
+        return Arrays.asList(EventFlexibility.values());
     }
 
-    public Customer getCustomer() {
-        if (customer == null) customer = new Customer();
+    public CustomerTO getCustomer() {
+        if (customer == null) customer = new CustomerTO();
         return this.customer;
     }
 
     public String saveOffer() {
+        booking = bookingDAO.persist(booking);
         return "booking2.xhtml?step=1&faces-redirect=true";
     }
 
     public String saveCustomer() {
+        customer = customerDAO.persist(customer);
         return "booking3.xhtml?step=2&faces-redirect=true";
+    }
+
+    public ServiceEntity getService() {
+        if (service == null) {
+            service = serviceDAO.findServiceById(serviceId);
+            if (service == null) throw new IllegalArgumentException("Unknown service id: " + serviceId);
+        }
+        return service;
+    }
+
+    public void setService(ServiceEntity service) {
+        this.service = service;
     }
 }

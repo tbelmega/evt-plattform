@@ -6,12 +6,12 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 public class ServiceDAO {
 
     @PersistenceContext
     EntityManager em;
 
-    @Transactional
     public void persist(ServiceEntity massage) {
         em.persist(massage);
     }
@@ -23,5 +23,9 @@ public class ServiceDAO {
                 em.createQuery(qlString, ServiceEntity.class);
 
         return query.setParameter("category_id", categoryId).getResultList();
+    }
+
+    public ServiceEntity findServiceById(String serviceId) {
+        return em.find(ServiceEntity.class, serviceId);
     }
 }

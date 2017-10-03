@@ -9,7 +9,7 @@
     <ui:define name="metadata">
         <f:metadata>
             <!-- When page is loaded, get category from URL and store it in the bean. -->
-            <f:viewParam name="category" value="#{bookingBean.category}"/>
+            <f:viewParam name="category" value="#{bookingBean.serviceId}"/>
         </f:metadata>
     </ui:define>
 
@@ -20,8 +20,7 @@
 
             <div class="float-left">
                 <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
-                <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting"
-                                 class="width-medium">
+                <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting">
                     <f:selectItem itemLabel="Bitte auswählen..."/>
                     <f:selectItem itemValue="mrs" itemLabel="Frau"/>
                     <f:selectItem itemValue="mr" itemLabel="Herr"/>
@@ -29,30 +28,27 @@
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputCompany">Firma</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.company}" id="inputCompany" class="width-medium"/>
+                <h:inputText value="#{bookingBean.customer.company}" id="inputCompany"/>
             </div>
             <div style="clear: both; margin: 0"/>
 
             <div class="float-left">
                 <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.firstname}" id="inputFirstname"
-                             class="width-medium"/>
+                <h:inputText value="#{bookingBean.customer.firstname}" id="inputFirstname"/>
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.lastname}" id="inputLastname" class="width-medium"/>
+                <h:inputText value="#{bookingBean.customer.lastname}" id="inputLastname"/>
             </div>
             <div style="clear: both; margin: 0"/>
 
             <div class="float-left">
                 <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress"
-                             class="width-medium"
-                             readonly="true"/>
+                <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress"/>
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputPhoneMobile">Telefonnummer für Rückfragen</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.mobile}" id="inputPhoneMobile" class="width-medium"/>
+                <h:inputText value="#{bookingBean.customer.mobile}" id="inputPhoneMobile"/>
             </div>
             <div style="clear: both; margin: 0"/>
 
@@ -69,8 +65,7 @@
             <div style="clear: both; margin: 0"/>
 
             <div class="buttons-hbox">
-                <p:commandButton value="Weiter"
-                                 action="#{bookingBean.saveCustomer}" ajax="false"/>
+                <p:commandButton value="Weiter" action="#{bookingBean.saveCustomer}" ajax="false"/>
             </div>
 
         </h:form>

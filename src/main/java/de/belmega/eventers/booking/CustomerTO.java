@@ -1,6 +1,8 @@
 package de.belmega.eventers.booking;
 
-public class Customer {
+public class CustomerTO {
+
+    private Long id;
     private String greeting;
     private String firstname;
     private String lastname;
@@ -8,6 +10,14 @@ public class Customer {
     private String mobile;
     private String company;
     private String hotelAdress;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public void setGreeting(String greeting) {
         this.greeting = greeting;
