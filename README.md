@@ -4,24 +4,36 @@
 * --Dienstleisterseite: Checkboxen statt Multiselect--
 * Sportutensilien: Datensätze aus DB
 * Testen auf Android
-* Styling: Eingabefelder breiter, Dropdowns gleichbreit
+* --Styling: Eingabefelder breiter, Dropdowns gleichbreit--
 * --Ggf statt Embedded Formular externes Formular--
 * --Dienleisterseiten in eine. Sichtbarkeit nach Rolle--
+
+* Wordpress: "Zum Portal" soll ins Menü ("Anmelden")
+* Fehlermeldung Registrierung länger
+* Erreichbarkeit: in 5-Minuten-Schritten bis 60 min
+* "Dienstleistung" statt "Angebot"
+* Profil: Bei "Speichern" oben zuklappen, unten aufklappen
+* Nach Profil "Speichern" weiter zu "Dienstleistung"
+* Textarea: breiter
+* Statt "Label" style, "heading" style
+* Kalender: Drrag&Drop für "kopieren"
+* Rechnerleistung mit Alex besprechen
+* Erfassungsformular für Studenten
+* Nach Auftragsausführung soll Dienstleister bestätigigen: Mail mit Link
+* Massagio-App testen 
 
 
 
 ## Rückfragen an Herrn Wilfling:
-* Kategorien und Services: Startseite und Einzelseiten übereinstimmend?
 * Kategorie Massage
-* Buchung: Hoteladresse bereits eingetragen?
 * Bezahlung: An the-eventers? An Dienstleiser?
 
 
 ## Priorisierte ToDos
 * Matching von Buchungsanfrage und Verfügbarkeit
-* Alternativen-Tabelle für Kunden
 * Mail-Service
 * Payment
+* Alternativen-Tabelle für Kunden
 
 
 ## Backlog
