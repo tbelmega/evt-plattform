@@ -6,8 +6,8 @@ public class BookingTO {
     private Long id;
     private Date date = new Date();
     private Date time;
-    private EventDuration duration;
-    private EventFlexibility flexibility;
+    private EventDuration duration = EventDuration.MIN_90;
+    private EventFlexibility flexibility = EventFlexibility.NONE;
     private Integer attendees;
     private String location;
     private String remark;

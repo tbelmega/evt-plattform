@@ -69,4 +69,15 @@ public class ScheduleEventEntity {
     public void setUser(ProviderUserEntity user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "ScheduleEventEntity{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", user=" + user +
+                '}';
+    }
 }

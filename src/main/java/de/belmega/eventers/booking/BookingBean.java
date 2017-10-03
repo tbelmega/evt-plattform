@@ -1,5 +1,7 @@
 package de.belmega.eventers.booking;
 
+import de.belmega.eventers.scheduling.ScheduleEventDAO;
+import de.belmega.eventers.scheduling.ScheduleEventEntity;
 import de.belmega.eventers.services.categories.ServiceDAO;
 import de.belmega.eventers.services.categories.ServiceEntity;
 import org.apache.commons.lang.StringUtils;
@@ -43,7 +45,14 @@ public class BookingBean implements Serializable {
     }
 
     public String submit() {
-        return "http://www.the-eventers.de";
+        booking = bookingDAO.persist(booking);
+
+        List<ScheduleEventEntity> availabilities = bookingDAO.findMatchingAvailabilities(booking);
+
+        for (ScheduleEventEntity availability: availabilities)
+            System.out.println(availability);
+
+        return "login.xhtml&faces-redirect=true";
     }
 
     public void setBooking(BookingTO booking) {

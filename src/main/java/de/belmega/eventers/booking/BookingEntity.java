@@ -1,9 +1,7 @@
 package de.belmega.eventers.booking;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -15,11 +13,25 @@ public class BookingEntity {
     private long id;
     private String location;
     private Boolean createInvoice;
-    private Date dateTime;
-    private EventDuration duration;
-    private EventFlexibility flexibility;
+
+    @Column(nullable = false)
+    private Date preferredStartTime = new Date();
+
+    @Column(nullable = false)
+    private EventDuration duration = EventDuration.MIN_90;
+
+    @Column(nullable = false)
+    private EventFlexibility flexibility = EventFlexibility.NONE;
+
     private Integer numberOfAttendees;
     private String remark;
+
+    @Column(nullable = false)
+    private Date latestStartTime = new Date();
+
+
+    @Column(nullable = false)
+    private Date earliestEndTime = new Date();
 
     public void setNumberOfAttendees(Integer numberOfAttendees) {
         this.numberOfAttendees = numberOfAttendees;
@@ -53,12 +65,12 @@ public class BookingEntity {
         return createInvoice;
     }
 
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public void setPreferredStartTime(Date preferredStartTime) {
+        this.preferredStartTime = preferredStartTime;
     }
 
-    public Date getDateTime() {
-        return dateTime;
+    public Date getPreferredStartTime() {
+        return preferredStartTime;
     }
 
     public void setDuration(EventDuration duration) {
@@ -83,5 +95,21 @@ public class BookingEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setLatestStartTime(Date latestStartTime) {
+        this.latestStartTime = latestStartTime;
+    }
+
+    public Date getLatestStartTime() {
+        return latestStartTime;
+    }
+
+    public Date getEarliestEndTime() {
+        return earliestEndTime;
+    }
+
+    public void setEarliestEndTime(Date earliestEndTime) {
+        this.earliestEndTime = earliestEndTime;
     }
 }

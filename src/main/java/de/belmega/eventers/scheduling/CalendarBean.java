@@ -2,6 +2,7 @@ package de.belmega.eventers.scheduling;
 
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserProfileBean;
+import de.belmega.eventers.util.DateUtil;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
@@ -153,8 +154,10 @@ public class CalendarBean {
     }
 
     private ScheduleEventEntity createEventEntity(ScheduleEvent event) {
+        Date endDate = DateUtil.combineDateTime(event.getStartDate(), event.getEndDate());
+
         ScheduleEventEntity scheduleEventEntity = new ScheduleEventEntity(event.getId(), event.getTitle(),
-                event.getStartDate(), event.getEndDate());
+                event.getStartDate(), endDate);
 
         scheduleEventEntity.setUser(getProvider());
         return scheduleEventEntity;
