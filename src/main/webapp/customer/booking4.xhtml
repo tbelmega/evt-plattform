@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="template-booking.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <!-- When page is loaded, get category from URL and store it in the bean. -->
+            <f:viewParam name="category" value="#{bookingBean.serviceId}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="main-content">
+
+        <h:form>
+            <h1>#{bookingBean.title}</h1>
+
+            <span>Vielen Dank für Ihre Buchung. Die verfügbaren Dienstleister wurden informiert
+                und werden Ihre Buchung in Kürze bestätigen.</span>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
+

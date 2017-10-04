@@ -88,8 +88,8 @@
                        styleClass="message"/>
 
             <div class="buttons-hbox">
-                <h:commandLink value="Absenden" class="button button_green"
-                               action="#{registerProviderBean.register()}" includeViewParams="true"/>
+                <p:commandButton value="Absenden"
+                                 actionListener="#{registerProviderBean.register}" ajax="false"/>
             </div>
             <h:messages globalOnly="true" errorStyle="color: red"/>
         </h:form>

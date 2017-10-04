@@ -52,7 +52,7 @@ public class BookingBean implements Serializable {
         for (ScheduleEventEntity availability: availabilities)
             System.out.println(availability);
 
-        return "login.xhtml&faces-redirect=true";
+        return "booking4.xhtml&faces-redirect=true";
     }
 
     public void setBooking(BookingTO booking) {

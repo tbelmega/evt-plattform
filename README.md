@@ -9,14 +9,14 @@
 * --Dienleisterseiten in eine. Sichtbarkeit nach Rolle--
 
 * Wordpress: "Zum Portal" soll ins Menü ("Anmelden")
-* Fehlermeldung Registrierung länger
-* Erreichbarkeit: in 5-Minuten-Schritten bis 60 min
-* "Dienstleistung" statt "Angebot"
+* --Fehlermeldung Registrierung länger--
+* --Erreichbarkeit: in 5-Minuten-Schritten bis 60 min--
+* --"Dienstleistung" statt "Angebot"--
 * Profil: Bei "Speichern" oben zuklappen, unten aufklappen
 * Nach Profil "Speichern" weiter zu "Dienstleistung"
 * Textarea: breiter
 * Statt "Label" style, "heading" style
-* Kalender: Drrag&Drop für "kopieren"
+* Kalender: Drag&Drop für "kopieren"
 * Serverleistung mit Alex besprechen
 * Erfassungsformular für Studenten
 * Nach Auftragsausführung soll Dienstleister bestätigigen: Mail mit Link

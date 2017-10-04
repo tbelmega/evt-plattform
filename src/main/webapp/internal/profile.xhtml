@@ -1,6 +1,7 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
                 template="template-internal.xhtml">
 
     <ui:define name="main-content">
@@ -42,7 +43,8 @@
                 <h:inputText value="#{userProfileBean.provider.mobile}" id="inputPhoneMobile" class="width-medium"/>
 
                 <div class="buttons-hbox">
-                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save}"/>
+                    <p:commandButton value="Speichern"
+                                     actionListener="#{userProfileBean.save}" ajax="false"/>
                 </div>
             </div>
 
@@ -71,11 +73,17 @@
                 <h:selectOneMenu value="#{userProfileBean.provider.contactable}" id="dropdownContactable" class="width-medium">
                     <f:selectItem itemLabel="Bitte auswählen..."/>
                     <f:selectItem itemValue="5" itemLabel="5 Minuten"/>
+                    <f:selectItem itemValue="10" itemLabel="10 Minuten"/>
                     <f:selectItem itemValue="15" itemLabel="15 Minuten"/>
+                    <f:selectItem itemValue="20" itemLabel="20 Minuten"/>
+                    <f:selectItem itemValue="25" itemLabel="25 Minuten"/>
                     <f:selectItem itemValue="30" itemLabel="30 Minuten"/>
-                    <f:selectItem itemValue="60" itemLabel="1 Stunde"/>
-                    <f:selectItem itemValue="120" itemLabel="2 Stunden"/>
-                    <f:selectItem itemValue="more" itemLabel="Länger"/>
+                    <f:selectItem itemValue="35" itemLabel="35 Minuten"/>
+                    <f:selectItem itemValue="40" itemLabel="40 Minuten"/>
+                    <f:selectItem itemValue="45" itemLabel="45 Minuten"/>
+                    <f:selectItem itemValue="50" itemLabel="50 Minuten"/>
+                    <f:selectItem itemValue="55" itemLabel="55 Minuten"/>
+                    <f:selectItem itemValue="60" itemLabel="60 Minuten"/>
                 </h:selectOneMenu>
 
                 <h4>Mobilität</h4>
@@ -91,7 +99,8 @@
                 <h:inputText value="#{userProfileBean.provider.hourlyRate}" id="inputHourlyRate" class="width-medium" />
 
                 <div class="buttons-hbox">
-                    <h:commandLink class="button button_green" value="Speichern" action="#{userProfileBean.save}"/>
+                    <p:commandButton value="Speichern"
+                                     actionListener="#{userProfileBean.save}" ajax="false"/>
                 </div>
             </div>
 
