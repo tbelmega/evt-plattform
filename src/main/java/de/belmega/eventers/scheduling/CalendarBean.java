@@ -103,8 +103,6 @@ public class CalendarBean {
             if (repititionsAsIntegers.contains(dayOfWeek))
                 addEventSeries(cal.getTime(), event, repeatUntil);
         }
-
-        System.out.println(repeatUntil);
     }
 
     /**

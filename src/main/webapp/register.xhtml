@@ -10,14 +10,8 @@
             <h:outputLabel for="selectCategory">Ihr Fachgebiet</h:outputLabel>
             <h:selectOneMenu value="#{registerProviderBean.category}" id="selectCategory"
                              class="width-medium">
-                <f:ajax execute="@this" listener="#{registerProviderBean.categorySelected}" render="selectService" />
                 <f:selectItem itemLabel="Bitte auswählen..."/>
                 <f:selectItems value="#{registerProviderBean.allAvailableCategories}" var="cat" itemLabel="#{cat.categoryName}" itemValue="#{cat.id}"/>
-            </h:selectOneMenu>
-            <h:selectOneMenu value="#{registerProviderBean.service}" id="selectService"
-                             class="width-medium">
-                <f:selectItem itemLabel="Bitte erst Kategorie auswählen..."/>
-                <f:selectItems value="#{registerProviderBean.servicesForCategory}"/>
             </h:selectOneMenu>
 
             <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
@@ -89,7 +83,7 @@
 
             <div class="buttons-hbox">
                 <p:commandButton value="Absenden"
-                                 actionListener="#{registerProviderBean.register}" ajax="false"/>
+                                 action="#{registerProviderBean.register}" ajax="false"/>
             </div>
             <h:messages globalOnly="true" errorStyle="color: red"/>
         </h:form>

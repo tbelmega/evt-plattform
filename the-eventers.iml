@@ -41,8 +41,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-api:7.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sun.mail:javax.mail:1.5.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:jaxrs:2017.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:container:2017.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:spi:2017.4.0" level="project" />
@@ -86,7 +85,6 @@
     <orderEntry type="library" name="Maven: org.wildfly.swarm:bean-validation:2017.4.0" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:ee:2017.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.wildfly.swarm:naming:2017.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.enterprise.concurrent:jboss-concurrency-api_1.0_spec:1.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.2_spec:1.0.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.spec.javax.el:jboss-el-api_3.0_spec:1.0.7.Final" level="project" />
@@ -97,6 +95,9 @@
     <orderEntry type="library" name="Maven: org.jboss.openjdk-orb:openjdk-orb:8.0.4.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:1.2" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: org.wildfly.swarm:mail:2017.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.wildfly.swarm:naming:2017.4.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:jpa:2017.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:datasources:2017.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.wildfly.swarm:jca:2017.4.0" level="project" />

@@ -1,5 +1,6 @@
 package de.belmega.eventers.user.registration;
 
+import de.belmega.eventers.mail.EmailSessionBean;
 import de.belmega.eventers.services.categories.CategoryDAO;
 import de.belmega.eventers.services.categories.CategoryEntity;
 import de.belmega.eventers.services.categories.ServiceDAO;
@@ -40,12 +41,24 @@ public class RegisterProviderBean implements Serializable {
     ServiceDAO serviceDAO;
 
     @Inject
+    EmailSessionBean emailSessionBean;
+
+    @Inject
+    @ConfigurationValue("urls.hostname")
+    String hostname;
+
+    @Inject
+    @ConfigurationValue("urls.pages.profile")
+    String profileSite;
+
+
+    @Inject
     @ConfigurationValue("urls.pages.registered")
     String registeredSite;
 
     private ProviderUserEntity provider;
     private String category;
-    private Object service;
+    private String service;
 
     @PostConstruct
     public void init() {
@@ -63,12 +76,23 @@ public class RegisterProviderBean implements Serializable {
         provider.setCategoryIds(categories);
         try {
             UserID serviceProviderID = providerService.registerNewProvider(provider);
-            return registeredSite + "?faces-redirect=true";
+
+            sendRegistrationEmail();
+
+            String page = registeredSite + "?faces-redirect=true";
+            System.out.println("Going to page " + page);
+            return page;
         } catch (MailadressAlreadyInUse mailadressAlreadyInUse) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Diese Mailadresse wird bereits genutzt.", null));
             return "";
         }
+    }
+
+    public void sendRegistrationEmail() {
+        System.out.println("Sending Email...");
+
+        emailSessionBean.sendEmail("t.belmega@gmx.de", "Test", "Does that work...?" + hostname + profileSite);
     }
 
     public void setProvider(ProviderUserEntity provider) {
@@ -97,11 +121,11 @@ public class RegisterProviderBean implements Serializable {
         else return serviceDAO.findServicesByCategory(category);
     }
 
-    public void setService(Object service) {
+    public void setService(String service) {
         this.service = service;
     }
 
-    public Object getService() {
+    public String getService() {
         return service;
     }
 
