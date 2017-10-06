@@ -116,7 +116,7 @@ public class TestDataGenerator {
     private void generateTestData() throws MailadressAlreadyInUse {
 
         try {
-            registerUser("1", "Belmega", "Thiemo", "foo", "foo",
+            registerUser("1", "Belmega", "Thiemo", "t.belmega@gmx.de", "foo",
                     Arrays.asList(ServiceCategoryId.values()));
             registerUser("2", "Wilfling", "Jochen", "info@coorgeist.de", "eventers789!",
                     Arrays.asList(ServiceCategoryId.values()));

@@ -14,6 +14,8 @@ public class BookingEntity {
     private String location;
     private Boolean createInvoice;
 
+    private boolean bookingConfirmed = false;
+
     @Column(nullable = false)
     private Date preferredStartTime = new Date();
 
@@ -111,5 +113,13 @@ public class BookingEntity {
 
     public void setEarliestEndTime(Date earliestEndTime) {
         this.earliestEndTime = earliestEndTime;
+    }
+
+    public boolean isBookingConfirmed() {
+        return bookingConfirmed;
+    }
+
+    public void setBookingConfirmed(boolean bookingConfirmed) {
+        this.bookingConfirmed = bookingConfirmed;
     }
 }

@@ -95,10 +95,8 @@ public class RegisterProviderBean implements Serializable {
 
         Map<String, String> data = new HashMap<>();
         data.put("greeting", provider.getGreeting().getGreeting() + " " + provider.getLastname());
-        data.put("link", hostname + profileSite + "?id=" + provider.getId());
+        data.put("link", hostname + profileSite + "?id=" + provider.getId().getId());
         String formattedMailText = StrSubstitutor.replace(mailTextString, data);
-
-        System.out.println(formattedMailText);
 
         emailSessionBean.sendEmail(provider.getEmailadress(), "Registrierung auf the-eventers.de", formattedMailText);
     }

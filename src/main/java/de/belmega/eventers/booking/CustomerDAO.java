@@ -41,4 +41,8 @@ public class CustomerDAO {
             return em.find(CustomerEntity.class, customer.getId());
         } else return null;
     }
+
+    public CustomerEntity findById(Long customerId) {
+        return em.find(CustomerEntity.class, customerId);
+    }
 }

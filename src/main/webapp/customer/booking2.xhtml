@@ -20,10 +20,12 @@
 
             <div class="float-left">
                 <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
-                <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting">
+                <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting"
+                                 required="true" requiredMessage="Anrede: Angabe benötigt."
+                                 class="width-medium">
                     <f:selectItem itemLabel="Bitte auswählen..."/>
-                    <f:selectItem itemValue="mrs" itemLabel="Frau"/>
-                    <f:selectItem itemValue="mr" itemLabel="Herr"/>
+                    <f:selectItems value="#{bookingBean.allAvailableGreetings}" var="greeting"
+                                   itemLabel="#{greeting.name}" itemValue="#{greeting}"/>
                 </h:selectOneMenu>
             </div>
             <div class="float-right">
@@ -44,23 +46,23 @@
 
             <div class="float-left">
                 <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress"/>
+                <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress" required="true"/>
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputPhoneMobile">Telefonnummer für Rückfragen</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.mobile}" id="inputPhoneMobile"/>
+                <h:inputText value="#{bookingBean.customer.mobile}" id="inputPhoneMobile" required="true"/>
             </div>
             <div style="clear: both; margin: 0"/>
 
             <div class="float-left">
                 <h:outputLabel for="inputHotel">Adresse Hotel</h:outputLabel>
                 <h:inputTextarea value="#{bookingBean.customer.hotelAdress}" id="inputHotel" cols="30" rows="5"
-                                 style="resize: none"/>
+                                 style="resize: none" required="true"/>
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputRemark">Bemerkungen zur Buchungsanfrage</h:outputLabel>
                 <h:inputTextarea value="#{bookingBean.booking.remark}" id="inputRemark" cols="30" rows="5"
-                                 style="resize: none"/>
+                                 style="resize: none" required="true"/>
             </div>
             <div style="clear: both; margin: 0"/>
 

@@ -1,5 +1,7 @@
 package de.belmega.eventers.booking;
 
+import de.belmega.eventers.user.Greeting;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +15,7 @@ public class CustomerEntity {
     @GeneratedValue
     long id;
     private String company;
-    private String greeting;
+    private Greeting greeting;
     private String firstName;
     private String lastName;
     private String emailadress;
@@ -37,11 +39,11 @@ public class CustomerEntity {
         return company;
     }
 
-    public void setGreeting(String greeting) {
+    public void setGreeting(Greeting greeting) {
         this.greeting = greeting;
     }
 
-    public String getGreeting() {
+    public Greeting getGreeting() {
         return greeting;
     }
 

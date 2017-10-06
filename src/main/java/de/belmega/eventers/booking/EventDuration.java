@@ -29,4 +29,7 @@ public enum EventDuration {
         return minutes;
     }
 
+    public String getText() {
+        return text;
+    }
 }

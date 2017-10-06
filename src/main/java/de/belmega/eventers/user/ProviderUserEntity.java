@@ -21,7 +21,7 @@ public class ProviderUserEntity {
     private String firstname;
     private String lastname;
     private String emailadress;
-    private Greeting greeting;
+    private Greeting greeting = Greeting.MR;
     private String street;
     private String zipcode;
     private String city;

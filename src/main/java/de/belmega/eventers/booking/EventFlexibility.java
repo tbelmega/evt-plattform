@@ -29,4 +29,8 @@ public enum EventFlexibility {
     public int getMinutes() {
         return minutes;
     }
+
+    public String getText() {
+        return text;
+    }
 }

@@ -1,0 +1,29 @@
+${greeting-provider},
+es liegt eine neue Kundenbuchung vor.
+
+Kundendaten:
+${greeting-customer}
+${email-customer}
+${phone}
+Hotel: ${hotel}
+
+Auftragsdaten:
+Dienstleistung: ${service-name}
+Datum: ${start-date}
+Gewünschte Zeit: ${preferred-time} Uhr
+Gewünschte Dauer: ${duration}
+Flexibilität: ${flexibility}
+
+Anzahl der Teilnehmer: ${number-of-participants}
+Ort: ${location}
+Treffpunkt: ${meeting-location}
+
+Bemerkungen:
+${remarks}
+
+Um den Auftrag anzunehmen, klicken Sie bitte auf untenstehenden Link:
+${link}
+
+
+Mit freundlichen Grüßen
+Ihr Team von The-Eventers.de

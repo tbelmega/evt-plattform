@@ -77,4 +77,7 @@ public class BookingDAO {
         return query.getResultList();
     }
 
+    public BookingEntity findById(Long bookingId) {
+        return em.find(BookingEntity.class, bookingId);
+    }
 }

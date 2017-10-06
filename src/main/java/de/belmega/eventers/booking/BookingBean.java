@@ -1,17 +1,25 @@
 package de.belmega.eventers.booking;
 
-import de.belmega.eventers.scheduling.ScheduleEventDAO;
+import de.belmega.eventers.mail.EmailSessionBean;
 import de.belmega.eventers.scheduling.ScheduleEventEntity;
 import de.belmega.eventers.services.categories.ServiceDAO;
 import de.belmega.eventers.services.categories.ServiceEntity;
+import de.belmega.eventers.user.Greeting;
+import de.belmega.eventers.user.ProviderUserEntity;
+import de.belmega.eventers.user.UserDAO;
+import de.belmega.eventers.user.registration.RegisterProviderBean;
+import io.undertow.util.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.text.StrSubstitutor;
+import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @ManagedBean
 @SessionScoped
@@ -24,12 +32,29 @@ public class BookingBean implements Serializable {
     private BookingDAO bookingDAO;
 
     @Inject
+    BookingLinkDAO bookingLinkDAO;
+
+    @Inject
     private CustomerDAO customerDAO;
+
+    @Inject
+    private UserDAO userDAO;
+
+    @Inject
+    EmailSessionBean emailSessionBean;
+
+
+    @Inject
+    @ConfigurationValue("urls.hostname")
+    String hostname;
+
 
     private String serviceId;
     private BookingTO booking;
     private CustomerTO customer;
     private ServiceEntity service;
+    public static final SimpleDateFormat DATE_ONLY = new SimpleDateFormat("dd.MM.yyyy");
+    public static final SimpleDateFormat TIME_ONLY = new SimpleDateFormat("hh:mm");
 
     public String getTitle() {
         return getService().getServiceName();
@@ -49,10 +74,48 @@ public class BookingBean implements Serializable {
 
         List<ScheduleEventEntity> availabilities = bookingDAO.findMatchingAvailabilities(booking);
 
-        for (ScheduleEventEntity availability: availabilities)
-            System.out.println(availability);
+        for (ScheduleEventEntity availability : availabilities)
+            sendBookingEmailToProviders(availability);
 
-        return "booking4.xhtml&faces-redirect=true";
+        return "booking4.xhtml?step=-1&faces-redirect=true";
+    }
+
+    private void sendBookingEmailToProviders(ScheduleEventEntity availability) {
+        InputStream mailText = RegisterProviderBean.class.getClassLoader().getResourceAsStream("emails/booking.txt");
+        String mailTextString = FileUtils.readFile(mailText);
+
+        ProviderUserEntity provider = availability.getUser();
+
+        Map<String, String> data = new HashMap<>();
+        data.put("greeting-provider", provider.getGreeting().getGreeting() + " " + provider.getLastname());
+        data.put("greeting-customer", customer.getGreeting().getName() + " "
+                + customer.getFirstname() + " " + customer.getLastname() + " " + customer.getCompany());
+
+        data.put("email-customer", customer.getEmailadress());
+        data.put("phone", customer.getMobile());
+        data.put("hotel", customer.getHotelAdress());
+
+        data.put("service-name", service.getServiceName());
+
+        data.put("preferred-time", TIME_ONLY.format(booking.getTime()));
+        data.put("duration", booking.getDuration().getText());
+        data.put("flexibility", booking.getFlexibility().getText());
+        data.put("start-date", DATE_ONLY.format(booking.getDate()));
+        data.put("number-of-participants", booking.getAttendees().toString());
+
+        data.put("location", booking.getLocation());
+        data.put("meeting-location", booking.getLocation());
+        data.put("remarks", booking.getRemark());
+
+        BookingLinkEntity link = bookingLinkDAO.createBookingLink(booking, customer, provider);
+
+        String fullLink = hostname + "/confirm-booking.xhtml?id=" + link.getId();
+        data.put("link", fullLink);
+
+        String formattedMailText = StrSubstitutor.replace(mailTextString, data);
+        System.out.println(formattedMailText);
+
+        emailSessionBean.sendEmail(provider.getEmailadress(), "Neue Buchungsanfrage auf the-eventers.de", formattedMailText);
     }
 
     public void setBooking(BookingTO booking) {
@@ -97,5 +160,9 @@ public class BookingBean implements Serializable {
 
     public void setService(ServiceEntity service) {
         this.service = service;
+    }
+
+    public Greeting[] getAllAvailableGreetings() {
+        return Greeting.values();
     }
 }

@@ -1,9 +1,11 @@
 package de.belmega.eventers.booking;
 
+import de.belmega.eventers.user.Greeting;
+
 public class CustomerTO {
 
     private Long id;
-    private String greeting;
+    private Greeting greeting;
     private String firstname;
     private String lastname;
     private String emailadress;
@@ -19,11 +21,11 @@ public class CustomerTO {
         this.id = id;
     }
 
-    public void setGreeting(String greeting) {
+    public void setGreeting(Greeting greeting) {
         this.greeting = greeting;
     }
 
-    public String getGreeting() {
+    public Greeting getGreeting() {
         return greeting;
     }
 

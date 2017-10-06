@@ -21,24 +21,28 @@
             <div class="float-left">
                 <h:outputLabel for="eventDate" value="Datum"/>
                 <p:calendar id="eventDate" value="#{bookingBean.booking.date}"
+                            required="true"
                             pattern="dd.MM.yyyy" locale="de" showOn="button"/>
             </div>
             <div class="float-right">
                 <h:outputLabel for="eventTime" value="Gewünschte Zeit"/>
                 <p:calendar id="eventTime" value="#{bookingBean.booking.time}"
+                            required="true"
                             pattern="HH:mm" timeOnly="true" locale="de" showOn="button"/>
             </div>
             <div style="clear: both; margin: 0"/>
 
             <div class="float-left">
                 <h:outputLabel for="dropdownFlexibility">Zeitliche Flexibilität</h:outputLabel>
-                <h:selectOneMenu value="#{bookingBean.booking.flexibility}" id="dropdownFlexibility">
+                <h:selectOneMenu value="#{bookingBean.booking.flexibility}" id="dropdownFlexibility"
+                                 required="true">
                     <f:selectItems value="#{bookingBean.allAvailableFlexibilities}"/>
                 </h:selectOneMenu>
             </div>
             <div class="float-right">
                 <h:outputLabel for="dropdownDuration">Gewünschte Dauer</h:outputLabel>
-                <h:selectOneMenu value="#{bookingBean.booking.duration}" id="dropdownDuration">
+                <h:selectOneMenu value="#{bookingBean.booking.duration}" id="dropdownDuration"
+                                 required="true">
                     <f:selectItems value="#{bookingBean.allAvailableDurations}"/>
                 </h:selectOneMenu>
             </div>
@@ -46,11 +50,13 @@
 
             <div class="float-left">
                 <h:outputLabel for="inputAttendees">Anzahl der Teilnehmer</h:outputLabel>
-                <h:inputText value="#{bookingBean.booking.attendees}" id="inputAttendees" converter="javax.faces.Integer"/>
+                <h:inputText value="#{bookingBean.booking.attendees}" id="inputAttendees" converter="javax.faces.Integer"
+                             required="true"/>
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputLocation">Treffpunkt</h:outputLabel>
-                <h:inputText value="#{bookingBean.booking.location}" id="inputLocation"/>
+                <h:inputText value="#{bookingBean.booking.location}" id="inputLocation"
+                             required="true"/>
             </div>
             <div style="clear: both; margin: 0"/>
             <div class="buttons-hbox">
