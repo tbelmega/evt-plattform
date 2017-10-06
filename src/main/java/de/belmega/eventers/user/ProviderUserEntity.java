@@ -21,7 +21,7 @@ public class ProviderUserEntity {
     private String firstname;
     private String lastname;
     private String emailadress;
-    private String greeting;
+    private Greeting greeting;
     private String street;
     private String zipcode;
     private String city;
@@ -70,11 +70,11 @@ public class ProviderUserEntity {
         this.emailadress = emailadress;
     }
 
-    public String getGreeting() {
+    public Greeting getGreeting() {
         return greeting;
     }
 
-    public void setGreeting(String greeting) {
+    public void setGreeting(Greeting greeting) {
         this.greeting = greeting;
     }
 

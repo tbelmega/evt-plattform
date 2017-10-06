@@ -5,11 +5,14 @@ import de.belmega.eventers.services.categories.CategoryDAO;
 import de.belmega.eventers.services.categories.CategoryEntity;
 import de.belmega.eventers.services.categories.ServiceDAO;
 import de.belmega.eventers.services.categories.ServiceEntity;
+import de.belmega.eventers.user.Greeting;
 import de.belmega.eventers.user.ProviderUserEntity;
 import de.belmega.eventers.user.UserID;
 import de.belmega.eventers.user.ProviderService;
 import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
+import io.undertow.util.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.text.StrSubstitutor;
 import org.primefaces.context.RequestContext;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -20,11 +23,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import java.io.InputStream;
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Named
@@ -80,7 +81,6 @@ public class RegisterProviderBean implements Serializable {
             sendRegistrationEmail();
 
             String page = registeredSite + "?faces-redirect=true";
-            System.out.println("Going to page " + page);
             return page;
         } catch (MailadressAlreadyInUse mailadressAlreadyInUse) {
             FacesContext.getCurrentInstance().addMessage(null,
@@ -90,9 +90,17 @@ public class RegisterProviderBean implements Serializable {
     }
 
     public void sendRegistrationEmail() {
-        System.out.println("Sending Email...");
+        InputStream mailText = RegisterProviderBean.class.getClassLoader().getResourceAsStream("emails/registration.txt");
+        String mailTextString = FileUtils.readFile(mailText);
 
-        emailSessionBean.sendEmail("t.belmega@gmx.de", "Test", "Does that work...?" + hostname + profileSite);
+        Map<String, String> data = new HashMap<>();
+        data.put("greeting", provider.getGreeting().getGreeting() + " " + provider.getLastname());
+        data.put("link", hostname + profileSite + "?id=" + provider.getId());
+        String formattedMailText = StrSubstitutor.replace(mailTextString, data);
+
+        System.out.println(formattedMailText);
+
+        emailSessionBean.sendEmail(provider.getEmailadress(), "Registrierung auf the-eventers.de", formattedMailText);
     }
 
     public void setProvider(ProviderUserEntity provider) {
@@ -132,5 +140,9 @@ public class RegisterProviderBean implements Serializable {
     // This is called when user selects a category
     public void categorySelected() {
         RequestContext.getCurrentInstance().update("selectService");
+    }
+
+    public Greeting[] getAllAvailableGreetings() {
+        return Greeting.values();
     }
 }

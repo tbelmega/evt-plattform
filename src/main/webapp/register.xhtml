@@ -9,17 +9,19 @@
         <h:form>
             <h:outputLabel for="selectCategory">Ihr Fachgebiet</h:outputLabel>
             <h:selectOneMenu value="#{registerProviderBean.category}" id="selectCategory"
+                             required="true" requiredMessage="Fachgebiet: Angabe benötigt."
                              class="width-medium">
                 <f:selectItem itemLabel="Bitte auswählen..."/>
                 <f:selectItems value="#{registerProviderBean.allAvailableCategories}" var="cat" itemLabel="#{cat.categoryName}" itemValue="#{cat.id}"/>
             </h:selectOneMenu>
 
             <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
-            <h:selectOneMenu value="#{registerProviderBean.provider.greeting}" id="selectGreeting" class="width-medium">
+            <h:selectOneMenu value="#{registerProviderBean.provider.greeting}" id="selectGreeting"
+                             required="true" requiredMessage="Anrede: Angabe benötigt."
+                             class="width-medium">
                 <f:selectItem itemLabel="Bitte auswählen..."/>
-                <f:selectItem itemValue="mrs" itemLabel="Frau"/>
-                <f:selectItem itemValue="mr" itemLabel="Herr"/>
-                <f:selectItem itemValue="company" itemLabel="Firma"/>
+                <f:selectItems value="#{registerProviderBean.allAvailableGreetings}" var="greeting"
+                               itemLabel="#{greeting.name}" itemValue="#{greeting}"/>
             </h:selectOneMenu>
 
             <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
