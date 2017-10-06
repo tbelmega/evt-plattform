@@ -1,5 +1,7 @@
 package de.belmega.eventers.mail;
 
+import com.sun.mail.smtp.SMTPTransport;
+
 import javax.ejb.Stateless;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -17,7 +19,7 @@ public class EmailSessionBean {
         Properties props = new Properties();
         props.put("mail.smtp.host", registration.getHost());
         props.put("mail.smtp.port", registration.getPort());
-        props.put("mail.smtp.ssl.enable", true);
+        props.put("mail.smtp.starttls.enable", true);
 
         Authenticator authenticator = null;
         if (registration.isAuth()) {
@@ -43,6 +45,7 @@ public class EmailSessionBean {
             message.setSubject(subject);
             message.setSentDate(new Date());
             message.setText(body);
+
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();

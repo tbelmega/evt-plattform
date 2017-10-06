@@ -2,14 +2,15 @@ package de.belmega.eventers.mail;
 
 public class EmailAdress {
 
-    private int port = 465;
-    private String host = "secureams22.sgcpanel.com";
-    private String from = "registrierung@the-eventers.de";
+    private int port = 587;
+    private String host = "smtp.gmail.com";
+    private String from = "noreply@the-eventers.de";
     private boolean auth = true;
-    private String username = "registrierung@the-eventers.de";
-    private String password = "4hZQXCig0WOC67VYeHzU";
-    private String protocol = "SMTPS";
-    private boolean debug = true;
+    private String username = "the.eventers.de@gmail.com";
+    private String password = "RcCuZnRev2VTWdnlabNy";
+    private String protocol = "TLS";
+    private boolean debug = false;
+
 
     public EmailAdress() {
     }
