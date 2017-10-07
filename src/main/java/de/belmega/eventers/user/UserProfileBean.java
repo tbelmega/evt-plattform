@@ -20,6 +20,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -31,6 +32,7 @@ public class UserProfileBean implements Serializable {
     ProviderService providerService;
 
     private ProviderUserEntity provider;
+    private String currentPage;
 
     public void save() {
         providerService.userDAO.update(provider);
@@ -98,5 +100,29 @@ public class UserProfileBean implements Serializable {
     public boolean isInRoleTransportation() {
         String fitness = ServiceCategoryId.TRANSPORTATION.name();
         return getProvider().getCategoryIds().contains(fitness);
+    }
+
+    public void setCurrentPage(String currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    private String getPage(String currentPage) {
+        switch (currentPage) {
+            case "profile": return "profile.xhtml";
+            case "services": return "services.xhtml";
+            case "calendar": return "calendar.xhtml";
+            case "assignments": return "assignments.xhtml";
+            default: System.out.println(currentPage); return "";
+        }
+    }
+
+    public void navigate() throws IOException {
+        String url = getPage(this.currentPage);
+        FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
+    public String getCurrentPage() {
+        return currentPage;
     }
 }

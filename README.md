@@ -41,7 +41,6 @@
 * Der Dienstleister hat nun zwei Optionen: A. Auftrag ausgeführt. Feld Bemerkungen. B. Auftrag nicht ausgeführt. Feld Bemerkungen. Mit einem Klick (setzen eines Häkchens) auf die entsprechende Option lässt sich das wahrscheinlich am besten umsetzen.
 
 
-
 ## Rückfragen an Herrn Wilfling:
 * Kategorie Massage
 * Bezahlung: An the-eventers? An Dienstleiser?

@@ -45,28 +45,24 @@
 </h:head>
 
 <h:body>
-    <h:form>
-        <p:tabMenu activeIndex="#{param.i}">
-            <p:menuitem value="Profil" outcome="/internal/profile.xhtml">
-                <f:param name="i" value="0" />
-            </p:menuitem>
-            <p:menuitem value="Dienstleistungen" outcome="/internal/services.xhtml">
-                <f:param name="i" value="1" />
-            </p:menuitem>
-            <p:menuitem value="Kalender" outcome="/internal/calendar.xhtml">
-                <f:param name="i" value="2" />
-            </p:menuitem>
-            <p:menuitem value="Aufträge" outcome="/internal/assignments.xhtml">
-                <f:param name="i" value="3" />
-            </p:menuitem>
-            <p:menuitem value="Logout" action="#{loginBean.logout}" >
-            </p:menuitem>
-        </p:tabMenu>
-    </h:form>
 
     <p:growl id="growl"/>
 
     <div class="container-fluid">
+        <h:form>
+            <p:selectOneButton value="#{userProfileBean.currentPage}" ajax="true">
+
+                <f:selectItem itemLabel="Profil" itemValue="profile"/>
+                <f:selectItem itemLabel="Dienstleistung" itemValue="services"/>
+                <f:selectItem itemLabel="Kalender" itemValue="calendar"/>
+                <f:selectItem itemLabel="Aufträge" itemValue="assignments"/>
+                <p:ajax event="change" listener="#{userProfileBean.navigate}" />
+            </p:selectOneButton>
+
+            <p:commandButton value="Logout" icon="fa fa-power-off" style="float: right; clear-after: both; text-align: center" action="#{loginBean.logout}" />
+        </h:form>
+
+
         <div id="main">
             <ui:insert name="main-content">
 

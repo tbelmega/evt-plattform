@@ -216,7 +216,7 @@ form label {
 
 /* Vertical spacing*/
 div {
-    margin-bottom: 2.5em
+    margin-bottom: 0em
 }
 
 .scheduler-section div {
@@ -345,7 +345,6 @@ a.tp-button {
 a.button, a.tp-button, button, input[type="submit"], input[type="reset"], input[type="button"] {
     display: inline-block;
     padding: 11px 20px;
-    margin-bottom: 15px;
     cursor: pointer;
     margin-right: 7px;
     border: 0;
