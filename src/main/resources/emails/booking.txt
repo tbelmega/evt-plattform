@@ -1,5 +1,5 @@
 ${greeting-provider},
-es liegt eine neue Kundenbuchung vor.
+es liegt eine neue Kundenanfrage vor.
 
 Kundendaten:
 ${greeting-customer}

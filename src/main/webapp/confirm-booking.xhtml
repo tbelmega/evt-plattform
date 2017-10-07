@@ -15,10 +15,9 @@
 
     <ui:define name="main-content">
         <h:form>
-            <h:outputLabel>#{confirmBookingBean.linkId}</h:outputLabel>
-            <h:outputText>#{confirmBookingBean.link.provider.lastname}</h:outputText>
-            <h:outputText>#{confirmBookingBean.customerEntity.lastName}</h:outputText>
-            <h:outputText>#{confirmBookingBean.bookingEntity.preferredStartTime}</h:outputText>
+            <h:outputText value="#{confirmBookingBean.link.provider.lastname}"/><br/>
+            <h:outputText value="#{confirmBookingBean.customerEntity.lastName}"/><br/>
+            <h:outputText value="#{confirmBookingBean.bookingEntity.preferredStartTime}"/>
 
         </h:form>
     </ui:define>
