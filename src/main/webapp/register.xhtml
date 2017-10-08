@@ -83,6 +83,8 @@
             <h:message for="inputPasswordConfirmation" id="m_password_confirm" errorStyle="color: red"
                        styleClass="message"/>
 
+            <p:captcha label="Captcha" id="captcha" required="true"/><!-- requires key in web.xml, register at google first -->
+
             <div class="buttons-hbox">
                 <p:commandButton value="Absenden"
                                  action="#{registerProviderBean.register}" ajax="false"/>
