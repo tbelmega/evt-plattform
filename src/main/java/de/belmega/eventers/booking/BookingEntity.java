@@ -1,5 +1,7 @@
 package de.belmega.eventers.booking;
 
+import de.belmega.eventers.user.ProviderUserEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -34,6 +36,9 @@ public class BookingEntity {
 
     @Column(nullable = false)
     private Date earliestEndTime = new Date();
+
+    @ManyToOne
+    private ProviderUserEntity provider;
 
     public void setNumberOfAttendees(Integer numberOfAttendees) {
         this.numberOfAttendees = numberOfAttendees;
@@ -121,5 +126,18 @@ public class BookingEntity {
 
     public void setBookingConfirmed(boolean bookingConfirmed) {
         this.bookingConfirmed = bookingConfirmed;
+    }
+
+    public void setProvider(ProviderUserEntity provider) {
+        this.provider = provider;
+    }
+
+    public ProviderUserEntity getProvider() {
+        return provider;
+    }
+
+    @Transient
+    public boolean isAccepted() {
+        return this.provider != null;
     }
 }

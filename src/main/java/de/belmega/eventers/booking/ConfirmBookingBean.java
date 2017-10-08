@@ -1,27 +1,14 @@
 package de.belmega.eventers.booking;
 
 import de.belmega.eventers.mail.EmailSessionBean;
-import de.belmega.eventers.scheduling.ScheduleEventEntity;
-import de.belmega.eventers.services.categories.ServiceDAO;
-import de.belmega.eventers.services.categories.ServiceEntity;
-import de.belmega.eventers.user.Greeting;
-import de.belmega.eventers.user.ProviderUserEntity;
-import de.belmega.eventers.user.UserDAO;
-import de.belmega.eventers.user.registration.RegisterProviderBean;
-import io.undertow.util.FileUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.text.StrSubstitutor;
+import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @ManagedBean
 @SessionScoped
@@ -35,6 +22,14 @@ public class ConfirmBookingBean implements Serializable {
 
     @Inject
     private BookingDAO bookingDAO;
+
+    @Inject
+    private EmailSessionBean emailSessionBean;
+
+    @Inject
+    @ConfigurationValue("urls.pages.login")
+    String loginPage;
+
 
     private String linkId;
     private BookingLinkEntity link;
@@ -50,8 +45,19 @@ public class ConfirmBookingBean implements Serializable {
     }
 
     public BookingLinkEntity getLink() {
-        if (link == null) link = bookingLinkDAO.findLinkById(linkId);
+        if (link == null) link = findLink();
+
         return link;
+    }
+
+    private BookingLinkEntity findLink() {
+        BookingLinkEntity linkById = bookingLinkDAO.findLinkById(linkId);
+
+        if (linkById == null) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Dieser Link ist ungültig.", "");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        return linkById;
     }
 
     public void setLink(BookingLinkEntity link) {
@@ -59,8 +65,14 @@ public class ConfirmBookingBean implements Serializable {
     }
 
     public CustomerEntity getCustomerEntity() {
-        if (customerEntity == null) customerEntity = customerDAO.findById(link.getCustomerId());
+        if (customerEntity == null) loadCustomerEntity();
         return customerEntity;
+    }
+
+    private void loadCustomerEntity() {
+        BookingLinkEntity link = getLink();
+        if (link != null)
+            customerEntity = customerDAO.findById(link.getCustomerId());
     }
 
     public void setCustomerEntity(CustomerEntity customerEntity) {
@@ -68,11 +80,44 @@ public class ConfirmBookingBean implements Serializable {
     }
 
     public BookingEntity getBookingEntity() {
-        if (bookingEntity == null) bookingEntity = bookingDAO.findById(link.getBookingId());
+        if (bookingEntity == null)  loadBookingEntity();
         return bookingEntity;
+    }
+
+    private void loadBookingEntity() {
+        BookingLinkEntity link = getLink();
+        if (link != null)
+            bookingEntity = bookingDAO.findById(link.getBookingId());
     }
 
     public void setBookingEntity(BookingEntity bookingEntity) {
         this.bookingEntity = bookingEntity;
     }
+
+    public String confirm(){
+
+        if (bookingEntity.isAccepted()) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Anfrage nicht mehr verfügbar",
+                    "Diese Anfrage wurde leider bereits von einem anderen Anbieter bestätigt.");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        } else {
+
+            bookingEntity.setProvider(link.getProvider());
+            emailSessionBean.sendEmail(customerEntity.getEmailadress(), "Ihre Buchung auf the-eventers.de wurde bestätigt",
+                    "blubb");
+
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Buchungsanfrage angenommen",
+                    "Der Kunde wird über Ihre Zusage informiert.");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+        return loginPage;
+    };
+
+    public String reject() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Buchungsanfrage abgelehnt", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return loginPage;
+    }
+
 }

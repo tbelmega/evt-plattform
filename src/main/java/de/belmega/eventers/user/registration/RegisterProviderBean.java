@@ -1,5 +1,6 @@
 package de.belmega.eventers.user.registration;
 
+import de.belmega.eventers.auth.LoginBean;
 import de.belmega.eventers.mail.EmailSessionBean;
 import de.belmega.eventers.services.categories.CategoryDAO;
 import de.belmega.eventers.services.categories.CategoryEntity;
@@ -22,6 +23,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -80,7 +82,10 @@ public class RegisterProviderBean implements Serializable {
 
             sendRegistrationEmail();
 
-            String page = registeredSite + "?faces-redirect=true";
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            session.invalidate();
+
+            String page = registeredSite + LoginBean.FACES_REDIRECT_TRUE_PARAMETER;
             return page;
         } catch (MailadressAlreadyInUse mailadressAlreadyInUse) {
             FacesContext.getCurrentInstance().addMessage(null,

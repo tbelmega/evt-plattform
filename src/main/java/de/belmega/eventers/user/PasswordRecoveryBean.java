@@ -3,6 +3,7 @@ package de.belmega.eventers.user;
 import de.belmega.eventers.auth.AuthFilter;
 import de.belmega.eventers.mail.EmailSessionBean;
 import de.belmega.eventers.services.categories.ServiceCategoryId;
+import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -21,6 +22,7 @@ public class PasswordRecoveryBean {
 
     @Inject
     ProviderService providerService;
+
 
     private String mailadress = "";
 

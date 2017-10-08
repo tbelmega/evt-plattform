@@ -29,4 +29,5 @@ public class BookingLinkDAO {
     public BookingLinkEntity findLinkById(String linkId) {
         return em.find(BookingLinkEntity.class, linkId);
     }
+
 }

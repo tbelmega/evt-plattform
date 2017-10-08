@@ -16,10 +16,24 @@
     <ui:define name="main-content">
         <h:form>
 
+            <h1>Buchungsanfrage</h1>
 
-            <h:outputText value="#{confirmBookingBean.link.provider.lastname}"/><br/>
-            <h:outputText value="#{confirmBookingBean.customerEntity.lastName}"/><br/>
-            <h:outputText value="#{confirmBookingBean.bookingEntity.preferredStartTime}"/>
+            <div>
+                <h:outputText rendered="#{confirmBookingBean.bookingEntity.accepted}"
+                              value="Diese Buchungsanfrage wurde leider bereits von einem Dienstleister bestätigt."/>
+            </div>
+
+            <h:outputText value="#{confirmBookingBean.customerEntity.lastName}"  rendered="#{!confirmBookingBean.bookingEntity.accepted}"/><br/>
+            <h:outputText value="#{confirmBookingBean.bookingEntity.preferredStartTime}" rendered="#{!confirmBookingBean.bookingEntity.accepted}">
+                <f:convertDateTime type="date" pattern="dd.MM.yyyy HH:mm"/>
+            </h:outputText>
+
+            <div class="buttons-hbox">
+                <p:commandButton value="Annehmen" rendered="#{!confirmBookingBean.bookingEntity.accepted}"
+                                 action="#{confirmBookingBean.confirm}" ajax="false"/>
+                <p:commandButton value="Ablehnen"  rendered="#{!confirmBookingBean.bookingEntity.accepted}"
+                                 action="#{confirmBookingBean.reject}" ajax="false"/>
+            </div>
 
         </h:form>
     </ui:define>

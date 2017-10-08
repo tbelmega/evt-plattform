@@ -54,7 +54,7 @@ public class BookingBean implements Serializable {
     private CustomerTO customer;
     private ServiceEntity service;
     public static final SimpleDateFormat DATE_ONLY = new SimpleDateFormat("dd.MM.yyyy");
-    public static final SimpleDateFormat TIME_ONLY = new SimpleDateFormat("hh:mm");
+    public static final SimpleDateFormat TIME_ONLY = new SimpleDateFormat("HH:mm");
 
     public String getTitle() {
         return getService().getServiceName();

@@ -46,6 +46,8 @@
 * Bezahlung: An the-eventers? An Dienstleiser?
 * "Doppelte Einträge: längere Verfügbarkeit überschreibt kürzere Verfügbarkeit. Mehrere Einträge sind nur dann möglich, wenn eine Unterbrechung zweier oder mehrere Termine vorliegen (Z.B.: 17 -18 Uhr; 19-21 Uhr)" Wunsch oder aktuelles verhalten?
 * Wischfunktion -> keine native App!
+* Wenn alle Anbieter die Buchungsanfrage abgelehnt haben, könnte der Kunde informiert werden
+* Bei Flexibilität: Wie gibt der Anbieter die tatsächliche Uhrzeit an?
 
 
 ## Priorisierte Features
