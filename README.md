@@ -17,7 +17,7 @@
 * Textarea: breiter
 * Statt "Label" style, "heading" style
 * Kalender: Drag&Drop für "kopieren"
-* Serverleistung mit Alex besprechen
+* --Serverleistung mit Alex besprechen--
 * Nach Auftragsausführung soll Dienstleister bestätigigen: Mail mit Link
 * Massagio-App anschauen zur Orientierung 
 * Styling: Auf großen Bildschirmen mehr mittig

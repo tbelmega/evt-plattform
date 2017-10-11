@@ -17,6 +17,8 @@ public class BookingEntity {
     private Boolean createInvoice;
 
     private boolean bookingConfirmed = false;
+    private PaymentStatus paymentStatus = PaymentStatus.NONE;
+    private String paypalPaymentId;
 
     @Column(nullable = false)
     private Date preferredStartTime = new Date();
@@ -32,7 +34,6 @@ public class BookingEntity {
 
     @Column(nullable = false)
     private Date latestStartTime = new Date();
-
 
     @Column(nullable = false)
     private Date earliestEndTime = new Date();
@@ -134,6 +135,22 @@ public class BookingEntity {
 
     public ProviderUserEntity getProvider() {
         return provider;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public String getPaypalPaymentId() {
+        return paypalPaymentId;
+    }
+
+    public void setPaypalPaymentId(String paypalPaymentId) {
+        this.paypalPaymentId = paypalPaymentId;
     }
 
     @Transient

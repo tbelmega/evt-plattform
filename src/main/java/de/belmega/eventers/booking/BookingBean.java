@@ -1,6 +1,8 @@
 package de.belmega.eventers.booking;
 
+import com.paypal.api.payments.Payment;
 import de.belmega.eventers.mail.EmailSessionBean;
+import de.belmega.eventers.paypal.PaypalPaymentServlet;
 import de.belmega.eventers.scheduling.ScheduleEventEntity;
 import de.belmega.eventers.services.categories.ServiceDAO;
 import de.belmega.eventers.services.categories.ServiceEntity;
@@ -11,6 +13,7 @@ import de.belmega.eventers.user.registration.RegisterProviderBean;
 import io.undertow.util.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
+import org.apache.log4j.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.faces.bean.ManagedBean;
@@ -56,6 +59,7 @@ public class BookingBean implements Serializable {
     private String paymentServletUrl;
 
 
+    private static final Logger LOGGER = Logger.getLogger(BookingBean.class);
 
 
     private String serviceId;
@@ -182,5 +186,15 @@ public class BookingBean implements Serializable {
 
     public String getEnvironment() {
         return this.environment;
+    }
+
+    public void updateBooking(Payment payment) {
+
+        getBooking().setPaymentStatus(PaymentStatus.PAYMENT_AUTHORIZED);
+        getBooking().setPaypalPaymentId(payment.getId());
+
+        booking = bookingDAO.persist(booking);
+
+        LOGGER.info("Updated booking " + booking);
     }
 }

@@ -13,6 +13,9 @@ public class BookingTO {
     private String remark;
     private Boolean createInvoice;
 
+    private PaymentStatus paymentStatus = PaymentStatus.NONE;
+    private String paypalPaymentId;
+
     public void setDate(Date date) {
         this.date = date;
     }
@@ -83,5 +86,38 @@ public class BookingTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPaypalPaymentId() {
+        return paypalPaymentId;
+    }
+
+    public void setPaypalPaymentId(String paypalPaymentId) {
+        this.paypalPaymentId = paypalPaymentId;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "BookingTO{" +
+                "id=" + id +
+                ", date=" + date +
+                ", time=" + time +
+                ", duration=" + duration +
+                ", flexibility=" + flexibility +
+                ", attendees=" + attendees +
+                ", location='" + location + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createInvoice=" + createInvoice +
+                ", paymentStatus=" + paymentStatus +
+                ", paypalPaymentId='" + paypalPaymentId + '\'' +
+                '}';
     }
 }
