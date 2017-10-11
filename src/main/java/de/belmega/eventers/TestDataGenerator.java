@@ -3,6 +3,7 @@ package de.belmega.eventers;
 import de.belmega.eventers.services.categories.*;
 import de.belmega.eventers.user.*;
 import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
+import org.apache.commons.lang.StringUtils;
 import org.jboss.logging.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
@@ -10,10 +11,13 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
+import org.apache.commons.io.IOUtils;
 
 @ApplicationScoped
 public class TestDataGenerator {
@@ -32,7 +36,7 @@ public class TestDataGenerator {
     Boolean testEnvironment;
 
     private static final Logger LOG = Logger.getLogger(TestDataGenerator.class);
-
+    private Map<String, Integer> pricing;
 
 
     public void setupTestData(@Observes @Initialized(ApplicationScoped.class) Object init) throws MailadressAlreadyInUse {
@@ -67,7 +71,6 @@ public class TestDataGenerator {
         CategoryEntity transport = new CategoryEntity(ServiceCategoryId.TRANSPORTATION.name(), "Transport");
         categoryDAO.persist(transport);
 
-        createServiceEntity("massage", wellness, "Massage");
         createServiceEntity("cosmetics", wellness, "Kosmetik");
         createServiceEntity("nails", wellness, "Nageldesign");
         createServiceEntity("make-up", wellness, "Make-up Artist");
@@ -109,8 +112,11 @@ public class TestDataGenerator {
     }
 
     private void createServiceEntity(String serviceId, CategoryEntity categoryEntity, String serviceName) {
-        ServiceEntity massage = new ServiceEntity(serviceId, categoryEntity, serviceName);
-        serviceDAO.persist(massage);
+
+        int hourlyRate = getPricing().get(serviceId);
+
+        ServiceEntity entity = new ServiceEntity(serviceId, categoryEntity, serviceName, hourlyRate);
+        serviceDAO.persist(entity);
     }
 
     private void generateTestData() throws MailadressAlreadyInUse {
@@ -157,7 +163,7 @@ public class TestDataGenerator {
         user.setPasswordPlainText(password);
 
         HashSet<String> categoryIds = new HashSet<>();
-        for (ServiceCategoryId categoryId: categories)
+        for (ServiceCategoryId categoryId : categories)
             categoryIds.add(categoryId.name());
         user.setCategoryIds(categoryIds);
 
@@ -165,4 +171,48 @@ public class TestDataGenerator {
     }
 
 
+    private Map<String, Integer> getPricing() {
+        if (pricing == null) {
+            try {
+                pricing = loadPricing();
+            } catch (IOException e) {
+                throw new RuntimeException("Reading of pricing file failed.");
+            }
+        }
+        return pricing;
+    }
+
+    private Map<String, Integer> loadPricing() throws IOException {
+        Map<String, Integer> pricing = new HashMap<>();
+
+        InputStream in = TestDataGenerator.class.getClassLoader().getResourceAsStream("pricing.csv");
+        if (in == null) throw new FileNotFoundException();
+        String data = IOUtils.toString(in, StandardCharsets.UTF_8.name());
+        List<String> rows = Arrays.asList(data.split("\n"));
+        for (int i = 1; i < rows.size(); i++) {
+            String row = rows.get(i);
+
+            if (StringUtils.isNotBlank(row)) {
+                String[] elements = row.split(";");
+                pricing.put(elements[1].trim(), getValue(elements[2]));
+            }
+        }
+        in.close();
+        return pricing;
+    }
+
+    private int getValue(String element) {
+        try {
+            return Integer.parseInt(element.trim());
+        } catch (NumberFormatException e) {
+            System.err.println(e);
+            Logger.getLogger(TestDataGenerator.class).error(e);
+            Logger.getLogger(TestDataGenerator.class).error(element);
+            return 0;
+        }
+    }
+
+    public void setPricing(Map<String, Integer> pricing) {
+        this.pricing = pricing;
+    }
 }

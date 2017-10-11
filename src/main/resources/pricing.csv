@@ -1,0 +1,32 @@
+serviceName;serviceID;pricePerHour
+Kosmetik;cosmetics;1
+Nageldesign;nails;1
+Make-up Artist;make-up;1
+Friseur;barber;1
+Ganzkörpermassage;body;1
+Medizinische Massage;medical;1
+Wellnessmassage;wellness-massage;1
+Fitnesstrainer / Personal Coach;personal-coach;1
+Wanderführer;hiking-guide;1
+Tanzlehrer;dancing;1
+Yogalehrer;yoga;1
+Tai Chi/Qigong-Lehrer;tai-chi;1
+Musiker/Sänger;musician;3
+Illusionist;illusionist;1
+Entertainer/Moderator;entertainer;1
+Kabarattist;cabaret;1
+Schnellzeichner;drawer;1
+Schauspieler;actor;1
+Stadtführer;city-guide;1
+Kunstführer;art-guide;1
+Schriftsteller oder Vorleser;author;1
+Sommelier;sommelier;1
+Chocolatier;chocolatier;1
+Destilllateur;destillateuer;1
+Käsesommelier;cheese;1
+Barkeeper;barkeeper;1
+Restaurant;restaurant;1
+Taxiunternehmen;taxi;1
+Limosinenservice;limosine;1
+Velotaxi-Unternehmen;velotaxi;1
+Fahrradverleih;bike-rental;1

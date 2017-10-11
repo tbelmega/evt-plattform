@@ -5,18 +5,22 @@ import javax.persistence.*;
 @Entity
 public class ServiceEntity {
 
+
     @Id
     private String serviceId;
+
+    private  int hourlyRate;
 
     private String serviceName;
 
     @ManyToOne // each service has One category. each category has Many services. --> Many to One
     private CategoryEntity category;
 
-    public ServiceEntity(String serviceId, CategoryEntity category, String serviceName) {
+    public ServiceEntity(String serviceId, CategoryEntity category, String serviceName, int hourlyRate) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.category = category;
+        this.hourlyRate = hourlyRate;
     }
 
     public ServiceEntity() {
