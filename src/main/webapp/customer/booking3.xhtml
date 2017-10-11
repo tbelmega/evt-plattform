@@ -13,12 +13,58 @@
         </f:metadata>
     </ui:define>
 
+    <ui:define name="head">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    </ui:define>
+
     <ui:define name="main-content">
 
         <h:form>
             <h1>#{bookingBean.title}</h1>
 
-            <div>[Paypal plugin]</div>
+            <div id="paypal-button"></div>
+
+            <script>
+                paypal.Button.render({
+
+                    env: '#{bookingBean.environment}', // 'production' Or 'sandbox',
+
+                    style: { label: 'pay', size:  'responsive',  shape: 'rect',  color: 'silver' },
+
+                    commit: true, // Show a 'Pay Now' button
+
+                    payment: function(data, actions) {
+                        // Make a call to your server to set up the payment
+                        return paypal.request.post('#{bookingBean.paymentUrl}')
+                            .then(function(res) {
+                                return res.paymentID;
+                            });
+                    },
+
+                    // onAuthorize() is called when the buyer approves the payment
+                    onAuthorize: function(data) {
+
+                        console.log(data);
+
+                        // Set up the data you need to pass to your server
+                        var data = {
+                            paymentID: data.paymentID,
+                            payerID: data.payerID
+                        };
+
+                        // Make a call to your server to execute the payment
+                        return paypal.request.post('#{bookingBean.paymentUrl}', data)
+                            .then(function (res) {
+                                $('#paypal-button').toggleClass('invisible');
+                                $('.buttons-hbox').toggleClass('invisible');
+                                return false;
+                            });
+                    }
+
+                }, '#paypal-button');
+            </script>
 
             <h:selectBooleanCheckbox id="checkboxInvoice"
                                      onclick="$('.invoice-adress-textarea').toggleClass('invisible');"/>
@@ -29,8 +75,8 @@
                              a:placeholder="Rechnungsadresse privat oder geschäftlich"
                              value="#{bookingBean.booking.createInvoice}"/>
 
-            <div class="buttons-hbox">
-                <p:commandButton value="Buchung abschließen" action="#{bookingBean.submit}" ajax="false"/>
+            <div class="buttons-hbox invisible">
+                <p:commandButton value="Buchung abschließen" id="btnSubmit" action="#{bookingBean.submit}" ajax="false"/>
             </div>
 
         </h:form>

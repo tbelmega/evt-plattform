@@ -41,6 +41,15 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PaypalPaymentServlet</servlet-name>
+        <servlet-class>de.belmega.eventers.paypal.PaypalPaymentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PaypalPaymentServlet</servlet-name>
+        <url-pattern>/paypal/payment</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>

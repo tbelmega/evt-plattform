@@ -35,8 +35,6 @@
 * Relaxmassage als Beispiel
 
 ## Mail:
-* Anbieter-Terminbestätigung
-* Mail an Kunden, wenn Termin bestätigt
 * Autoresponder: Die Datenbank prüft, wenn eine Dienstleistung hätte erbracht werden müssen. (Timing: Startzeit der gebuchten Leistung gemäß Auftragsbestätigung + Dauer des Programms + 1 Stunde). Tritt der Fall ein, erhält der Dienstleister eine automatisierte Mail mit der Aufforderung den Status der gebuchten Leistung zu markieren. (Link)
 * Der Dienstleister hat nun zwei Optionen: A. Auftrag ausgeführt. Feld Bemerkungen. B. Auftrag nicht ausgeführt. Feld Bemerkungen. Mit einem Klick (setzen eines Häkchens) auf die entsprechende Option lässt sich das wahrscheinlich am besten umsetzen.
 

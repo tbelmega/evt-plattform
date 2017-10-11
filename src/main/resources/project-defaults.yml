@@ -21,3 +21,10 @@ urls:
     registered: /registered.xhtml
 
 test-environment: true
+
+paypal:
+  clientId: AV51fGHQBYzbG4AbuiHGbfSyDvnhBbvWsjlw89T9keYMK5J1tadXBjlSC327Jzn5aOXMYPsIR6kb2DA7
+  clientSecret: EL5B6D2vaUnxzMI54gl-tAaeSHSTReKU-VcIku1ft1UQLvijEFmHCmYb-6OdmgW_c8QYGPBpDr7vy7C-
+  mode: sandbox
+  servlet:
+    payment: /paypal/payment

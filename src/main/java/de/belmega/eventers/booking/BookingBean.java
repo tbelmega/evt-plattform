@@ -43,10 +43,19 @@ public class BookingBean implements Serializable {
     @Inject
     EmailSessionBean emailSessionBean;
 
-
     @Inject
     @ConfigurationValue("urls.hostname")
     String hostname;
+
+    @Inject
+    @ConfigurationValue("paypal.mode")
+    String environment;
+
+    @Inject
+    @ConfigurationValue("paypal.servlet.payment")
+    private String paymentServletUrl;
+
+
 
 
     private String serviceId;
@@ -55,6 +64,7 @@ public class BookingBean implements Serializable {
     private ServiceEntity service;
     public static final SimpleDateFormat DATE_ONLY = new SimpleDateFormat("dd.MM.yyyy");
     public static final SimpleDateFormat TIME_ONLY = new SimpleDateFormat("HH:mm");
+
 
     public String getTitle() {
         return getService().getServiceName();
@@ -164,5 +174,13 @@ public class BookingBean implements Serializable {
 
     public Greeting[] getAllAvailableGreetings() {
         return Greeting.values();
+    }
+
+    public String getPaymentUrl() {
+        return hostname + paymentServletUrl;
+    }
+
+    public String getEnvironment() {
+        return this.environment;
     }
 }
