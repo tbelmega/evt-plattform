@@ -8,6 +8,11 @@ import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import de.belmega.eventers.booking.BookingBean;
+import de.belmega.eventers.booking.BookingDAO;
+import de.belmega.eventers.booking.BookingEntity;
+import de.belmega.eventers.booking.PaymentStatus;
+import de.belmega.eventers.services.categories.ServiceDAO;
+import de.belmega.eventers.services.categories.ServiceEntity;
 import org.apache.log4j.Logger;
 import org.primefaces.json.JSONObject;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
@@ -27,10 +32,17 @@ public class PaypalPaymentServlet extends HttpServlet {
 
     public static final String PAYER_ID = "payerID";
     public static final String PAYMENT_ID = "paymentID";
+    public static final String BOOKING_ID = "bookingId";
+    public static final String SERVICE_ID = "serviceId";
 
+    // The currency for paypal
+    public static final String EURO = "EUR";
 
     @Inject
-    private BookingBean bookingBean;
+    private ServiceDAO serviceDAO;
+
+    @Inject
+    private BookingDAO bookingDAO;
 
     @Inject
     @ConfigurationValue("paypal.clientId")
@@ -45,6 +57,8 @@ public class PaypalPaymentServlet extends HttpServlet {
     protected String mode;
 
     private static final Logger LOGGER = Logger.getLogger(PaypalPaymentServlet.class);
+
+
 
 
     @Override
@@ -70,31 +84,40 @@ public class PaypalPaymentServlet extends HttpServlet {
 
 
     private Payment createNewPayment(HttpServletRequest req) throws ServletException {
-        Payment createdPayment;// ###Details
+        Payment createdPayment;
+
+        // ###Details
         // Let's you specify details of a payment amount.
-        Details details = new Details();
-        details.setShipping("1");
-        details.setSubtotal("5");
-        details.setTax("1");
+//        Details details = new Details();
+//        details.setShipping("1");
+//        details.setSubtotal("5");
+//        details.setTax("1");
+
+        String serviceId = req.getParameter(SERVICE_ID);
 
         // ###Amount
         // Let's you specify a payment amount.
+        ServiceEntity service = serviceDAO.findServiceById(serviceId);
+        String serviceName = service.getServiceName();
+        int hourlyRate = service.getHourlyRate();
+        String hourlyString = Integer.toString(hourlyRate);
+
         Amount amount = new Amount();
-        amount.setCurrency("USD");
+        amount.setCurrency(EURO);
         // Total must be equal to sum of shipping, tax and subtotal.
-        amount.setTotal("7");
-        amount.setDetails(details);
+        amount.setTotal(hourlyString);
+//        amount.setDetails(details);
 
         // ###Transaction
         // A transaction defines the contract of a payment - what is the payment for and who is fulfilling it.
         // Transaction is created with a `Payee` and `Amount` types
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
-        transaction.setDescription("This is the payment transaction description.");
+        transaction.setDescription("the-eventers.de Buchung für " + serviceName);
 
         // ### Items
         Item item = new Item();
-        item.setName("Ground Coffee 40 oz").setQuantity("1").setCurrency("USD").setPrice("5");
+        item.setName(serviceName).setQuantity("1").setCurrency(EURO).setPrice(hourlyString);
         ItemList itemList = new ItemList();
         List<Item> items = new ArrayList<>();
         items.add(item);
@@ -176,8 +199,17 @@ public class PaypalPaymentServlet extends HttpServlet {
 
         LOGGER.info("Executed payment with id = " + payment.getId());
 
-        bookingBean.updateBooking(payment);
+        updateBooking(req, payment);
 
+    }
+
+    public void updateBooking(HttpServletRequest req, Payment payment) {
+        String bookingId = req.getParameter(BOOKING_ID);
+
+        BookingEntity booking = bookingDAO.findById(Long.parseLong(bookingId));
+
+        booking.setPaymentStatus(PaymentStatus.PAYMENT_AUTHORIZED);
+        booking.setPaypalPaymentId(payment.getId());
     }
 
     /**

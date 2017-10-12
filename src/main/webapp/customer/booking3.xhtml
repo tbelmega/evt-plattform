@@ -36,8 +36,11 @@
                     commit: true, // Show a 'Pay Now' button
 
                     payment: function(data, actions) {
+
+                        data.serviceId = '#{bookingBean.serviceId}';
+
                         // Make a call to your server to set up the payment
-                        return paypal.request.post('#{bookingBean.paymentUrl}')
+                        return paypal.request.post('#{bookingBean.paymentUrl}', data)
                             .then(function(res) {
                                 return res.paymentID;
                             });
@@ -51,7 +54,8 @@
                         // Set up the data you need to pass to your server
                         var data = {
                             paymentID: data.paymentID,
-                            payerID: data.payerID
+                            payerID: data.payerID,
+                            bookingId: '#{bookingBean.booking.id}'
                         };
 
                         // Make a call to your server to execute the payment

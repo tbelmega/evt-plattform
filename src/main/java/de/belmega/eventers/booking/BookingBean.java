@@ -35,7 +35,7 @@ public class BookingBean implements Serializable {
     private BookingDAO bookingDAO;
 
     @Inject
-    BookingLinkDAO bookingLinkDAO;
+    private BookingLinkDAO bookingLinkDAO;
 
     @Inject
     private CustomerDAO customerDAO;
@@ -44,7 +44,7 @@ public class BookingBean implements Serializable {
     private UserDAO userDAO;
 
     @Inject
-    EmailSessionBean emailSessionBean;
+    private EmailSessionBean emailSessionBean;
 
     @Inject
     @ConfigurationValue("urls.hostname")
@@ -186,15 +186,5 @@ public class BookingBean implements Serializable {
 
     public String getEnvironment() {
         return this.environment;
-    }
-
-    public void updateBooking(Payment payment) {
-
-        getBooking().setPaymentStatus(PaymentStatus.PAYMENT_AUTHORIZED);
-        getBooking().setPaypalPaymentId(payment.getId());
-
-        booking = bookingDAO.persist(booking);
-
-        LOGGER.info("Updated booking " + booking);
     }
 }

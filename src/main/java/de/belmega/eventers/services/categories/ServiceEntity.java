@@ -50,6 +50,14 @@ public class ServiceEntity {
         this.serviceName = serviceName;
     }
 
+    public int getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(int hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
     @Override
     public String toString() {
         return serviceName;
