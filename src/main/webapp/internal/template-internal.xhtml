@@ -49,11 +49,11 @@
     <p:growl id="growl"/>
 
     <div class="container-fluid">
-        <h:form>
-            <p:selectOneButton value="#{userProfileBean.currentPage}" ajax="true">
+        <h:form id="formNavigation">
+            <p:selectOneButton value="#{userProfileBean.currentPage}" ajax="true" id="btnBar">
 
                 <f:selectItem itemLabel="Profil" itemValue="profile"/>
-                <f:selectItem itemLabel="Dienstleistung" itemValue="services"/>
+                <f:selectItem itemLabel="Dienstleistung" itemValue="services" id="btnServices"/>
                 <f:selectItem itemLabel="Kalender" itemValue="calendar"/>
                 <f:selectItem itemLabel="Aufträge" itemValue="assignments"/>
                 <p:ajax event="change" listener="#{userProfileBean.navigate}" />

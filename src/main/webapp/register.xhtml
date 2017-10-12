@@ -6,7 +6,7 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="main-content">
-        <h:form>
+        <h:form name="formRegister">
             <h:outputLabel for="selectCategory">Ihr Fachgebiet</h:outputLabel>
             <h:selectOneMenu value="#{registerProviderBean.category}" id="selectCategory"
                              required="true" requiredMessage="Fachgebiet: Angabe benötigt."
@@ -86,7 +86,7 @@
             <p:captcha label="Captcha" id="captcha" required="true"/><!-- requires key in web.xml, register at google first -->
 
             <div class="buttons-hbox">
-                <p:commandButton value="Absenden"
+                <p:commandButton value="Absenden" name="btnSubmit"
                                  action="#{registerProviderBean.register}" ajax="false"/>
             </div>
             <h:messages globalOnly="true" errorStyle="color: red"/>

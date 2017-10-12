@@ -15,9 +15,9 @@
                 <h:outputLabel for="passwordInput" value="Passwort"/>
                 <h:inputSecret id="passwordInput" value="#{loginBean.password}"/>
             </div>
-            <p:commandButton value="Login"
+            <p:commandButton value="Login" id="btnLogin"
                              action="#{loginBean.validateUsernamePassword}" ajax="false"/>
-            <p:commandButton value="Registrieren"
+            <p:commandButton value="Registrieren" id="btnRegister"
                              action="#{loginBean.registration}" ajax="false"/>
             <a href="recovery.xhtml">Passwort vergessen?</a>
         </h:form>
