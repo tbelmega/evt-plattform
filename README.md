@@ -22,7 +22,7 @@
 * Massagio-App anschauen zur Orientierung 
 * Styling: Auf großen Bildschirmen mehr mittig
 * Login: muss auf IPhone zweimal angeklickt werden?
-* Kalender-Popup -> unter Kalender?
+* Kalender-Popup -> unter Kalender? Nein, Popup billschirmfüllend
 * Kalender-Breite IPhone?
 * Speichern-Button (Hintergrund) im Kalender grün, löschen rot. Termineinträge grün
 * Kalender-Eintrag: Start-und Endzeit als Titel
@@ -33,6 +33,17 @@
 * Kalender von/bis mit Tagesangabe
 * Kalender: Option, die Daten nicht zu pflegen
 * Relaxmassage als Beispiel
+* Pricing-Formeln
+* Über Whatsapp klären, wer das Layout/Styling für die Buchungsseiten entwirft
+* Buchungsformular: Zeiten mit halbstündigem Dropdown
+* Bei "gewünschter Dauer" 30min raus
+* Teilnehmerzahl wie auf Screenshot
+* Treffpunkt: Dropdown wie auf Screenshot
+* Emailadresse validieren
+* Paypal: Icons für Zahlungsoptionen
+* Checkbox für AGB
+* Abweichende Rechnungsadresse auf Seite 3
+* Schriftgröße generell erhöhen
 
 ## Mail:
 * Autoresponder: Die Datenbank prüft, wenn eine Dienstleistung hätte erbracht werden müssen. (Timing: Startzeit der gebuchten Leistung gemäß Auftragsbestätigung + Dauer des Programms + 1 Stunde). Tritt der Fall ein, erhält der Dienstleister eine automatisierte Mail mit der Aufforderung den Status der gebuchten Leistung zu markieren. (Link)
