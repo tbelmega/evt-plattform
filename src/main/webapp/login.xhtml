@@ -9,11 +9,11 @@
         <h:form id="formLogin">
             <div>
                 <h:outputLabel for="emailAdressInput" value="E-Mail-Adresse"/>
-                <h:inputText id="emailAdressInput" value="#{loginBean.emailAdress}"/>
+                <h:inputText id="emailAdressInput" value="#{loginBean.emailAdress}" class="width-medium"/>
             </div>
             <div>
                 <h:outputLabel for="passwordInput" value="Passwort"/>
-                <h:inputSecret id="passwordInput" value="#{loginBean.password}"/>
+                <h:inputSecret id="passwordInput" value="#{loginBean.password}" class="width-medium"/>
             </div>
             <p:commandButton value="Login" id="btnLogin"
                              action="#{loginBean.validateUsernamePassword}" ajax="false"/>

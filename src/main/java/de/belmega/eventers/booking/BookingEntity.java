@@ -1,5 +1,6 @@
 package de.belmega.eventers.booking;
 
+import de.belmega.eventers.paypal.PaymentEntity;
 import de.belmega.eventers.user.ProviderUserEntity;
 
 import javax.persistence.*;
@@ -17,8 +18,9 @@ public class BookingEntity {
     private Boolean createInvoice;
 
     private boolean bookingConfirmed = false;
-    private PaymentStatus paymentStatus = PaymentStatus.NONE;
-    private String paypalPaymentId;
+
+    @OneToOne
+    private PaymentEntity payment;
 
     @Column(nullable = false)
     private Date preferredStartTime = new Date();
@@ -137,20 +139,12 @@ public class BookingEntity {
         return provider;
     }
 
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
+    public PaymentEntity getPayment() {
+        return payment;
     }
 
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-    public String getPaypalPaymentId() {
-        return paypalPaymentId;
-    }
-
-    public void setPaypalPaymentId(String paypalPaymentId) {
-        this.paypalPaymentId = paypalPaymentId;
+    public void setPayment(PaymentEntity payment) {
+        this.payment = payment;
     }
 
     @Transient

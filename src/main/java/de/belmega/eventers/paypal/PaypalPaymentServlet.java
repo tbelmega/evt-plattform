@@ -41,20 +41,11 @@ public class PaypalPaymentServlet extends HttpServlet {
     @Inject
     private ServiceDAO serviceDAO;
 
-    @Inject
-    private BookingDAO bookingDAO;
+
+
 
     @Inject
-    @ConfigurationValue("paypal.clientId")
-    protected String clientID;
-
-    @Inject
-    @ConfigurationValue("paypal.clientSecret")
-    protected String clientSecret;
-
-    @Inject
-    @ConfigurationValue("paypal.mode")
-    protected String mode;
+    private PaypalService paypalService;
 
     private static final Logger LOGGER = Logger.getLogger(PaypalPaymentServlet.class);
 
@@ -67,7 +58,7 @@ public class PaypalPaymentServlet extends HttpServlet {
 
 
         if (isExistingPayment(req)) {
-            executePayment(req);
+            paypalService.executePayment(req.getParameter(PAYMENT_ID), req.getParameter(PAYER_ID), req.getParameter(BOOKING_ID));
 
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {
@@ -140,7 +131,7 @@ public class PaypalPaymentServlet extends HttpServlet {
         // ###Payment
         // A Payment Resource; create one using the above types and intent as 'sale'
         Payment payment = new Payment();
-        payment.setIntent("sale");
+        payment.setIntent("authorize");
         payment.setPayer(payer);
         payment.setTransactions(transactions);
 
@@ -161,7 +152,7 @@ public class PaypalPaymentServlet extends HttpServlet {
 
         try {
 
-            createdPayment = payment.create(createApiContext());
+            createdPayment = payment.create(paypalService.createApiContext());
         } catch (PayPalRESTException e) {
             throw new ServletException(e);
         }
@@ -182,35 +173,7 @@ public class PaypalPaymentServlet extends HttpServlet {
         return createdPayment;
     }
 
-    private void executePayment(HttpServletRequest req) throws ServletException {
-        Payment payment = new Payment();
-        if (req.getParameter(PAYMENT_ID) != null) {
-            payment.setId(req.getParameter(PAYMENT_ID));
-        }
 
-        PaymentExecution paymentExecution = new PaymentExecution();
-        paymentExecution.setPayerId(req.getParameter(PAYER_ID));
-
-        try {
-            payment.execute(createApiContext(), paymentExecution);
-        } catch (PayPalRESTException e) {
-            throw new ServletException(e);
-        }
-
-        LOGGER.info("Executed payment with id = " + payment.getId());
-
-        updateBooking(req, payment);
-
-    }
-
-    public void updateBooking(HttpServletRequest req, Payment payment) {
-        String bookingId = req.getParameter(BOOKING_ID);
-
-        BookingEntity booking = bookingDAO.findById(Long.parseLong(bookingId));
-
-        booking.setPaymentStatus(PaymentStatus.PAYMENT_AUTHORIZED);
-        booking.setPaypalPaymentId(payment.getId());
-    }
 
     /**
      * Check if the request is for an existing payment or should create a new payment.
@@ -220,10 +183,5 @@ public class PaypalPaymentServlet extends HttpServlet {
     }
 
 
-    // ### Api Context
-    // Pass in a `ApiContext` object to authenticate the call and to send a unique request id
-    // (that ensures idempotency). The SDK generates  a request id if you do not pass one explicitly.
-    private APIContext createApiContext() {
-        return new APIContext(clientID, clientSecret, mode);
-    }
+
 }

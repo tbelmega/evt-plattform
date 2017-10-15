@@ -1,10 +1,25 @@
+/* Widths */
+@media only screen
+and (max-width: 800px) {
+    body {
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
 
-body {
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
-    padding: 0.5em
+        margin: 0;
+    }
 }
+@media only screen
+and (min-width: 800px) {
+    body {
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
+        padding: 0.5em
+    }
+}
+
+
 
 /* Typography ------------------------------------------------------------------------ */
 h1, h2, h3, h4, h5, h6 {
@@ -80,10 +95,9 @@ input, select {
 
 /* Widths */
 @media only screen
-and (max-device-width: 640px) {
+and (max-width: 800px) {
     .width-medium {
-        min-width: 200px;
-        width: 80%;
+        width: 96%;
 
         -ms-box-sizing:content-box;
         -moz-box-sizing:content-box;
@@ -93,7 +107,7 @@ and (max-device-width: 640px) {
     }
 }
 @media only screen
-and (min-device-width: 640px) {
+and (min-width: 800px) {
     .width-medium {
         min-width: 200px;
         width: 40%;
@@ -106,7 +120,7 @@ and (min-device-width: 640px) {
 }
 
 .value {
-    width: 1000px;
+    width: 1024px; /* required for calendar widget */
 }
 
 .slidedown-heading {
