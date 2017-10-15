@@ -103,6 +103,7 @@ public class ConfirmBookingBean implements Serializable {
         } else {
 
             bookingEntity.setProvider(link.getProvider());
+            bookingDAO.update(bookingEntity);
             emailSessionBean.sendEmail(customerEntity.getEmailadress(), "Ihre Buchung auf the-eventers.de wurde bestätigt",
                     "blubb");
 
@@ -115,6 +116,21 @@ public class ConfirmBookingBean implements Serializable {
 
     public String reject() {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Buchungsanfrage abgelehnt", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return loginPage;
+    }
+
+    public String confirmEvent() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vielen Dank für Ihre Bestätigung.", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        return loginPage;
+    }
+
+    public String cancelEvent() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vielen Dank für Ihre Rückmeldung, " +
+                "dass das Event abgesagt wurde.", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
         return loginPage;

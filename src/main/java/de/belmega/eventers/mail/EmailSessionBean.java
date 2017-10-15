@@ -1,7 +1,5 @@
 package de.belmega.eventers.mail;
 
-import com.sun.mail.smtp.SMTPTransport;
-
 import javax.ejb.Stateless;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

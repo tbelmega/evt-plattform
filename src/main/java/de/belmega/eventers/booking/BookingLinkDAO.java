@@ -4,6 +4,7 @@ import de.belmega.eventers.user.ProviderUserEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.UUID;
 
@@ -30,4 +31,14 @@ public class BookingLinkDAO {
         return em.find(BookingLinkEntity.class, linkId);
     }
 
+    public BookingLinkEntity findLinkForBooking(BookingEntity bookingEntity, ProviderUserEntity provider) {
+        String qlString = "SELECT e FROM BookingLinkEntity e "
+                + "WHERE e.provider = :provider AND e.bookingId = :bookingId";
+        TypedQuery<BookingLinkEntity> query =
+                em.createQuery(qlString, BookingLinkEntity.class);
+        query.setParameter("provider", provider)
+                .setParameter("bookingId", bookingEntity.getId());
+
+        return query.getSingleResult();
+    }
 }

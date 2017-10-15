@@ -18,7 +18,9 @@ import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -90,6 +92,9 @@ public class BookingBean implements Serializable {
 
         for (ScheduleEventEntity availability : availabilities)
             sendBookingEmailToProviders(availability);
+
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.invalidate();
 
         return "booking4.xhtml?step=-1&faces-redirect=true";
     }

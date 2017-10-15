@@ -2,7 +2,6 @@ package de.belmega.eventers.booking;
 
 import de.belmega.eventers.scheduling.ScheduleEventEntity;
 import de.belmega.eventers.util.DateUtil;
-import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -79,5 +78,29 @@ public class BookingDAO {
 
     public BookingEntity findById(Long bookingId) {
         return em.find(BookingEntity.class, bookingId);
+    }
+
+    /**
+     * Find all bookings with a latestStartTime between the given times.
+     */
+    public List<BookingEntity> findBookingsStartingBetween(Date beginTimeSlot, Date endTimeSlot) {
+
+        String qlString = "SELECT e FROM BookingEntity e "
+                + "WHERE e.latestStartTime > :beginTimeSlot AND e.latestStartTime <= :endTimeSlot";
+        TypedQuery<BookingEntity> query =
+                em.createQuery(qlString, BookingEntity.class);
+        query.setParameter("beginTimeSlot", beginTimeSlot)
+                .setParameter("endTimeSlot", endTimeSlot);
+
+        return query.getResultList();
+    }
+
+    public void remove(BookingEntity be) {
+        BookingEntity entity = em.find(BookingEntity.class, be.getId());
+        em.remove(entity);
+    }
+
+    public void update(BookingEntity bookingEntity) {
+        em.merge(bookingEntity);
     }
 }

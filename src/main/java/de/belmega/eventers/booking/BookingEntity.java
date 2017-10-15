@@ -4,7 +4,6 @@ import de.belmega.eventers.paypal.PaymentEntity;
 import de.belmega.eventers.user.ProviderUserEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -16,8 +15,6 @@ public class BookingEntity {
     private long id;
     private String location;
     private Boolean createInvoice;
-
-    private boolean bookingConfirmed = false;
 
     @OneToOne
     private PaymentEntity payment;
@@ -40,7 +37,7 @@ public class BookingEntity {
     @Column(nullable = false)
     private Date earliestEndTime = new Date();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private ProviderUserEntity provider;
 
     public void setNumberOfAttendees(Integer numberOfAttendees) {
@@ -121,14 +118,6 @@ public class BookingEntity {
 
     public void setEarliestEndTime(Date earliestEndTime) {
         this.earliestEndTime = earliestEndTime;
-    }
-
-    public boolean isBookingConfirmed() {
-        return bookingConfirmed;
-    }
-
-    public void setBookingConfirmed(boolean bookingConfirmed) {
-        this.bookingConfirmed = bookingConfirmed;
     }
 
     public void setProvider(ProviderUserEntity provider) {

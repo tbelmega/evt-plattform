@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="template-public.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <!-- When page is loaded, get category from URL and store it in the bean. -->
+            <f:viewParam name="id" value="#{confirmBookingBean.linkId}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <h:form>
+
+            <h1>Ihr Kundenevent</h1>
+
+            <h:outputText value="#{confirmBookingBean.customerEntity.lastName}"/><br/>
+            <h:outputText value="#{confirmBookingBean.bookingEntity.preferredStartTime}">
+                <f:convertDateTime type="date" pattern="dd.MM.yyyy HH:mm"/>
+            </h:outputText>
+
+            <span>Hat das Event mit dem genannten Kunden wie geplant stattgefunden?</span>
+
+            <div class="buttons-hbox">
+                <p:commandButton value="Ja"
+                                 action="#{confirmBookingBean.confirmEvent}" ajax="false"/>
+                <p:commandButton value="Nein"
+                                 action="#{confirmBookingBean.cancelEvent}" ajax="false"/>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+
+
+

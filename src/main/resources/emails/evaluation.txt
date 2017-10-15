@@ -1,0 +1,8 @@
+${greeting-provider},
+bitte lassen Sie uns wissen, ob das Event mit dem Kunden wie geplant stattgefunden hat:
+
+${link}
+
+
+Mit freundlichen Grüßen
+Ihr Team von The-Eventers.de

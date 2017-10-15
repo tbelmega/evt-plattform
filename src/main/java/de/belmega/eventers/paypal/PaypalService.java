@@ -99,6 +99,7 @@ public class PaypalService {
         paymentDAO.persist(paymentEntity);
 
         booking.setPayment(paymentEntity);
+        bookingDAO.update(booking);
     }
 
     // ### Api Context
