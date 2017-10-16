@@ -46,7 +46,11 @@
 
             <div class="float-left">
                 <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress" required="true"/>
+                <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress" required="true"
+                             validatorMessage="Invalid email format">
+                    <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                </h:inputText>
             </div>
             <div class="float-right">
                 <h:outputLabel for="inputPhoneMobile">Telefonnummer für Rückfragen</h:outputLabel>

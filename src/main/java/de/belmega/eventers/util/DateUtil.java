@@ -1,5 +1,7 @@
 package de.belmega.eventers.util;
 
+import de.belmega.eventers.booking.EventTime;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,6 +21,16 @@ public class DateUtil {
         timeCal.setTime(time);
         dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
         dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
+
+        return dateCal.getTime();
+    }
+
+    public static Date combineDateTime(Date date, EventTime time) {
+        Calendar dateCal = Calendar.getInstance();
+        dateCal.setTime(date);
+
+        dateCal.set(Calendar.HOUR_OF_DAY, time.getHours());
+        dateCal.set(Calendar.MINUTE, time.getMinutes());
 
         return dateCal.getTime();
     }

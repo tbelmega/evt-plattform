@@ -25,10 +25,11 @@
                             pattern="dd.MM.yyyy" locale="de" showOn="button"/>
             </div>
             <div class="float-right">
-                <h:outputLabel for="eventTime" value="Gewünschte Zeit"/>
-                <p:calendar id="eventTime" value="#{bookingBean.booking.time}"
-                            required="true"
-                            pattern="HH:mm" timeOnly="true" locale="de" showOn="button"/>
+                <h:outputLabel for="dropdownTime" value="Gewünschte Zeit"/>
+                <h:selectOneMenu value="#{bookingBean.booking.time}" id="dropdownTime"
+                                 required="true">
+                    <f:selectItems value="#{bookingBean.allAvailableTimes}"/>
+                </h:selectOneMenu>
             </div>
             <div style="clear: both; margin: 0"/>
 

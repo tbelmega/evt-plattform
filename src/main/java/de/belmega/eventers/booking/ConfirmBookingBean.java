@@ -40,6 +40,7 @@ public class ConfirmBookingBean implements Serializable {
     private BookingLinkEntity link;
     private CustomerEntity customerEntity;
     private BookingEntity bookingEntity;
+    private String remarks;
 
     public String getLinkId() {
         return linkId;
@@ -136,6 +137,8 @@ public class ConfirmBookingBean implements Serializable {
             throw new RuntimeException(e);
         }
 
+        getBookingEntity().setProviderRemark(remarks);
+
         return loginPage;
     }
 
@@ -144,7 +147,16 @@ public class ConfirmBookingBean implements Serializable {
                 "dass das Event abgesagt wurde.", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
+        getBookingEntity().setProviderRemark(remarks);
+
         return loginPage;
     }
 
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
 }

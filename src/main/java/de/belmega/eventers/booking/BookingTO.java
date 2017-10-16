@@ -1,12 +1,11 @@
 package de.belmega.eventers.booking;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class BookingTO {
     private Long id;
     private Date date = new Date();
-    private Date time;
+    private EventTime time;
     private EventDuration duration = EventDuration.MIN_90;
     private EventFlexibility flexibility = EventFlexibility.NONE;
     private Integer attendees;
@@ -25,18 +24,11 @@ public class BookingTO {
         return date;
     }
 
-    public void setTime(Date time) {
+    public void setTime(EventTime time) {
         this.time = time;
     }
 
-    public Date getTime() {
-        if (time == null) {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date());
-            cal.set(Calendar.HOUR_OF_DAY, 18);
-            cal.set(Calendar.MINUTE, 0);
-            time = cal.getTime();
-        }
+    public EventTime getTime() {
         return time;
     }
 

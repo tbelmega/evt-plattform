@@ -3,7 +3,6 @@ package de.belmega.eventers.booking;
 
 public enum EventDuration {
 
-    MIN_30("30 Minuten", 30),
     MIN_60("1 Stunde", 60),
     MIN_90("1,5 Stunden", 90),
     MIN_120("2 Stunden", 120),

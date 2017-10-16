@@ -192,4 +192,8 @@ public class BookingBean implements Serializable {
     public String getEnvironment() {
         return this.environment;
     }
+
+    public EventTime[] getAllAvailableTimes() {
+        return EventTime.values();
+    }
 }

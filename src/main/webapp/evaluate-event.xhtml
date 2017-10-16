@@ -23,6 +23,12 @@
                 <f:convertDateTime type="date" pattern="dd.MM.yyyy HH:mm"/>
             </h:outputText>
 
+            <div>
+                <h:outputLabel for="inputRemarks">Bemerkungen</h:outputLabel>
+                <h:inputTextarea value="#{confirmBookingBean.remarks}" id="inputRemarks" cols="40" rows="5"
+                                 style="resize: none" required="true"/>
+            </div>
+
             <span>Hat das Event mit dem genannten Kunden wie geplant stattgefunden?</span>
 
             <div class="buttons-hbox">

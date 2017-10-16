@@ -43,7 +43,9 @@
             <h:outputLabel for="inputEmailadress">E-Mail-Adresse</h:outputLabel>
             <h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress" required="true"
                          requiredMessage="Angabe benötigt."
-                         class="width-medium">
+                         class="width-medium" validatorMessage="E-Mail-Adresse ungültig.">
+                <f:validateRegex
+                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                 <f:validator validatorId="confirmEmailadressValidator"/>
                 <f:attribute name="confirmEmailadress" value="#{confirmEmailadress.submittedValue}"/>
                 <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation" render="m_emailadress"/>

@@ -40,6 +40,8 @@ public class BookingEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     private ProviderUserEntity provider;
 
+    private String providerRemark;
+
     public void setNumberOfAttendees(Integer numberOfAttendees) {
         this.numberOfAttendees = numberOfAttendees;
     }
@@ -139,5 +141,13 @@ public class BookingEntity {
     @Transient
     public boolean isAccepted() {
         return this.provider != null;
+    }
+
+    public void setProviderRemark(String providerRemark) {
+        this.providerRemark = providerRemark;
+    }
+
+    public String getProviderRemark() {
+        return providerRemark;
     }
 }
