@@ -1,6 +1,10 @@
 package de.belmega.eventers;
 
+import de.belmega.eventers.scheduling.ScheduleEventDAO;
+import de.belmega.eventers.scheduling.ScheduleEventEntity;
 import de.belmega.eventers.services.categories.*;
+import de.belmega.eventers.services.common.OfferSelection;
+import de.belmega.eventers.services.common.SelectionServicesDAO;
 import de.belmega.eventers.user.*;
 import de.belmega.eventers.user.registration.exceptions.MailadressAlreadyInUse;
 import org.apache.commons.lang.StringUtils;
@@ -29,7 +33,13 @@ public class TestDataGenerator {
     private ServiceDAO serviceDAO;
 
     @Inject
+    private SelectionServicesDAO selectionServicesDAO;
+
+    @Inject
     private CategoryDAO categoryDAO;
+
+    @Inject
+    private ScheduleEventDAO scheduleEventDAO;
 
     @Inject
     @ConfigurationValue("test-environment")
@@ -122,7 +132,7 @@ public class TestDataGenerator {
     private void generateTestData() throws MailadressAlreadyInUse {
 
         try {
-            registerUser("1", "Belmega", "Thiemo", "t.belmega@gmx.de", "foo",
+            ProviderUserEntity tbelmega = registerUser("1", "Belmega", "Thiemo", "t.belmega@gmx.de", "foo",
                     Arrays.asList(ServiceCategoryId.values()));
             registerUser("2", "Wilfling", "Jochen", "info@coorgeist.de", "eventers789!",
                     Arrays.asList(ServiceCategoryId.values()));
@@ -148,6 +158,9 @@ public class TestDataGenerator {
             registerUser("9", "9", "9", "9", "9",
                     Arrays.asList(ServiceCategoryId.WELLNESS));
 
+            enableService(tbelmega);
+            registerAvailability(tbelmega);
+
         } catch (MailadressAlreadyInUse e) {
             LOG.warn("Test users already existing.");
         }
@@ -155,7 +168,7 @@ public class TestDataGenerator {
         LOG.warn("Test data injection complete.");
     }
 
-    private void registerUser(String id, String surname, String firstname, String emailadress, String password, List<ServiceCategoryId> categories) throws MailadressAlreadyInUse {
+    private ProviderUserEntity registerUser(String id, String surname, String firstname, String emailadress, String password, List<ServiceCategoryId> categories) throws MailadressAlreadyInUse {
         ProviderUserEntity user = new ProviderUserEntity();
         user.setLastname(surname);
         user.setFirstname(firstname);
@@ -168,6 +181,34 @@ public class TestDataGenerator {
         user.setCategoryIds(categoryIds);
 
         providerService.registerNewProvider(user);
+
+        return user;
+    }
+
+    private void registerAvailability(ProviderUserEntity user) {
+        // Add an all-day availability for today
+        ScheduleEventEntity scheduleEventEntity = new ScheduleEventEntity();
+        scheduleEventEntity.setId(UUID.randomUUID().toString());
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.HOUR_OF_DAY, 1);
+
+        scheduleEventEntity.setStartDate(cal.getTime());
+
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        scheduleEventEntity.setEndDate(cal.getTime());
+
+        scheduleEventEntity.setUser(user);
+
+        scheduleEventDAO.persist(scheduleEventEntity);
+    }
+
+    private void enableService(ProviderUserEntity user) {
+        // Enable "Culture" services for this user
+        List<OfferSelection> selectionsForUser = selectionServicesDAO.findSelectionsForUser(user, ServiceCategoryId.CULTURE);
+        for (OfferSelection selection: selectionsForUser)
+            selection.setEnabled(true);
     }
 
 

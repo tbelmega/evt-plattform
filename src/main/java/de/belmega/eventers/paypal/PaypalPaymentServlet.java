@@ -5,17 +5,11 @@
 package de.belmega.eventers.paypal;
 
 import com.paypal.api.payments.*;
-import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-import de.belmega.eventers.booking.BookingBean;
-import de.belmega.eventers.booking.BookingDAO;
-import de.belmega.eventers.booking.BookingEntity;
-import de.belmega.eventers.booking.PaymentStatus;
 import de.belmega.eventers.services.categories.ServiceDAO;
 import de.belmega.eventers.services.categories.ServiceEntity;
 import org.apache.log4j.Logger;
 import org.primefaces.json.JSONObject;
-import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -58,7 +52,7 @@ public class PaypalPaymentServlet extends HttpServlet {
 
 
         if (isExistingPayment(req)) {
-            paypalService.executePayment(req.getParameter(PAYMENT_ID), req.getParameter(PAYER_ID), req.getParameter(BOOKING_ID));
+            paypalService.executePaymentAuthorization(req.getParameter(PAYMENT_ID), req.getParameter(PAYER_ID), req.getParameter(BOOKING_ID));
 
             resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {

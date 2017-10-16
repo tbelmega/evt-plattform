@@ -1,6 +1,8 @@
 package de.belmega.eventers.booking;
 
+import com.paypal.base.rest.PayPalRESTException;
 import de.belmega.eventers.mail.EmailSessionBean;
+import de.belmega.eventers.paypal.PaypalService;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.faces.application.FacesMessage;
@@ -25,6 +27,9 @@ public class ConfirmBookingBean implements Serializable {
 
     @Inject
     private EmailSessionBean emailSessionBean;
+
+    @Inject
+    private PaypalService paypalService;
 
     @Inject
     @ConfigurationValue("urls.pages.login")
@@ -124,6 +129,12 @@ public class ConfirmBookingBean implements Serializable {
     public String confirmEvent() {
         FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Vielen Dank für Ihre Bestätigung.", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        try {
+            paypalService.captureAuthorizedPayment(this.link.getBookingId());
+        } catch (PayPalRESTException e) {
+            throw new RuntimeException(e);
+        }
 
         return loginPage;
     }

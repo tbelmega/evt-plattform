@@ -1,5 +1,6 @@
 package de.belmega.eventers.booking;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class BookingTO {
@@ -29,6 +30,13 @@ public class BookingTO {
     }
 
     public Date getTime() {
+        if (time == null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.set(Calendar.HOUR_OF_DAY, 18);
+            cal.set(Calendar.MINUTE, 0);
+            time = cal.getTime();
+        }
         return time;
     }
 

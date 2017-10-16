@@ -25,6 +25,11 @@ import java.util.*;
 @ApplicationScoped
 public class FixedTimerEmailSendBean {
 
+    /**
+     * Cron expression to send mails every hour.
+     */
+    public static final String SEND_EMAIL_INTERVALL = "0 0/15 * * * ?";
+
     @Inject
     @ConfigurationValue("urls.hostname")
     String hostname;
@@ -40,7 +45,7 @@ public class FixedTimerEmailSendBean {
 
     private Logger logger = Logger.getLogger(FixedTimerEmailSendBean.class);
 
-    @Cron(cronExpression = "0 0/15 * * * ?")
+    @Cron(cronExpression = SEND_EMAIL_INTERVALL)
     public void atSchedule() throws InterruptedException {
         logger.info("Sending scheduled emails.");
 
@@ -59,7 +64,7 @@ public class FixedTimerEmailSendBean {
 
         for (BookingEntity be: bookingsStartingBetween) {
             if (be.isAccepted()) sendMailToCheckIfEventWasAccomplished(be);
-            else bookingDAO.remove(be);
+            //else bookingDAO.remove(be); // TODO remove old bookings here?
         }
     }
 

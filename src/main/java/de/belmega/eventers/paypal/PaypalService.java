@@ -6,7 +6,7 @@ import com.paypal.base.rest.PayPalRESTException;
 import de.belmega.eventers.booking.BookingDAO;
 import de.belmega.eventers.booking.BookingEntity;
 import de.belmega.eventers.booking.PaymentStatus;
-import org.apache.log4j.Logger;
+import org.jboss.logging.Logger;
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 import javax.inject.Inject;
@@ -35,7 +35,7 @@ public class PaypalService {
     private static final Logger LOGGER = Logger.getLogger(PaypalService.class);
 
 
-    void executePayment(String paymentId, String payerId, String bookingId) throws ServletException {
+    void executePaymentAuthorization(String paymentId, String payerId, String bookingId) throws ServletException {
         Payment payment = new Payment();
         payment.setIntent(PaymentIntent.AUTHORIZE.getId());
         payment.setId(paymentId);
@@ -57,7 +57,7 @@ public class PaypalService {
      * Find the authorizationId value in the data sent from paypal server.
      */
     private String getAuthorizationId(Payment paymentFromServer) {
-        return paymentFromServer.getTransactions().get(0).getRelatedResources().get(0).getAuthorization().getId();
+        return paymentFromServer.getTransactions().get(0).getRelatedResources().get(0).getAuthorization().getId(); //TODO check
     }
 
     public void captureAuthorizedPayment(Long bookingId) throws PayPalRESTException {
