@@ -42,7 +42,7 @@ public class EmailSessionBean {
             message.setRecipients(Message.RecipientType.TO, address);
             message.setSubject(subject);
             message.setSentDate(new Date());
-            message.setText(body);
+            message.setText(body); // message.setContent(someHtmlMessage, "text/html; charset=utf-8");
 
             Transport.send(message);
         } catch (MessagingException ex) {
