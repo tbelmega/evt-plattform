@@ -21,8 +21,6 @@
 * Doppelklick auf Kalender erzeugt Doppeleintrag bei IPhone/IPad.?
 * Verfügbarkeit mit Einzelklick löschen?
 
-* Checkbox für AGB
-* Abweichende Rechnungsadresse auf Seite 3
 * HTML-Emails prüfen
 * Profil: Bei "Speichern" oben zuklappen, unten aufklappen
 * Nach Profil "Speichern" weiter zu "Dienstleistung"
@@ -50,6 +48,8 @@
 * Emailadressen bei Eingabe validieren
 * Buchungsformular: Zeiten mit halbstündigem Dropdown
 * Paypal: Icons für Zahlungsoptionen
+* Checkbox für AGB
+* Abweichende Rechnungsadresse auf Seite 3
 
 ## Rückfragen an Herrn Wilfling:
 * "Doppelte Einträge: längere Verfügbarkeit überschreibt kürzere Verfügbarkeit. Mehrere Einträge sind nur dann möglich, wenn eine Unterbrechung zweier oder mehrere Termine vorliegen (Z.B.: 17 -18 Uhr; 19-21 Uhr)" Wunsch oder aktuelles verhalten?

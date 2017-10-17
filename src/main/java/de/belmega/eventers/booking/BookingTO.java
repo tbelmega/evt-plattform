@@ -68,11 +68,11 @@ public class BookingTO {
         return remark;
     }
 
-    public void setCreateInvoice(Boolean createInvoice) {
-        this.createInvoice = createInvoice;
+    public void setInvoiceAddress(Boolean invoiceAddress) {
+        this.createInvoice = invoiceAddress;
     }
 
-    public Boolean getCreateInvoice() {
+    public Boolean getInvoiceAddress() {
         return createInvoice;
     }
 

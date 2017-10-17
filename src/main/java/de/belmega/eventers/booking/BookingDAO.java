@@ -22,7 +22,7 @@ public class BookingDAO {
         BookingEntity bookingEntity = loadOrCreateBookingEntity(booking);
 
         bookingEntity.setNumberOfAttendees(booking.getAttendees());
-        bookingEntity.setCreateInvoice(booking.getCreateInvoice());
+        bookingEntity.setCreateInvoice(booking.getInvoiceAddress());
 
         if (booking.getDate() != null && booking.getTime() != null) {
             Date dateTime = DateUtil.combineDateTime(booking.getDate(), booking.getTime());
