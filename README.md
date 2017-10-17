@@ -21,7 +21,6 @@
 * Doppelklick auf Kalender erzeugt Doppeleintrag bei IPhone/IPad.?
 * Verfügbarkeit mit Einzelklick löschen?
 
-* Paypal: Icons für Zahlungsoptionen
 * Checkbox für AGB
 * Abweichende Rechnungsadresse auf Seite 3
 * HTML-Emails prüfen
@@ -39,6 +38,8 @@
 * Massagio-App anschauen zur Orientierung 
 * Relaxmassage als Beispiel
 * Über Whatsapp klären, wer das Layout/Styling für die Buchungsseiten entwirft
+* Kalenderfunktion: Wiederholfunktion eines definierten Zeitfensters (z.B.: 17-21 Uhr) zur schnellen Übertragung in den Kalender
+* Dienstleister-option: Kalender nicht nutzen
 
 ## Erledigt:
 * Autoresponder: Die Datenbank prüft, wenn eine Dienstleistung hätte erbracht werden müssen. (Timing: Startzeit der gebuchten Leistung gemäß Auftragsbestätigung + Dauer des Programms + 1 Stunde). Tritt der Fall ein, erhält der Dienstleister eine automatisierte Mail mit der Aufforderung den Status der gebuchten Leistung zu markieren. (Link)
@@ -47,6 +48,8 @@
 * Bei "gewünschter Dauer" 30min raus
 * Uhrzeiten in Buchungsbestätigung überprüfen (Zeitzone?)
 * Emailadressen bei Eingabe validieren
+* Buchungsformular: Zeiten mit halbstündigem Dropdown
+* Paypal: Icons für Zahlungsoptionen
 
 ## Rückfragen an Herrn Wilfling:
 * "Doppelte Einträge: längere Verfügbarkeit überschreibt kürzere Verfügbarkeit. Mehrere Einträge sind nur dann möglich, wenn eine Unterbrechung zweier oder mehrere Termine vorliegen (Z.B.: 17 -18 Uhr; 19-21 Uhr)" Wunsch oder aktuelles verhalten?
@@ -58,10 +61,10 @@
 * --Matching von Buchungsanfrage und Verfügbarkeit--
 * --Mail-Service--
 * --Payment--
-* Dienstleister-option: Kalender nicht nutzen
-* Alternativen-Tabelle für Kunden
+* Alternativen-Tabelle für Kunden bis 27.10.
+* Hotel-Pflege-Seite und Dienstleister-Hotel-Auswahl
 * Erfassungsformular für Studenten
-* Buchungsformular: Zeiten mit halbstündigem Dropdown
+
 
 
 ## Backlog
@@ -69,7 +72,6 @@
 * Profil: Wenn Emailadresse änderbar wird: Neue Bestätigung der Mailadresse?
 * Nutzer aktivieren?
 * Kunde Login?
-* Captcha Login & Registration?
 * Logging
 * DB-Backup
 * UI Tests

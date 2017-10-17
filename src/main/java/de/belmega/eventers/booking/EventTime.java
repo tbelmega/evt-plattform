@@ -53,21 +53,17 @@ public enum EventTime {
     TIME_23_00(23, 0),
     TIME_23_30(23, 30);
 
-
-
-    private final String text;
     private final int hours;
     private final int minutes;
 
     private EventTime(int hours, int minutes) {
-        this.text = hours + ":" + minutes;
         this.hours = hours;
         this.minutes = minutes;
     }
 
     @Override
     public String toString() {
-        return text;
+        return getText();
     }
 
     public int getMinutes() {
@@ -79,6 +75,7 @@ public enum EventTime {
     }
 
     public String getText() {
-        return text;
+        // output hours and minutes in a format with trailing zeros, like 08:00 for 8 und 0
+        return String.format("%1$02d:%2$02d", hours, minutes);
     }
 }
