@@ -5,7 +5,6 @@ and (max-width: 800px) {
         -webkit-font-smoothing: antialiased;
         -webkit-text-size-adjust: 100%;
         font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
-
         margin: 0;
     }
 }
@@ -17,6 +16,15 @@ and (min-width: 800px) {
         font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
         padding: 0.5em
     }
+}
+
+body * {
+    font-size: large;
+
+    -ms-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 
@@ -60,19 +68,10 @@ a:hover {
     visibility: hidden;
 }
 
-.loginInputText {
-    font-size: 1em;
-    color: black;
-    line-height: 1em;
-}
-
 form label {
     display: block;
     font-weight: bold;
-    font-size: 14px;
-    color: #626262;
-    margin-bottom: 5px;
-    line-height: 25px
+    line-height: 150%;
 }
 
 .service-section label, .weekday-list label {
@@ -99,10 +98,7 @@ and (max-width: 800px) {
     .width-medium {
         width: 96%;
 
-        -ms-box-sizing:content-box;
-        -moz-box-sizing:content-box;
-        -webkit-box-sizing:content-box;
-        box-sizing:content-box;
+
 
     }
 }
@@ -111,11 +107,6 @@ and (min-width: 800px) {
     .width-medium {
         min-width: 200px;
         width: 40%;
-
-        -ms-box-sizing:content-box;
-        -moz-box-sizing:content-box;
-        -webkit-box-sizing:content-box;
-        box-sizing:content-box;
     }
 }
 
