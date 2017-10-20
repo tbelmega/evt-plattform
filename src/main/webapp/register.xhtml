@@ -6,92 +6,98 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="main-content">
-        <h:form name="formRegister">
-            <h:outputLabel for="selectCategory">Ihr Fachgebiet</h:outputLabel>
-            <h:selectOneMenu value="#{registerProviderBean.category}" id="selectCategory"
-                             required="true" requiredMessage="Fachgebiet: Angabe benötigt."
-                             class="width-medium">
-                <f:selectItem itemLabel="Bitte auswählen..."/>
-                <f:selectItems value="#{registerProviderBean.allAvailableCategories}" var="cat" itemLabel="#{cat.categoryName}" itemValue="#{cat.id}"/>
-            </h:selectOneMenu>
+        <h:form name="formRegister" class="eventers-container">
+                <div class="row">
+                    <h:outputLabel for="selectCategory">Ihr Fachgebiet</h:outputLabel>
+                    <h:selectOneMenu value="#{registerProviderBean.category}" id="selectCategory"
+                                     required="true" requiredMessage="Fachgebiet: Angabe benötigt."
+                                     class="col-12">
+                        <f:selectItem itemLabel="Bitte auswählen..."/>
+                        <f:selectItems value="#{registerProviderBean.allAvailableCategories}" var="cat"
+                                       itemLabel="#{cat.categoryName}" itemValue="#{cat.id}"/>
+                    </h:selectOneMenu>
 
-            <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
-            <h:selectOneMenu value="#{registerProviderBean.provider.greeting}" id="selectGreeting"
-                             required="true" requiredMessage="Anrede: Angabe benötigt."
-                             class="width-medium">
-                <f:selectItem itemLabel="Bitte auswählen..."/>
-                <f:selectItems value="#{registerProviderBean.allAvailableGreetings}" var="greeting"
-                               itemLabel="#{greeting.name}" itemValue="#{greeting}"/>
-            </h:selectOneMenu>
+                    <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
+                    <h:selectOneMenu value="#{registerProviderBean.provider.greeting}" id="selectGreeting"
+                                     required="true" requiredMessage="Anrede: Angabe benötigt."
+                                     class="col-12">
+                        <f:selectItem itemLabel="Bitte auswählen..."/>
+                        <f:selectItems value="#{registerProviderBean.allAvailableGreetings}" var="greeting"
+                                       itemLabel="#{greeting.name}" itemValue="#{greeting}"/>
+                    </h:selectOneMenu>
 
-            <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
-            <h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname" required="true"
-                         requiredMessage="Angabe benötigt."
-                         class="width-medium">
-                <f:validateRequired/>
-            </h:inputText>
-            <h:message for="inputFirstname" id="m_firstname" errorStyle="color: red" styleClass="message"/>
+                    <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
+                    <h:inputText value="#{registerProviderBean.provider.firstname}" id="inputFirstname" required="true"
+                                 requiredMessage="Angabe benötigt."
+                                 class="col-12">
+                        <f:validateRequired/>
+                    </h:inputText>
+                    <h:message for="inputFirstname" id="m_firstname" errorStyle="color: red" styleClass="message"/>
 
-            <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
-            <h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname" required="true"
-                         requiredMessage="Angabe benötigt."
-                         class="width-medium">
-                <f:validateRequired/>
-            </h:inputText>
-            <h:message for="inputLastname" id="m_lastname" errorStyle="color: red" styleClass="message"/>
+                    <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
+                    <h:inputText value="#{registerProviderBean.provider.lastname}" id="inputLastname" required="true"
+                                 requiredMessage="Angabe benötigt."
+                                 class="col-12">
+                        <f:validateRequired/>
+                    </h:inputText>
+                    <h:message for="inputLastname" id="m_lastname" errorStyle="color: red" styleClass="message"/>
 
-            <h:outputLabel for="inputEmailadress">E-Mail-Adresse</h:outputLabel>
-            <h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress" required="true"
-                         requiredMessage="Angabe benötigt."
-                         class="width-medium" validatorMessage="E-Mail-Adresse ungültig.">
-                <f:validateRegex
-                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                <f:validator validatorId="confirmEmailadressValidator"/>
-                <f:attribute name="confirmEmailadress" value="#{confirmEmailadress.submittedValue}"/>
-                <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation" render="m_emailadress"/>
-            </h:inputText>
-            <h:message for="inputEmailadress" id="m_emailadress" errorStyle="color: red" styleClass="message"/>
+                    <h:outputLabel for="inputEmailadress">E-Mail-Adresse</h:outputLabel>
+                    <h:inputText value="#{registerProviderBean.provider.emailadress}" id="inputEmailadress"
+                                 required="true"
+                                 requiredMessage="Angabe benötigt."
+                                 class="col-12" validatorMessage="E-Mail-Adresse ungültig.">
+                        <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                        <f:validator validatorId="confirmEmailadressValidator"/>
+                        <f:attribute name="confirmEmailadress" value="#{confirmEmailadress.submittedValue}"/>
+                        <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation"
+                                render="m_emailadress"/>
+                    </h:inputText>
+                    <h:message for="inputEmailadress" id="m_emailadress" errorStyle="color: red" styleClass="message"/>
 
-            <h:outputLabel for="inputEmailadressConfirmation">E-Mail-Adresse wiederholen</h:outputLabel>
-            <h:inputText binding="#{confirmEmailadress}" id="inputEmailadressConfirmation" required="true"
-                         requiredMessage="Angabe benötigt."
-                         class="width-medium">
-                <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation"
-                        render="m_emailadress m_emailadress_confirm"/>
-            </h:inputText>
-            <h:message for="inputEmailadressConfirmation" id="m_emailadress_confirm" errorStyle="color: red"
-                       styleClass="message"/>
+                    <h:outputLabel for="inputEmailadressConfirmation">E-Mail-Adresse wiederholen</h:outputLabel>
+                    <h:inputText binding="#{confirmEmailadress}" id="inputEmailadressConfirmation" required="true"
+                                 requiredMessage="Angabe benötigt."
+                                 class="col-12">
+                        <f:ajax event="blur" execute="inputEmailadress inputEmailadressConfirmation"
+                                render="m_emailadress m_emailadress_confirm"/>
+                    </h:inputText>
+                    <h:message for="inputEmailadressConfirmation" id="m_emailadress_confirm" errorStyle="color: red"
+                               styleClass="message"/>
 
 
-            <h:outputLabel for="inputPassword">Passwort</h:outputLabel>
+                    <h:outputLabel for="inputPassword">Passwort</h:outputLabel>
 
-            <h:inputSecret value="#{registerProviderBean.provider.passwordPlainText}" id="inputPassword"
-                           required="true"
-                           requiredMessage="Angabe benötigt."
-                           class="width-medium">
-                <f:validator validatorId="confirmPasswordValidator"/>
-                <f:attribute name="confirmPassword" value="#{confirmPassword.submittedValue}"/>
-                <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation" render="m_password"/>
-            </h:inputSecret>
-            <h:message for="inputPassword" id="m_password" errorStyle="color: red" styleClass="message"/>
+                    <h:inputSecret value="#{registerProviderBean.provider.passwordPlainText}" id="inputPassword"
+                                   required="true"
+                                   requiredMessage="Angabe benötigt."
+                                   class="col-12">
+                        <f:validator validatorId="confirmPasswordValidator"/>
+                        <f:attribute name="confirmPassword" value="#{confirmPassword.submittedValue}"/>
+                        <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation" render="m_password"/>
+                    </h:inputSecret>
+                    <h:message for="inputPassword" id="m_password" errorStyle="color: red" styleClass="message"/>
 
-            <h:outputLabel for="inputPasswordConfirmation">Passwort wiederholen</h:outputLabel>
-            <h:inputSecret binding="#{confirmPassword}" id="inputPasswordConfirmation" required="true"
-                           requiredMessage="Angabe benötigt."
-                           class="width-medium">
-                <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation"
-                        render="m_password m_password_confirm"/>
-            </h:inputSecret>
-            <h:message for="inputPasswordConfirmation" id="m_password_confirm" errorStyle="color: red"
-                       styleClass="message"/>
+                    <h:outputLabel for="inputPasswordConfirmation">Passwort wiederholen</h:outputLabel>
+                    <h:inputSecret binding="#{confirmPassword}" id="inputPasswordConfirmation" required="true"
+                                   requiredMessage="Angabe benötigt."
+                                   class="col-12">
+                        <f:ajax event="blur" execute="inputPassword inputPasswordConfirmation"
+                                render="m_password m_password_confirm"/>
+                    </h:inputSecret>
+                    <h:message for="inputPasswordConfirmation" id="m_password_confirm" errorStyle="color: red"
+                               styleClass="message"/>
 
-            <p:captcha label="Captcha" id="captcha" required="true"/><!-- requires key in web.xml, register at google first -->
+                    <p:captcha label="Captcha" id="captcha"
+                               required="true"/><!-- requires key in web.xml, register at google first -->
 
-            <div class="buttons-hbox">
-                <p:commandButton value="Absenden" name="btnSubmit"
-                                 action="#{registerProviderBean.register}" ajax="false"/>
-            </div>
-            <h:messages globalOnly="true" errorStyle="color: red"/>
+                    <div class="buttons-hbox">
+                        <p:commandButton value="Absenden" name="btnSubmit"
+                                         action="#{registerProviderBean.register}" ajax="false"/>
+                    </div>
+                    <h:messages globalOnly="true" errorStyle="color: red"/>
+                </div>
         </h:form>
     </ui:define>
 

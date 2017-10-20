@@ -6,20 +6,23 @@
                 template="template-public.xhtml">
 
     <ui:define name="main-content">
-        <h:form id="formLogin">
-            <div>
+        <h:form id="formLogin" class="eventers-container">
+            <div class="row">
                 <h:outputLabel for="emailAdressInput" value="E-Mail-Adresse"/>
-                <h:inputText id="emailAdressInput" value="#{loginBean.emailAdress}" class="width-medium"/>
-            </div>
-            <div>
+                <h:inputText id="emailAdressInput" value="#{loginBean.emailAdress}" class="col-12"/>
+
                 <h:outputLabel for="passwordInput" value="Passwort"/>
-                <h:inputSecret id="passwordInput" value="#{loginBean.password}" class="width-medium"/>
+                <h:inputSecret id="passwordInput" value="#{loginBean.password}" class="col-12"/>
+                <div class="buttons-hbox">
+                    <p:commandButton value="Login" id="btnLogin"
+                                     action="#{loginBean.validateUsernamePassword}" ajax="false"/>
+                    <p:commandButton value="Registrieren" id="btnRegister"
+                                     action="#{loginBean.registration}" ajax="false"/>
+                </div>
+
+                <a href="recovery.xhtml">Passwort vergessen?</a>
+
             </div>
-            <p:commandButton value="Login" id="btnLogin"
-                             action="#{loginBean.validateUsernamePassword}" ajax="false"/>
-            <p:commandButton value="Registrieren" id="btnRegister"
-                             action="#{loginBean.registration}" ajax="false"/>
-            <a href="recovery.xhtml">Passwort vergessen?</a>
         </h:form>
     </ui:define>
 

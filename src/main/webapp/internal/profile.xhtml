@@ -11,36 +11,36 @@
                 <h3 class="slidedown-heading">Persönliche Daten</h3></h:commandLink>
             <div class="personal-section">
                 <h:outputLabel for="outputEmailadress">Ihre Emailadresse / Nutzerkennung</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.emailadress}" id="outputEmailadress" class="width-medium"
+                <h:inputText value="#{userProfileBean.provider.emailadress}" id="outputEmailadress" class="col-12"
                              readonly="true"/>
 
                 <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.firstname}" id="inputFirstname" class="width-medium"/>
+                <h:inputText value="#{userProfileBean.provider.firstname}" id="inputFirstname" class="col-12"/>
 
                 <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.lastname}" id="inputLastname" class="width-medium"/>
+                <h:inputText value="#{userProfileBean.provider.lastname}" id="inputLastname" class="col-12"/>
 
                 <h:outputLabel for="inputStreet">Straße und Hausnummer</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.street}" id="inputStreet" class="width-medium"/>
+                <h:inputText value="#{userProfileBean.provider.street}" id="inputStreet" class="col-12"/>
 
                 <h:outputLabel for="inputZipCode">Postleitzahl</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.zipcode}" id="inputZipCode" class="width-medium"/>
+                <h:inputText value="#{userProfileBean.provider.zipcode}" id="inputZipCode" class="col-12"/>
 
                 <h:outputLabel for="inputCity">Stadt</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.city}" id="inputCity" class="width-medium"/>
+                <h:inputText value="#{userProfileBean.provider.city}" id="inputCity" class="col-12"/>
 
                 <h:outputLabel for="inputDateOFBirth">Geburtsdatum</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.dateOfBirth}" id="inputDateOFBirth" class="width-medium"
+                <h:inputText value="#{userProfileBean.provider.dateOfBirth}" id="inputDateOFBirth" class="col-12"
                              a:placeholder="31.12.2999">
                     <f:convertDateTime pattern="dd.MM.yyyy"/>
                 </h:inputText>
                 <h:message for="inputDateOFBirth" id="messageDateOfBirth"/>
 
                 <h:outputLabel for="inputPhoneBusiness">Telefonnummer Geschäftlich</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.phoneBusiness}" id="inputPhoneBusiness" class="width-medium"/>
+                <h:inputText value="#{userProfileBean.provider.phoneBusiness}" id="inputPhoneBusiness" class="col-12"/>
 
                 <h:outputLabel for="inputPhoneMobile">Telefonnummer Mobil</h:outputLabel>
-                <h:inputText value="#{userProfileBean.provider.mobile}" id="inputPhoneMobile" class="width-medium"/>
+                <h:inputText value="#{userProfileBean.provider.mobile}" id="inputPhoneMobile" class="col-12"/>
 
                 <div class="buttons-hbox">
                     <p:commandButton value="Speichern"
@@ -58,7 +58,7 @@
                 <h4>Praktische Erfahrung</h4>
                 <h:outputLabel
                         for="dropdownExperience">Wieviel Erfahrung besitzen Sie in Ihrem Fachgebiet? (im Vergleich zum Markt oder Mitbewerbern)</h:outputLabel>
-                <h:selectOneMenu value="#{userProfileBean.provider.experience}" id="dropdownExperience" class="width-medium">
+                <h:selectOneMenu value="#{userProfileBean.provider.experience}" id="dropdownExperience" class="col-12">
                     <f:selectItem itemLabel="Bitte auswählen..." />
                     <f:selectItem itemValue="50" itemLabel="Sehr viel Erfahrung"/>
                     <f:selectItem itemValue="40" itemLabel="Viel Erfahrung"/>
@@ -70,7 +70,7 @@
                 <h4>Erreichbarkeit</h4>
                 <h:outputLabel
                         for="dropdownContactable">Wie schnell sind Sie gewöhnlich telefonisch/per SMS/per Whatsapp zu erreichen?</h:outputLabel>
-                <h:selectOneMenu value="#{userProfileBean.provider.contactable}" id="dropdownContactable" class="width-medium">
+                <h:selectOneMenu value="#{userProfileBean.provider.contactable}" id="dropdownContactable" class="col-12">
                     <f:selectItem itemLabel="Bitte auswählen..."/>
                     <f:selectItem itemValue="5" itemLabel="5 Minuten"/>
                     <f:selectItem itemValue="10" itemLabel="10 Minuten"/>
@@ -89,14 +89,14 @@
                 <h4>Mobilität</h4>
                 <h:outputLabel
                         for="dropdownMobility">Verfügen Sie über einen PKW oder eine andere Möglichkeit die Kunden vor Ort (Hotel, Firma, etc.) zu besuchen?</h:outputLabel>
-                <h:selectOneMenu value="#{userProfileBean.provider.mobility}" id="dropdownMobility" class="width-medium">
+                <h:selectOneMenu value="#{userProfileBean.provider.mobility}" id="dropdownMobility" class="col-12">
                     <f:selectItem itemLabel="Bitte auswählen..." />
                     <f:selectItem itemValue="true" itemLabel="Ja"/>
                     <f:selectItem itemValue="false" itemLabel="Nein"/>
                 </h:selectOneMenu>
 
                 <h4>Stundensatz inkl. Anreisepauschale bis 30km</h4>
-                <h:inputText value="#{userProfileBean.provider.hourlyRate}" id="inputHourlyRate" class="width-medium" />
+                <h:inputText value="#{userProfileBean.provider.hourlyRate}" id="inputHourlyRate" class="col-12" />
 
                 <div class="buttons-hbox">
                     <p:commandButton value="Speichern"

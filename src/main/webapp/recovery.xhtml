@@ -7,15 +7,18 @@
 
     <ui:define name="main-content">
 
-        <h:form>
-            <div>Bitte geben Sie Ihre Email-Adresse ein, damit wir Ihnen ein neues Passwort zuschicken können:</div>
-            <p:messages showDetail="false"/>
-            <h:inputText required="true" class="width-medium" value="#{passwordRecoveryBean.mailadress}"/>
+        <h:form class="eventers-container">
+            <div class="row">
+                <h:outputLabel for="inputEmail">Bitte geben Sie Ihre Email-Adresse ein, damit wir Ihnen ein neues Passwort zuschicken können:</h:outputLabel>
+                <p:messages showDetail="false"/>
+                <h:inputText id="inputEmail" required="true" class="col-12" value="#{passwordRecoveryBean.mailadress}"/>
 
-            <p:captcha label="Captcha" id="captcha" required="true"/><!-- requires key in web.xml, register at google first -->
+                <p:captcha label="Captcha" id="captcha"
+                           required="true"/><!-- requires key in web.xml, register at google first -->
 
-            <div class="buttons-hbox">
-                <p:commandButton value="Absenden" actionListener="#{passwordRecoveryBean.submit}" ajax="false"/>
+                <div class="buttons-hbox">
+                    <p:commandButton value="Absenden" actionListener="#{passwordRecoveryBean.submit}" ajax="false"/>
+                </div>
             </div>
         </h:form>
     </ui:define>

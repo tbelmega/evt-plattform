@@ -22,7 +22,7 @@
                 <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
                 <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting"
                                  required="true" requiredMessage="Anrede: Angabe benötigt."
-                                 class="width-medium">
+                                 class="col-12">
                     <f:selectItem itemLabel="Bitte auswählen..."/>
                     <f:selectItems value="#{bookingBean.allAvailableGreetings}" var="greeting"
                                    itemLabel="#{greeting.name}" itemValue="#{greeting}"/>

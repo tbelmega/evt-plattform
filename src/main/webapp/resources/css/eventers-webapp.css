@@ -1,31 +1,98 @@
 /* Widths */
-@media only screen
-and (max-width: 800px) {
+@media (max-device-width: 800px) { /* Phones and Tablets*/
     body {
         -webkit-font-smoothing: antialiased;
         -webkit-text-size-adjust: 100%;
         font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
+        font-size: 3em;
+
         margin: 0;
     }
+
+    input[type="color"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="email"],
+    input[type="month"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="time"],
+    input[type="url"],
+    input[type="week"],
+    select {
+        font-size: 1em;
+    }
+
+
+    .eventers-container {
+        margin: 0;
+    }
+
+    .eventers-container .ui-button > .ui-button-text {
+        line-height: 150%;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
 }
-@media only screen
-and (min-width: 800px) {
+@media (min-device-width: 800px) { /* PCs */
     body {
         -webkit-font-smoothing: antialiased;
         -webkit-text-size-adjust: 100%;
         font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
-        padding: 0.5em
+        font-size: large;
+
+        padding: 0.5em;
+    }
+
+    .eventers-container {
+        max-width: 800px;
+
+        margin: auto;
+    }
+
+    .eventers-container .ui-button > .ui-button-text {
+        line-height: 200%; !important;
+        padding-left: 2em;
+        padding-right: 2em;
     }
 }
 
 body * {
-    font-size: large;
-
     -ms-box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
 }
+
+
+.container-fluid {
+    position: relative;
+    background-color: transparent;
+    min-height: 100vh;
+
+}
+
+.eventers-container {
+    background-color: white;
+    padding: 5px;
+}
+
+.eventers-container > * > .col-12 {
+    width: 100%;
+}
+
+.buttons-hbox {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+
+
+
 
 
 
@@ -53,14 +120,6 @@ a:hover {
     top: 0;
 }
 
-.container-fluid {
-    margin: auto;
-    position: relative;
-    background-color: white;
-    max-width: 1024px;
-    min-height: 100vh;
-    padding: 5px;
-}
 
 .invisible {
     margin: 0;
@@ -92,23 +151,6 @@ input, select {
     padding: 10px
 }
 
-/* Widths */
-@media only screen
-and (max-width: 800px) {
-    .width-medium {
-        width: 96%;
-
-
-
-    }
-}
-@media only screen
-and (min-width: 800px) {
-    .width-medium {
-        min-width: 200px;
-        width: 40%;
-    }
-}
 
 .value {
     width: 1024px; /* required for calendar widget */
