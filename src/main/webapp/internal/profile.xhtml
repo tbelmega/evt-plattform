@@ -6,10 +6,10 @@
 
     <ui:define name="main-content">
 
-        <h:form id="formProfile">
+        <h:form id="formProfile" class="eventers-container">
             <h:commandLink class="toggle" onclick="$('.personal-section').toggleClass('invisible'); return false;">
                 <h3 class="slidedown-heading">Persönliche Daten</h3></h:commandLink>
-            <div class="personal-section">
+            <div class="personal-section row">
                 <h:outputLabel for="outputEmailadress">Ihre Emailadresse / Nutzerkennung</h:outputLabel>
                 <h:inputText value="#{userProfileBean.provider.emailadress}" id="outputEmailadress" class="col-12"
                              readonly="true"/>
@@ -50,10 +50,10 @@
 
             <h:commandLink class="toggle" onclick="$('.additional-section').toggleClass('invisible'); return false;">
                 <h3 class="slidedown-heading">Ergänzende Angaben</h3></h:commandLink>
-            <div class="additional-section">
+            <div class="additional-section row">
                 <h4>Ausbildung</h4>
                 <h:outputLabel for="inputDegree">Welches ist Ihr höchster Ausbildungsgrad?</h:outputLabel>
-                <h:inputTextarea  value="#{userProfileBean.provider.degree}" id="inputDegree" cols="40" rows="5" style="resize: none"/>
+                <h:inputTextarea  value="#{userProfileBean.provider.degree}" id="inputDegree" rows="5" style="resize: none" styleClass="col-12"/>
 
                 <h4>Praktische Erfahrung</h4>
                 <h:outputLabel

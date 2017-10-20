@@ -14,86 +14,91 @@
     </ui:define>
 
     <ui:define name="head">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     </ui:define>
 
     <ui:define name="main-content">
 
-        <h:form>
-            <h1>#{bookingBean.title}</h1>
+        <h:form class="eventers-container">
+            <div class="row">
+                <h1>#{bookingBean.title}</h1>
 
 
-            <h:selectBooleanCheckbox id="checkboxInvoice"
-                                     onclick="$('.invoice-adress-textarea').toggleClass('invisible');"/>
-            <h:outputLabel for="checkboxInvoice" style="display: inline">Abweichende Rechnungsadresse</h:outputLabel>
+                <h:selectBooleanCheckbox id="checkboxInvoice"
+                                         onclick="$('.invoice-adress-textarea').toggleClass('invisible');"/>
+                <h:outputLabel for="checkboxInvoice"
+                               style="display: inline">Abweichende Rechnungsadresse</h:outputLabel>
 
-            <h:inputTextarea style="display: block; resize: none" styleClass="invoice-adress-textarea invisible"
-                             cols="40" rows="5"
-                             a:placeholder="Rechnungsadresse privat oder geschäftlich"
-                             value="#{bookingBean.booking.invoiceAddress}"/>
+                <h:inputTextarea style="display: block; resize: none"
+                                 class="invoice-adress-textarea invisible col-12" rows="5"
+                                 a:placeholder="Rechnungsadresse privat oder geschäftlich"
+                                 value="#{bookingBean.booking.invoiceAddress}"/>
 
-            <h:selectBooleanCheckbox id="checkboxAGB"
-                                     onclick="$('#paypal-section').toggleClass('invisible');"/>
-            <h:outputLabel for="checkboxAGB" style="display: inline">Ich habe die <a href="">Allgemeinen Geschäftsbedingungen</a> gelesen und verstanden.</h:outputLabel>
+                <h:selectBooleanCheckbox id="checkboxAGB"
+                                         onclick="$('#paypal-section').toggleClass('invisible');"/>
+                <h:outputLabel for="checkboxAGB" style="display: inline">Ich habe die <a
+                        href="">Allgemeinen Geschäftsbedingungen</a> gelesen und verstanden.</h:outputLabel>
 
-            <div id="paypal-section" class="invisible">
-            <h:outputLabel for="paypal-button">Bitte autorisieren Sie jetzt die Zahlung über den Dienstleister Paypal.
-            Ihr Konto/Kreditkarte wird erst belastet, wenn das gebuchte Event erfolgreich stattgefunden hat.</h:outputLabel>
+                <div id="paypal-section" class="invisible">
+                    <h:outputLabel
+                            for="paypal-button">Bitte autorisieren Sie jetzt die Zahlung über den Dienstleister Paypal.
+                        Ihr Konto/Kreditkarte wird erst belastet, wenn das gebuchte Event erfolgreich stattgefunden hat.</h:outputLabel>
 
-            <div id="paypal-button" ></div>
+                    <div id="paypal-button"></div>
+                </div>
+
+                <script>
+                    paypal.Button.render({
+
+                        env: '#{bookingBean.environment}', // 'production' Or 'sandbox',
+
+                        style: {label: 'pay', size: 'responsive', shape: 'rect', color: 'silver', fundingicons: true},
+
+                        commit: true, // Show a 'Pay Now' button
+
+                        payment: function (data, actions) {
+
+                            data.serviceId = '#{bookingBean.serviceId}';
+
+                            // Make a call to your server to set up the payment
+                            return paypal.request.post('#{bookingBean.paymentUrl}', data)
+                                .then(function (res) {
+                                    return res.paymentID;
+                                });
+                        },
+
+                        // onAuthorize() is called when the buyer approves the payment
+                        onAuthorize: function (data) {
+
+                            console.log(data);
+
+                            // Set up the data you need to pass to your server
+                            var data = {
+                                paymentID: data.paymentID,
+                                payerID: data.payerID,
+                                bookingId: '#{bookingBean.booking.id}'
+                            };
+
+                            // Make a call to your server to execute the payment
+                            return paypal.request.post('#{bookingBean.paymentUrl}', data)
+                                .then(function (res) {
+                                    $('#paypal-button').toggleClass('invisible');
+                                    $('.buttons-hbox').toggleClass('invisible');
+                                    return false;
+                                });
+                        }
+
+
+                    }, '#paypal-button');
+                </script>
+
+                <div class="buttons-hbox invisible">
+                    <p:commandButton value="Buchung abschließen" id="btnSubmit" action="#{bookingBean.submit}"
+                                     ajax="false"/>
+                </div>
             </div>
-
-            <script>
-                paypal.Button.render({
-
-                    env: '#{bookingBean.environment}', // 'production' Or 'sandbox',
-
-                    style: { label: 'pay', size:  'responsive',  shape: 'rect',  color: 'silver', fundingicons: true },
-
-                    commit: true, // Show a 'Pay Now' button
-
-                    payment: function(data, actions) {
-
-                        data.serviceId = '#{bookingBean.serviceId}';
-
-                        // Make a call to your server to set up the payment
-                        return paypal.request.post('#{bookingBean.paymentUrl}', data)
-                            .then(function(res) {
-                                return res.paymentID;
-                            });
-                    },
-
-                    // onAuthorize() is called when the buyer approves the payment
-                    onAuthorize: function(data) {
-
-                        console.log(data);
-
-                        // Set up the data you need to pass to your server
-                        var data = {
-                            paymentID: data.paymentID,
-                            payerID: data.payerID,
-                            bookingId: '#{bookingBean.booking.id}'
-                        };
-
-                        // Make a call to your server to execute the payment
-                        return paypal.request.post('#{bookingBean.paymentUrl}', data)
-                            .then(function (res) {
-                                $('#paypal-button').toggleClass('invisible');
-                                $('.buttons-hbox').toggleClass('invisible');
-                                return false;
-                            });
-                    }
-
-
-                }, '#paypal-button');
-            </script>
-
-            <div class="buttons-hbox invisible">
-                <p:commandButton value="Buchung abschließen" id="btnSubmit" action="#{bookingBean.submit}" ajax="false"/>
-            </div>
-
         </h:form>
     </ui:define>
 

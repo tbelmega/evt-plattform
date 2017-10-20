@@ -6,31 +6,36 @@
 
     <ui:define name="main-content">
 
-        <h:form>
+        <h:form styleClass="eventers-container">
             <h:panelGroup layout="block" rendered="#{userProfileBean.inRoleFitness}">
                 <h:commandLink class="toggle" onclick="$('.fitness-section').toggleClass('invisible'); return false;">
                     <h3 class="slidedown-heading">Fitness</h3></h:commandLink>
                 <div class="fitness-section service-section">
 
-                    <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
-                    <h:selectManyCheckbox value="#{fitnessServicesBean.data.selectedServices}" layout="pageDirection">
-                        <f:selectItems value="#{fitnessServicesBean.allAvailableServices}"/>
-                    </h:selectManyCheckbox>
 
-                    <h4>Wo können Sie diese Leistungen erbringen?</h4>
-                    <h:selectManyCheckbox value="#{fitnessServicesBean.data.selectedLocations}" layout="pageDirection">
-                        <f:selectItems value="#{fitnessServicesBean.allAvailableLocations}"/>
-                    </h:selectManyCheckbox>
+                        <h4>Welche Leistungen können Sie für The Eventers erbringen?</h4>
+                        <h:selectManyCheckbox value="#{fitnessServicesBean.data.selectedServices}"
+                                              layout="pageDirection">
+                            <f:selectItems value="#{fitnessServicesBean.allAvailableServices}"/>
+                        </h:selectManyCheckbox>
 
-                    <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
-                    <h:selectManyCheckbox value="#{fitnessServicesBean.data.ownedEquipmentByUser}" layout="pageDirection">
-                        <f:selectItems value="#{fitnessServicesBean.allAvailableEquipment}"/>
-                    </h:selectManyCheckbox>
+                        <h4>Wo können Sie diese Leistungen erbringen?</h4>
+                        <h:selectManyCheckbox value="#{fitnessServicesBean.data.selectedLocations}"
+                                              layout="pageDirection">
+                            <f:selectItems value="#{fitnessServicesBean.allAvailableLocations}"/>
+                        </h:selectManyCheckbox>
 
-                    <div class="buttons-hbox">
-                        <p:commandButton value="Speichern"
-                                         actionListener="#{fitnessServicesBean.save}" ajax="false"/>
-                    </div>
+                        <h4>Welche Sportutensilien stehen Ihnen zur Verfügung? (für eine Gruppe von mindestens 6 Personen)</h4>
+                        <h:selectManyCheckbox value="#{fitnessServicesBean.data.ownedEquipmentByUser}"
+                                              layout="pageDirection">
+                            <f:selectItems value="#{fitnessServicesBean.allAvailableEquipment}"/>
+                        </h:selectManyCheckbox>
+
+                        <div class="buttons-hbox">
+                            <p:commandButton value="Speichern"
+                                             actionListener="#{fitnessServicesBean.save}" ajax="false"/>
+                        </div>
+
                 </div>
             </h:panelGroup>
 

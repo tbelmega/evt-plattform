@@ -4,7 +4,7 @@
         -webkit-font-smoothing: antialiased;
         -webkit-text-size-adjust: 100%;
         font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
-        font-size: 3em;
+        font-size: 2em;
 
         margin: 0;
     }
@@ -27,6 +27,15 @@
         font-size: 1em;
     }
 
+    input[type=checkbox]
+    {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(2); /* IE */
+        -moz-transform: scale(2); /* FF */
+        -webkit-transform: scale(2); /* Safari and Chrome */
+        -o-transform: scale(2); /* Opera */
+        padding: 10px;
+    }
 
     .eventers-container {
         margin: 0;
@@ -36,6 +45,20 @@
         line-height: 150%;
         padding-left: 1em;
         padding-right: 1em;
+    }
+
+    .eventers-container .ui-widget {
+        padding: 10px;
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        box-shadow: none;
+        font-size: 1em;
+        font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
+    }
+
+    #formNavigation .ui-icon {
+        overflow: visible;
+        margin-top: -12px;
     }
 }
 @media (min-device-width: 800px) { /* PCs */
@@ -49,7 +72,7 @@
     }
 
     .eventers-container {
-        max-width: 800px;
+        max-width: 1024px;
 
         margin: auto;
     }
@@ -58,6 +81,20 @@
         line-height: 200%; !important;
         padding-left: 2em;
         padding-right: 2em;
+    }
+
+    .eventers-container .ui-widget {
+        padding: 10px;
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        box-shadow: none;
+        font-size: large;
+        font-family: 'Alegreya', 'Arial', 'Tahoma', sans-serif;
+    }
+
+
+    #formNavigation .ui-icon {
+        overflow: visible;
     }
 }
 
@@ -73,7 +110,8 @@ body * {
     position: relative;
     background-color: transparent;
     min-height: 100vh;
-
+    max-width: 1024px;
+    margin: auto;
 }
 
 .eventers-container {
@@ -81,8 +119,11 @@ body * {
     padding: 5px;
 }
 
-.eventers-container > * > .col-12 {
+.eventers-container .row > .col-12 {
     width: 100%;
+}
+.eventers-container .row > .col-6 {
+    width: 50%;
 }
 
 .buttons-hbox {
@@ -157,8 +198,6 @@ input, select {
 }
 
 .slidedown-heading {
-    font-size: large;
-    font-weight: 300;
     line-height: 2em;
     vertical-align: baseline;
     text-decoration: none;
@@ -221,3 +260,12 @@ td {
 .ui-steps.custom .ui-steps-item.ui-state-highlight .ui-steps-title {
     color: #555;
 }
+
+.eventers-container .ui-inputfield {
+    padding: 10px;
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    box-shadow: none;
+}
+
+

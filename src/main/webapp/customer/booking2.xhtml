@@ -15,65 +15,73 @@
 
     <ui:define name="main-content">
 
-        <h:form>
-            <h1>#{bookingBean.title}</h1>
+        <h:form class="eventers-container">
+            <div class="row">
+                <h1>#{bookingBean.title}</h1>
 
-            <div class="float-left">
-                <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
-                <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting"
-                                 required="true" requiredMessage="Anrede: Angabe benötigt."
-                                 class="col-12">
-                    <f:selectItem itemLabel="Bitte auswählen..."/>
-                    <f:selectItems value="#{bookingBean.allAvailableGreetings}" var="greeting"
-                                   itemLabel="#{greeting.name}" itemValue="#{greeting}"/>
-                </h:selectOneMenu>
-            </div>
-            <div class="float-right">
-                <h:outputLabel for="inputCompany">Firma</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.company}" id="inputCompany"/>
-            </div>
-            <div style="clear: both; margin: 0"/>
+                <div class="float-left col-6 row">
+                    <h:outputLabel for="selectGreeting">Anrede</h:outputLabel>
+                    <h:selectOneMenu value="#{bookingBean.customer.greeting}" id="selectGreeting"
+                                     required="true" requiredMessage="Anrede: Angabe benötigt."
+                                     class="col-12">
+                        <f:selectItem itemLabel="Bitte auswählen..."/>
+                        <f:selectItems value="#{bookingBean.allAvailableGreetings}" var="greeting"
+                                       itemLabel="#{greeting.name}" itemValue="#{greeting}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="float-right col-6 row">
+                    <h:outputLabel for="inputCompany">Firma</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.company}"
+                                 id="inputCompany" class="col-12"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
 
-            <div class="float-left">
-                <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.firstname}" id="inputFirstname"/>
-            </div>
-            <div class="float-right">
-                <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.lastname}" id="inputLastname"/>
-            </div>
-            <div style="clear: both; margin: 0"/>
+                <div class="float-left col-6 row">
+                    <h:outputLabel for="inputFirstname">Vorname</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.firstname}"
+                                 id="inputFirstname" class="col-12"/>
+                </div>
+                <div class="float-right col-6 row">
+                    <h:outputLabel for="inputLastname">Nachname</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.lastname}"
+                                 id="inputLastname" class="col-12"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
 
-            <div class="float-left">
-                <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.emailadress}" id="inputEmailadress" required="true"
-                             validatorMessage="Invalid email format">
-                    <f:validateRegex
-                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                </h:inputText>
-            </div>
-            <div class="float-right">
-                <h:outputLabel for="inputPhoneMobile">Telefonnummer für Rückfragen</h:outputLabel>
-                <h:inputText value="#{bookingBean.customer.mobile}" id="inputPhoneMobile" required="true"/>
-            </div>
-            <div style="clear: both; margin: 0"/>
+                <div class="float-left col-6 row">
+                    <h:outputLabel for="inputEmailadress">Emailadresse</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.emailadress}"
+                                 id="inputEmailadress" class="col-12" required="true"
+                                 validatorMessage="Invalid email format">
+                        <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                    </h:inputText>
+                </div>
+                <div class="float-right col-6 row">
+                    <h:outputLabel for="inputPhoneMobile">Telefonnummer für Rückfragen</h:outputLabel>
+                    <h:inputText value="#{bookingBean.customer.mobile}"
+                                 id="inputPhoneMobile" class="col-12" required="true"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
 
-            <div class="float-left">
-                <h:outputLabel for="inputHotel">Adresse Hotel</h:outputLabel>
-                <h:inputTextarea value="#{bookingBean.customer.hotelAdress}" id="inputHotel" cols="30" rows="5"
-                                 style="resize: none" required="true"/>
-            </div>
-            <div class="float-right">
-                <h:outputLabel for="inputRemark">Bemerkungen zur Buchungsanfrage</h:outputLabel>
-                <h:inputTextarea value="#{bookingBean.booking.remark}" id="inputRemark" cols="30" rows="5"
-                                 style="resize: none"/>
-            </div>
-            <div style="clear: both; margin: 0"/>
+                <div class="float-left col-6 row">
+                    <h:outputLabel for="inputHotel">Adresse Hotel</h:outputLabel>
+                    <h:inputTextarea value="#{bookingBean.customer.hotelAdress}"
+                                     id="inputHotel" class="col-12" rows="5"
+                                     style="resize: none" required="true"/>
+                </div>
+                <div class="float-right col-6 row">
+                    <h:outputLabel for="inputRemark">Bemerkungen zur Buchungsanfrage</h:outputLabel>
+                    <h:inputTextarea value="#{bookingBean.booking.remark}"
+                                     id="inputRemark" class="col-12" rows="5"
+                                     style="resize: none"/>
+                </div>
+                <div style="clear: both; margin: 0"/>
 
-            <div class="buttons-hbox">
-                <p:commandButton value="Weiter" action="#{bookingBean.saveCustomer}" ajax="false"/>
+                <div class="buttons-hbox">
+                    <p:commandButton value="Weiter" action="#{bookingBean.saveCustomer}" ajax="false"/>
+                </div>
             </div>
-
         </h:form>
     </ui:define>
 
