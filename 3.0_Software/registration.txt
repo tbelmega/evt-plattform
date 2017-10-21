@@ -1,9 +1,0 @@
-${greeting},
-es freut uns sehr, dass Sie sich auf The Eventers.de als Dienstleister registriert haben.
-
-Um den Vorgang abzuschließen, klicken Sie bitte auf untenstehenden Link.
-${link}
-Anschließend wählen Sie bitte Ihr Fachgebiet und füllen das Anmeldeformular vollständig aus.
-
-Mit freundlichen Grüßen
-Ihr Team von The-Eventers.de

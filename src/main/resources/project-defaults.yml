@@ -8,9 +8,9 @@ swarm:
     data-sources:
       ExampleDS:
         driver-name: com.mysql
-        connection-url: jdbc:mysql://vs221.vps4free.de:3306/eventers_testdatabase
-        user-name: eventers
-        password: PutzDerSchwanJolly99
+        connection-url: 
+        user-name: 
+        password: 
 
 urls:
   hostname: http://localhost:8080
@@ -23,8 +23,8 @@ urls:
 test-environment: true
 
 paypal:
-  clientId: AV51fGHQBYzbG4AbuiHGbfSyDvnhBbvWsjlw89T9keYMK5J1tadXBjlSC327Jzn5aOXMYPsIR6kb2DA7
-  clientSecret: EL5B6D2vaUnxzMI54gl-tAaeSHSTReKU-VcIku1ft1UQLvijEFmHCmYb-6OdmgW_c8QYGPBpDr7vy7C-
+  clientId: 
+  clientSecret: 
   mode: sandbox
   servlet:
     payment: /paypal/payment
