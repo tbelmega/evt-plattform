@@ -9,7 +9,7 @@
 
                 <p:growl id="messages" showDetail="true"/>
 
-                <h:panelGrid columnClasses="value">
+                <h:panelGrid style="width: 100%">
                     <p:schedule id="schedule" value="#{calendarBean.eventModel}" widgetVar="myschedule"
                                 locale="de" ignoreTimezone="false">
 
@@ -54,10 +54,11 @@
                     </section>
 
                     <section>
-                        <p:commandButton id="addButton" value="Speichern" actionListener="#{calendarBean.addEvent}"
+                        <p:commandButton id="addButton" value="Speichern" class="button-confirm"
+                                         actionListener="#{calendarBean.addEvent}"
                                          oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
 
-                        <p:commandButton id="deleteButton" value="Löschen"
+                        <p:commandButton id="deleteButton" value="Löschen" class="button-delete"
                                          actionListener="#{calendarBean.deleteEvent}"
                                          oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
 

@@ -9,13 +9,6 @@
 * --Erreichbarkeit: in 5-Minuten-Schritten bis 60 min--
 * --"Dienstleistung" statt "Angebot"--
 
-* Textarea: breiter
-* Statt "Label" style, "heading" style
-* Styling: Auf großen Bildschirmen mehr mittig
-* Speichern-Button (Hintergrund) im Kalender grün, löschen rot. Termineinträge grün
-* Schriftgröße generell erhöhen
-* Testen auf Android, ggf Styling für mobile
-* Kalender-Popup -> unter Kalender? Nein, Popup billschirmfüllend
 
 * Login: muss auf IPhone zweimal angeklickt werden?
 * Doppelklick auf Kalender erzeugt Doppeleintrag bei IPhone/IPad.?
@@ -50,6 +43,14 @@
 * Checkbox für AGB
 * Abweichende Rechnungsadresse auf Seite 3
 * HTML-Emails prüfen -> Kann jetzt beliebige HTML-Seiten als Mailinhalt verschicken, müsste nur jemand designen
+
+* Textarea: breiter
+* Statt "Label" style, "heading" style
+* Styling: Auf großen Bildschirmen mehr mittig
+* Schriftgröße generell erhöhen
+* Testen auf Android, ggf Styling für mobile
+* Speichern-Button (Hintergrund) im Kalender grün, löschen rot. Termineinträge grün
+* Kalender-Popup Popup billschirmfüllend
 
 ## Rückfragen an Herrn Wilfling:
 * "Doppelte Einträge: längere Verfügbarkeit überschreibt kürzere Verfügbarkeit. Mehrere Einträge sind nur dann möglich, wenn eine Unterbrechung zweier oder mehrere Termine vorliegen (Z.B.: 17 -18 Uhr; 19-21 Uhr)" Wunsch oder aktuelles verhalten?
